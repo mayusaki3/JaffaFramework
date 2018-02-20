@@ -40,14 +40,15 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoreWPF\Application\Jaffa.Application.WPF.cs" />
+    <Compile Include="CoreWPF\Diagnostics\Jaffa.Diagnostics.Logging.Desktop.cs" />
+    <Compile Include="CoreWPF\International\Jaffa.International.Desktop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CoreWPF\Diagnostics\" />
-    <Folder Include="CoreWPF\International\" />
     <Folder Include="CoreWPF\UI\Popups\" />
   </ItemGroup>
   <Import Project="..\JaffaCore\JaffaCore.projitems" Label="Shared" />

@@ -25,6 +25,7 @@ namespace UwpAppSample
         public MainPage()
         {
             this.InitializeComponent();
+            Jaffa.UI.Page.Start(this);
         }
     }
 }

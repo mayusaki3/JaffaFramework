@@ -1,4 +1,4 @@
-# Jaffaフレームワーク説明書  ver 0.0.1 
+# Jaffaフレームワーク説明書  ver 0.0.2 
 
 
 ## はじめに
@@ -20,18 +20,23 @@ Jaffaフレームワークは、Windowsユニバーサルアプリケーション（UWP)とデスクトップア
 ### UWPアプリケーションの場合
 
 1. 参照設定で JaffaForUWP.dll を追加します。
-2. App.xaml.csのコンストラクターの最後に、次のコードを追加します。
+2. App.xaml.csのコンストラクターの最後に、以下のコードを追加します。
    ```
 	// Jaffaフレームワーク開始
 	Jaffa.Application.Start();
    ```
+3. 各ページのコンストラクタ―内、this.InitializeComponent();の次の行に、以下のコードを追加します。
+   ```
+	Jaffa.UI.Page.Start(this);
+   ```
+
 ### WPFアプリケーションの場合
 
 1. 参照設定で JaffaForWPF.dll を追加します。
 2. App.xaml.csにコンストラクターを追加して、次のコードを追加します。
    ```
-    // Jaffaフレームワーク開始
-    Jaffa.Application.Start(this, "");
+	// Jaffaフレームワーク開始
+	Jaffa.Application.Start(this);
    ```
 ## 提供機能
 
@@ -40,4 +45,4 @@ Jaffaフレームワークは、Windowsユニバーサルアプリケーション（UWP)とデスクトップア
 
 ## リファレンス
 
-[クラス階層](Refarence/JaffaNamespace.md)
+[Jaffa 名前空間](Refarence/Jaffa.md)

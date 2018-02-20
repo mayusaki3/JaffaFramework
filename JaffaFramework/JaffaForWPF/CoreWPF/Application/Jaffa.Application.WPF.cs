@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.Windows;
 
 namespace Jaffa
 {
@@ -24,7 +23,16 @@ namespace Jaffa
         /// Jaffaフレームワークにアプリケーション開始を通知します。
         /// </summary>
         /// <param name="app">Jaffaフレームワークを利用するアプリケーションのインスタンス</param>
-        /// <param name="resourceName">国際化対応に使用するリソース名または空文字</param>
+        public static void Start(System.Windows.Application app)
+        {
+            Start(app, "");
+        }
+
+        /// <summary>
+        /// Jaffaフレームワークにアプリケーション開始を通知します。
+        /// </summary>
+        /// <param name="app">Jaffaフレームワークを利用するアプリケーションのインスタンス</param>
+        /// <param name="resourceName">国際化対応に使用するリソース名</param>
         public static void Start(System.Windows.Application app, string resourceName)
         {
             // アプリケーションへの参照設定
@@ -32,6 +40,14 @@ namespace Jaffa
 
             // 起動パス記憶
             startupPath = System.IO.Path.GetFullPath(Environment.GetCommandLineArgs()[0]);
+
+            // リソースマネージャ初期化
+            thisAsm = app.GetType().Assembly;
+            resMan = new System.Resources.ResourceManager(resourceName, thisAsm);
+
+            // 起動時のカルチャー名を記憶
+            int cid = GetUserDefaultLCID();
+            CultureInfo ci = new CultureInfo(cid);
         }
 
         #endregion
@@ -52,6 +68,24 @@ namespace Jaffa
             get
             {
                 return appInst;
+            }
+        }
+
+        #endregion
+
+        #region リソースマネージャを参照 ([R] Resource)
+
+        static private System.Reflection.Assembly thisAsm = null;
+        static private System.Resources.ResourceManager resMan = null;
+
+        /// <summary>
+        /// リソースマネージャを参照します。
+        /// </summary>
+        public static System.Resources.ResourceManager Resource
+        {
+            get
+            {
+                return resMan;
             }
         }
 

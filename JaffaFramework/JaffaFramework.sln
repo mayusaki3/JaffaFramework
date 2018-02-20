@@ -21,7 +21,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refarence", "Refarence", "{211B455B-EE72-41D0-ACF8-B984C02051C8}"
 	ProjectSection(SolutionItems) = preProject
 		Refarence\Jaffa.Application.md = Refarence\Jaffa.Application.md
-		Refarence\JaffaNamespace.md = Refarence\JaffaNamespace.md
+		Refarence\Jaffa.Diagnostics.Logging.md = Refarence\Jaffa.Diagnostics.Logging.md
+		Refarence\Jaffa.Diagnostics.md = Refarence\Jaffa.Diagnostics.md
+		Refarence\Jaffa.International.md = Refarence\Jaffa.International.md
+		Refarence\Jaffa.md = Refarence\Jaffa.md
+		Refarence\Jaffa.UI.md = Refarence\Jaffa.UI.md
+		Refarence\Jaffa.UI.Page.md = Refarence\Jaffa.UI.Page.md
 	EndProjectSection
 EndProject
 Global

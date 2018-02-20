@@ -107,6 +107,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CoreUWP\Application\Jaffa.Application.UWP.cs" />
+    <Compile Include="CoreUWP\Diagnostics\Jaffa.Diagnostics.Logging.Universal.cs" />
+    <Compile Include="CoreUWP\International\Jaffa.International.Universal.cs" />
+    <Compile Include="CoreUWP\UI\Jaffa.UI.Page.Universal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\JaffaForUWP.rd.xml" />
   </ItemGroup>
@@ -116,8 +119,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CoreUWP\Diagnostics\" />
-    <Folder Include="CoreUWP\International\" />
     <Folder Include="CoreUWP\UI\Popups\" />
   </ItemGroup>
   <Import Project="..\JaffaCore\JaffaCore.projitems" Label="Shared" />
