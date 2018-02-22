@@ -54,12 +54,8 @@ Jaffaフレームワークにアプリケーション開始を通知します。<br>
 <tr><td>UWP</td><td>void Start();</td></tr>
 <tr><td>WPF</td><td>void Start(System.Windows.Application app);<br>void Start(System.Windows.Application app, string resourceName);</td></tr>
 </table><b>パラメーター</b><br><table>
-<tr><td>app</td><td>Jaffaフレームワークを利用するアプリケーションのインスタンス</td></tr>
-<tr><td>resourceName</td><td>国際化対応に使用するリソース名</td></tr>
+<tr><td>app</td><td>Jaffaフレームワークを利用するアプリケーションのインスタンスを指定します。</td></tr>
+<tr><td>resourceName</td><td>国際化対応に使用するリソース名を指定します。</td></tr>
 </table></td></tr>
 
 </table>
-
-## イベント
-
-なし

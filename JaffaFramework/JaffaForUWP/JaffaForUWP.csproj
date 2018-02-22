@@ -121,6 +121,12 @@
   <ItemGroup>
     <Folder Include="CoreUWP\UI\Popups\" />
   </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Resources\Resources.lang-en-US.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Resources\Resources.lang-ja-JP.resw" />
+  </ItemGroup>
   <Import Project="..\JaffaCore\JaffaCore.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

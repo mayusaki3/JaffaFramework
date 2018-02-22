@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="UwpAppSample.MainPage"
+    x:Class="UwpAppSample.SubPage2"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UwpAppSample"
@@ -8,13 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot Title="JaffaFramework Sample" FlowDirection="LeftToRight">
-                <PivotItem Header="Lang and Logging" Margin="0,0,0,0">
-                    <local:SubPage1/>
-                </PivotItem>
-                <PivotItem Header="PivotItem 1" Margin="0,0,0,0">
-                    <local:SubPage2/>
-                </PivotItem>
-            </Pivot>
+
     </Grid>
 </Page>

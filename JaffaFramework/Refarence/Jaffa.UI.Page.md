@@ -8,14 +8,6 @@ Page ƒNƒ‰ƒX‚ÍAUWP ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Ì Page ‚Æ JaffaFramework ‚Æ‚ğŒ‹‚Ñ‚Â‚¯‚éAŠî–
 public static class Page : Object
 ```
 						
-## ƒRƒ“ƒXƒgƒ‰ƒNƒ^[
-
-‚È‚µ
-
-## ƒvƒƒpƒeƒB
-
-‚È‚µ
-
 ## ƒƒ\ƒbƒh
 
 <table><tr><td>–¼‘O</td><td>à–¾</td></tr>
@@ -25,7 +17,7 @@ JaffaƒtƒŒ[ƒ€ƒ[ƒN‚Éƒy[ƒWŠJn‚ğ’Ê’m‚µ‚Ü‚·B<br>
 <b>\•¶</b><br><table>
 <tr><td>UWP</td><td>static void Start(Windows.UI.Xaml.Controls.Page page);</td></tr>
 </table><b>ƒpƒ‰ƒ[ƒ^[</b><br><table>
-<tr><td>page</td><td>JaffaƒtƒŒ[ƒ€ƒ[ƒN‚ğ—˜—p‚·‚éƒy[ƒW‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</td></tr>
+<tr><td>page</td><td>JaffaƒtƒŒ[ƒ€ƒ[ƒN‚ğ—˜—p‚·‚éƒy[ƒW‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğw’è‚µ‚Ü‚·B</td></tr>
 </table></td></tr>
 
 </table>
@@ -38,6 +30,9 @@ JaffaƒtƒŒ[ƒ€ƒ[ƒN‚Éƒy[ƒWŠJn‚ğ’Ê’m‚µ‚Ü‚·B<br>
 ƒy[ƒWƒCƒ“ƒXƒ^ƒ“ƒX‚ª¶¬‚³‚ê‚½‚±‚Æ‚ğ’Ê’m‚µ‚Ü‚·B<br>
 <b>\•¶</b><br><table>
 <tr><td>UWP</td><td>delegate void CreatePageEventHandler(object sender, EventArgs e)</td></tr>
+</table><b>ƒpƒ‰ƒ[ƒ^[</b><br><table>
+<tr><td>sender</td><td>¶¬‚³‚ê‚½ Windows.UI.Xaml.Controls.Page ƒIƒuƒWƒFƒNƒg‚Å‚·B</td></tr>
+<tr><td>e</td><td>Šù’è‚ÌƒCƒxƒ“ƒgƒf[ƒ^‚Å‚·B</td></tr>
 </table></td></tr>
 
 </table>

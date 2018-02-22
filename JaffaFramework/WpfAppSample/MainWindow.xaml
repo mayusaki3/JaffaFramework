@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppSample"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="JaffaFramework for WPF Sample Application" Height="768" Width="1280">
     <Grid>
-        
+        <TabControl Margin="0" VerticalContentAlignment="Center">
+            <TabItem Header="Lang and Logging" SnapsToDevicePixels="True">
+                <Grid Background="#FFFFC24C">
+                    <ScrollViewer VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="300" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ListBox Visibility="Hidden"/>
+                    </ScrollViewer>
+                    <ScrollViewer Margin="300,0,0,0" Background="Black">
+                        <TextBlock TextWrapping="Wrap" Text="TextBlock" Foreground="White"/>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

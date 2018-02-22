@@ -10,7 +10,7 @@ namespace Jaffa
     {
         #region イベント
 
-        #region ページインスタンス生成イベント ([Private] Page_CreatePageEvent)
+        #region ページインスタンス生成イベント (Page_CreatePageEvent) [Private]
 
         private static void Page_CreatePageEvent(object sender, EventArgs e)
         {
@@ -27,7 +27,7 @@ namespace Jaffa
 
         #endregion
 
-        #region ページインスタンス破棄イベント ([Private] Page_Unloaded)
+        #region ページインスタンス破棄イベント (Page_Unloaded) [Private]
 
         private static void Page_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
@@ -60,6 +60,8 @@ namespace Jaffa
             // ページ追加通知を設定
             Jaffa.UI.Page.CreatePageEvent += Page_CreatePageEvent;
 
+            // コアライブラリ初期化
+            Jaffa.Internal.Core.Initialize();
         }
 
         #endregion

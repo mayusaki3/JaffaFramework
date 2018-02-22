@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Application\Jaffa.Application.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\Jaffa.Diagnostics.Logging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)International\Jaffa.International.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Jaffa.Internal.Core.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)UI\Popups\" />
