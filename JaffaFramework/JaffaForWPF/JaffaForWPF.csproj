@@ -44,8 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoreWPF\Application\Jaffa.Application.WPF.cs" />
-    <Compile Include="CoreWPF\Diagnostics\Jaffa.Diagnostics.Logging.Desktop.cs" />
-    <Compile Include="CoreWPF\International\Jaffa.International.Desktop.cs" />
+    <Compile Include="CoreWPF\Diagnostics\Jaffa.Diagnostics.Logging.WPF.cs" />
+    <Compile Include="CoreWPF\International\Jaffa.International.WPF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resources_en-US.Designer.cs">
       <AutoGen>True</AutoGen>

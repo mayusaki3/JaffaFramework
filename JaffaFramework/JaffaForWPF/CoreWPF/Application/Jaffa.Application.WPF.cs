@@ -48,6 +48,7 @@ namespace Jaffa
             // 起動時のカルチャー名を記憶
             int cid = GetUserDefaultLCID();
             CultureInfo ci = new CultureInfo(cid);
+            Jaffa.International.GetResourceCultureName(ci.Name);
 
             // コアライブラリ初期化
             Jaffa.Internal.Core.Initialize();

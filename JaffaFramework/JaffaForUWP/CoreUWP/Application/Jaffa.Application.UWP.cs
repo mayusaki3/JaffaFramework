@@ -53,9 +53,10 @@ namespace Jaffa
             {
                 resLoader = new Windows.ApplicationModel.Resources.ResourceLoader();
             }
-            catch
-            {
-            }
+            catch { }
+
+            // 起動時のカルチャー名を記憶
+            Jaffa.International.GetResourceCultureName(Windows.System.UserProfile.GlobalizationPreferences.Languages[0]);
 
             // ページ追加通知を設定
             Jaffa.UI.Page.CreatePageEvent += Page_CreatePageEvent;

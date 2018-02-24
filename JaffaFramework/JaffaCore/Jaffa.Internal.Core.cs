@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Reflection;
+﻿using Jaffa.Diagnostics;
+using System;
 
 namespace Jaffa.Internal
 {
@@ -69,6 +65,7 @@ namespace Jaffa.Internal
             {
                 coreHelper = new CoreHelper();
             }
+            Logging.Write(MakeMessage("{JAFFA_TITLE} {JAFFA_VERSION} " + " {JAFFA_START}"));
         }
 
         private static CoreHelper coreHelper = null;
@@ -82,6 +79,43 @@ namespace Jaffa.Internal
         /// </summary>
         private static void Terminate()
         {
+            Logging.Write(new string[] { MakeMessage("{JAFFA_TITLE} {JAFFA_END}"), "", ""});
+        }
+
+        #endregion
+
+        #region コアライブラリ内メッセージを構築 (MakeMessage)
+
+        /// <summary>
+        /// コアライブラリ内メッセージを構築します。
+        /// </summary>
+        /// <param name="message">メッセージ</param>
+        /// <param name="paramList">メッセージに埋め込むパラメータのリスト</param>
+        /// <returns>構築したメッセージ</returns>
+        /// <remarks>
+        /// メッセージは、テキスト中に {resource-name} と %paramList-index を指定できます。
+        /// パラメータは、テキスト中に {resource-name} を指定できます。
+        /// メッセージとパラメータは、それぞれリソースを参照してから、１つに編集します。
+        /// </remarks>
+        public static string MakeMessage(string message)
+        {
+            return MakeMessage(message, new string[0]);
+        }
+
+        /// <summary>
+        /// フレームワーク内メッセージを構築します。
+        /// </summary>
+        /// <param name="message">メッセージ</param>
+        /// <param name="paramList">メッセージに埋め込むパラメータのリスト</param>
+        /// <returns>構築したメッセージ</returns>
+        /// <remarks>
+        /// メッセージは、テキスト中に {resource-name} と %paramList-index を指定できます。
+        /// パラメータは、テキスト中に {resource-name} を指定できます。
+        /// メッセージとパラメータは、それぞれリソースを参照してから、１つに編集します。
+        /// </remarks>
+        public static string MakeMessage(string message, string[] paramList)
+        {
+            return Jaffa.International.MakeMessage(message, paramList);
         }
 
         #endregion

@@ -11,10 +11,10 @@
             <TabItem Header="Lang and Logging" SnapsToDevicePixels="True">
                 <Grid Background="#FFFFC24C">
                     <ScrollViewer VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="300" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <ListBox Visibility="Hidden"/>
+                        <ListBox x:Name="listLangages" Visibility="Hidden"/>
                     </ScrollViewer>
                     <ScrollViewer Margin="300,0,0,0" Background="Black">
-                        <TextBlock TextWrapping="Wrap" Text="TextBlock" Foreground="White"/>
+                        <TextBlock x:Name="logText" TextWrapping="Wrap" Text="TextBlock" Foreground="White"/>
                     </ScrollViewer>
                 </Grid>
             </TabItem>
