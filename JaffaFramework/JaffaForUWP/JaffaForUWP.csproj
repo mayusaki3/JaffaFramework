@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="CoreUWP\Application\Jaffa.Application.UWP.cs" />
     <Compile Include="CoreUWP\Diagnostics\Jaffa.Diagnostics.Logging.UWP.cs" />
+    <Compile Include="CoreUWP\Internal\Jaffa.Internal.Core.UWP.cs" />
     <Compile Include="CoreUWP\International\Jaffa.International.UWP.cs" />
     <Compile Include="CoreUWP\UI\Jaffa.UI.Page.UWP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

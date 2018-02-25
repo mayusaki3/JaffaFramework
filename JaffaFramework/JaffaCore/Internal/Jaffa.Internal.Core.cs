@@ -7,7 +7,7 @@ namespace Jaffa.Internal
     /// Jaffaフレームワーク・共通コアライブラリ
     /// </summary>
     ///[EditorBrowsable(EditorBrowsableState.Never)]
-    public static class Core : Object
+    public static partial class Core : Object
     {
         #region インナークラス
 
@@ -21,15 +21,14 @@ namespace Jaffa.Internal
             #region コンストラクタ―/デストラクター
 
             /// <summary>
-            /// 
+            /// コンストラクタ―
             /// </summary>
             public CoreHelper()
                 :base()
-            {
-            }
+            { }
 
             /// <summary>
-            /// 
+            /// デストラクター
             /// </summary>
             ~CoreHelper()
             {
@@ -37,7 +36,7 @@ namespace Jaffa.Internal
             }
 
             /// <summary>
-            /// 
+            /// リソースの開放
             /// </summary>
             public void Dispose()
             {
@@ -65,7 +64,7 @@ namespace Jaffa.Internal
             {
                 coreHelper = new CoreHelper();
             }
-            Logging.Write(MakeMessage("{JAFFA_TITLE} {JAFFA_VERSION} " + " {JAFFA_START}"));
+            Logging.Write(MakeMessage("{JAFFA_TITLE} {JAFFA_VERSION} " + Version + " {JAFFA_START}"));
         }
 
         private static CoreHelper coreHelper = null;
@@ -120,9 +119,6 @@ namespace Jaffa.Internal
 
         #endregion
 
-        #endregion
-
-        #region プロパティ
         #endregion
     }
 }

@@ -7,17 +7,5 @@ namespace Jaffa
     /// </summary>
     //[System.Diagnostics.DebuggerNonUserCode]
     public static partial class Application : Object
-    {
-        #region インナークラス
-        #endregion
-
-        #region イベント
-        #endregion
-
-        #region メソッド
-        #endregion
-
-        #region プロパティ
-        #endregion
-    }
+    { }
 }

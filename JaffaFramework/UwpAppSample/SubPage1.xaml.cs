@@ -45,10 +45,7 @@ namespace UwpAppSample
                 {
                     logText.Text += e.DateTime.ToString("HHmmssfff|") + log + "\r\n";
                 }
-                catch
-                {
-                }
-                logText.Text += "::>" + Jaffa.Diagnostics.Logging.LastFilename + "\r\n";
+                catch { }
             }
         }
     }

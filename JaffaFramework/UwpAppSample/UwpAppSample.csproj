@@ -110,6 +110,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <PRIResource Include="Resources.resw" />
     <None Include="UwpAppSample_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

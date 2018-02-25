@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Reflection;
 using System.Resources;
 using System.Text;
@@ -8,7 +7,7 @@ using System.Windows;
 namespace Jaffa
 {
     /// <summary>
-    /// Jaffaフレームワーク・デスクトップ(WPF)版国際化対応サポート
+    /// Jaffaフレームワーク・WPF版国際化対応サポート
     /// </summary>
     public partial class International : Object
     {
@@ -39,6 +38,25 @@ namespace Jaffa
         #endregion
 
         #region 現在のカルチャーをすべてのウィンドウに反映 (ChangeCulture) [Private]
+
+        /// <summary>
+        /// 現在のカルチャーをすべてのウィンドウに反映します。
+        /// </summary>
+        static private void ChangeCulture()
+        {
+            // Coreリソース切り替えのため解放
+            resManager = null;
+
+            // 各ウィンドウのリソースを更新
+            foreach (Window win in Jaffa.Application.Current.Windows)
+            {
+                win.Resources.Source = new Uri("Resources/Dictionary_" + currentCulture + ".xaml", UriKind.Relative);
+            }
+
+            // カルチャー変更通知イベント
+            OnChangeCulture();
+        }
+
         #endregion
 
         #region 文字列内のリソース指定を現在のカルチャーで変換 (ConvertCurrentCultureResourceString) [Private]
@@ -57,7 +75,7 @@ namespace Jaffa
                 // リソースマネージャ初期化
                 try
                 {
-                    resManager = new ResourceManager("Jaffa.Resources.Resources_" + currentCulture, Assembly.GetExecutingAssembly());
+                    resManager = new ResourceManager("JaffaForWPF.Resources.Resources_" + currentCulture, Assembly.GetExecutingAssembly());
                 }
                 catch(Exception es)
                 {

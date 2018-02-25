@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jaffa.Diagnostics;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,11 +15,27 @@ namespace Jaffa
 
         #region カルチャー変更通知イベント (ChangeCultureEvent)
 
+        public delegate void ChangeCultureEventHandler(object sender, EventArgs e);
+        /// <summary>
+        /// CurrentCultureが変更されたことを通知します。
+        /// </summary>
+        public static event ChangeCultureEventHandler ChangeCultureEvent;
 
         #endregion
 
         #region カルチャー変更通知イベント呼び出し ([private] OnChangeCulture)
 
+        /// <summary>
+        /// カルチャー変更通知イベントを呼び出します。
+        /// </summary>
+        private static void OnChangeCulture()
+        {
+            if (ChangeCultureEvent != null)
+            {
+                // カルチャー変更を通知
+                ChangeCultureEvent(null, new EventArgs());
+            }
+        }
 
         #endregion
 
@@ -26,11 +43,19 @@ namespace Jaffa
 
         #region メソッド
 
-        #region 利用可能な言語リストを取得 (GetAvailableLanguageList)
+        #region アプリケーションで利用可能な言語リストを取得 (GetAvailableLanguageList)
 
         /// <summary>
-        /// 利用可能な言語リストを取得します。
+        /// アプリケーションで利用可能な言語リストを取得します。
         /// </summary>
+        /// <remarks>
+        /// アプリケーションの Resources.resw(UWP) / Resources.resx(WPF) に 文字列 Dictionarys を追加し、
+        /// 次のようにサポートする{言語コード},{言語名} の行を設定します。
+        /// 例. Auto,{DynamicResource CultureAuto}
+        ///     en-US,English
+        ///     ja-JP,日本語
+        /// この例の「{DynamicResource CultureAuto}」部分は、
+        /// </remarks>
         public static string[] GetAvailableLanguageList()
         {
             string res = null;
@@ -38,7 +63,10 @@ namespace Jaffa
             {
                 res = Jaffa.Application.Resource.GetString("Dictionarys");
             }
-            catch { }
+            catch(Exception es)
+            {
+                Logging.Write(Logging.LogTypes.Error, Logging.ExceptionToList(es));
+            }
             if (res == null)
             {
                 return new string[0];
@@ -108,6 +136,7 @@ namespace Jaffa
         /// <returns>リソース上のカルチャー名</returns>
         public static string GetResourceCultureName(string name)
         {
+            string rt = "";
             string res = null;
             try
             {
@@ -116,35 +145,38 @@ namespace Jaffa
             catch { }
             if (res == null)
             {
-                return "";
+                rt = name;
             }
-            string[] langs = res.Split(new char[] { '\n' });
-            string rt = "";
-            foreach (string lang in langs)
+            else
             {
-                string[] s = lang.Split(new char[] { ',', '\r', '\n' });
-                if (!s[0].Equals("Auto"))
+                string[] langs = res.Split(new char[] { '\n' });
+                foreach (string lang in langs)
                 {
-                    if(rt.Equals(""))
+                    string[] s = lang.Split(new char[] { ',', '\r', '\n' });
+                    if (!s[0].Equals("Auto"))
                     {
-                        rt = s[0];
-                    }
-                    if(s[0].Equals(name))
-                    {
-                        // 完全一致
-                        rt = name;
-                        break;
-                    }
-                    if (s[0].IndexOf(name + "-") == 0)
-                    {
-                        // 前方一致
-                        rt = s[0];
+                        if (rt.Equals(""))
+                        {
+                            rt = s[0];
+                        }
+                        if (s[0].Equals(name))
+                        {
+                            // 完全一致
+                            rt = name;
+                            break;
+                        }
+                        if (s[0].IndexOf(name + "-") == 0)
+                        {
+                            // 前方一致
+                            rt = s[0];
+                        }
                     }
                 }
+
             }
 
             // 初回は起動時のカルチャー名として記憶
-            if(startupCulture.Equals(""))
+            if (startupCulture.Equals(""))
             {
                 startupCulture = rt;
                 currentCultureSetting = rt;
@@ -158,6 +190,42 @@ namespace Jaffa
 
         #region 現在のカルチャーを変更 (ChangeCultureFromDisplayLanguageName)
 
+        /// <summary>
+        /// 現在のカルチャーを言語名で変更します。ユニバーサルアプリのページキャッシュはクリアされます。
+        /// </summary>
+        /// <param name="name">表示名</param>
+        public static void ChangeCultureFromDisplayLanguageName(string name)
+        {
+            // 表示名からカルチャー名を取得
+            string res = Jaffa.Application.Resource.GetString("Dictionarys");
+            if (res == null)
+            {
+                return;
+            }
+            string[] langs = res.Split(new char[] { '\n' });
+            List<string> rt = new List<string>();
+            foreach (string lang in langs)
+            {
+                string[] s = lang.Split(new char[] { ',', '\r', '\n' });
+                if (s[1].IndexOf("{DynamicResource") >= 0)
+                {
+                    s[1] = GetCurrentCultureResourceString(s[1]);
+                }
+                if (s[1].Equals(name))
+                {
+                    currentCultureSetting = s[0];
+                    if (s[0].Equals("Auto"))
+                    {
+                        currentCulture = startupCulture;
+                    }
+                    else
+                    {
+                        currentCulture = s[0];
+                    }
+                    ChangeCulture();
+                }
+            }
+        }
 
         #endregion
 
