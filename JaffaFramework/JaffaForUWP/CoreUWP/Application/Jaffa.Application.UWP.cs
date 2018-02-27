@@ -71,10 +71,10 @@ namespace Jaffa
 
         #region プロパティ
 
-        #region アプリケーションを参照 ([R] Current)
+        #region アプリケーションインスタンスを参照 ([R] Current)
 
         /// <summary>
-        /// アプリケーションを参照します。
+        /// アプリケーションインスタンスを参照します。
         /// </summary>
         public static Windows.UI.Xaml.Application Current
         {
@@ -86,9 +86,24 @@ namespace Jaffa
 
         #endregion
 
+        #region アプリケーションでインスタンス化されたページを参照 ([R} Pages)
+
+        /// <summary>
+        /// アプリケーションでインスタンス化されたページを参照します。
+        /// </summary>
+        public static Windows.UI.Xaml.Controls.Page[] Pages
+        {
+            get
+            {
+                return instPages.ToArray();
+            }
+        }
+
+        #endregion
+
         #region リソースローダーを参照 ([R] Resource)
 
-        static private Windows.ApplicationModel.Resources.ResourceLoader resLoader = null;
+        private static Windows.ApplicationModel.Resources.ResourceLoader resLoader = null;
 
         /// <summary>
         /// リソースローダーを参照します。
@@ -98,21 +113,6 @@ namespace Jaffa
             get
             {
                 return resLoader;
-            }
-        }
-
-        #endregion
-
-        #region アプリケーションでインスタンス化されたページを取得 ([R} Pages)
-
-        /// <summary>
-        /// アプリケーションでインスタンス化されたページを取得します。
-        /// </summary>
-        public static Windows.UI.Xaml.Controls.Page[] Pages
-        {
-            get
-            {
-                return instPages.ToArray();
             }
         }
 

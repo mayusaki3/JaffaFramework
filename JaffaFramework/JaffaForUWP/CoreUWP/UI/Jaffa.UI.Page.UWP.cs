@@ -8,9 +8,6 @@ namespace Jaffa.UI
     [System.Diagnostics.DebuggerNonUserCode]
     public static class Page : Object
     {
-        #region コンストラクター
-        #endregion
-
         #region イベント
 
         #region ページインスタンス生成イベント (CreatePageEvent)
@@ -50,9 +47,6 @@ namespace Jaffa.UI
 
         #endregion
 
-        #endregion
-
-        #region プロパティ
         #endregion
     }
 }

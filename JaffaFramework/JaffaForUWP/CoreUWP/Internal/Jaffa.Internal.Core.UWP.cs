@@ -1,5 +1,4 @@
-﻿using Jaffa.Diagnostics;
-using System;
+﻿using System;
 using System.Reflection;
 
 namespace Jaffa.Internal
@@ -20,7 +19,7 @@ namespace Jaffa.Internal
         {
             get
             {
-                return new Version(0,0);
+                return System.Reflection.Assembly.Load(new AssemblyName("JaffaForUWP")).GetName().Version;
             }
         }
 

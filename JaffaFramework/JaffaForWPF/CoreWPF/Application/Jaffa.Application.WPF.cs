@@ -9,15 +9,12 @@ namespace Jaffa
     /// </summary>
     public static partial class Application : Object
     {
-        #region イベント
-        #endregion
-
         #region メソッド
 
         #region アプリケーション開始 (Start)
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        static extern int GetUserDefaultLCID();
+        private static extern int GetUserDefaultLCID();
 
         /// <summary>
         /// Jaffaフレームワークにアプリケーション開始を通知します。
@@ -60,12 +57,12 @@ namespace Jaffa
 
         #region プロパティ
 
-        #region アプリケーションを参照 ([R] Current)
+        #region アプリケーションインスタンスを参照 ([R] Current)
 
-        static private System.Windows.Application appInst = null;
+        private static System.Windows.Application appInst = null;
 
         /// <summary>
-        /// アプリケーションを参照します。
+        /// アプリケーションインスタンスを参照します。
         /// </summary>
         public static System.Windows.Application Current
         {
@@ -79,8 +76,8 @@ namespace Jaffa
 
         #region リソースマネージャを参照 ([R] Resource)
 
-        static private System.Reflection.Assembly thisAsm = null;
-        static private System.Resources.ResourceManager resMan = null;
+        private static System.Reflection.Assembly thisAsm = null;
+        private static System.Resources.ResourceManager resMan = null;
 
         /// <summary>
         /// リソースマネージャを参照します。
@@ -97,7 +94,7 @@ namespace Jaffa
 
         #region アプリケーション起動パスを参照 ([R] StartupPath)
 
-        static private string startupPath = null;
+        private static string startupPath = null;
 
         /// <summary>
         /// アプリケーションの起動パスを参照します。

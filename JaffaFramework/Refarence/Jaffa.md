@@ -11,9 +11,3 @@
 - [Application クラス](Jaffa.Application.md)
 - [International クラス](Jaffa.International.md)
 
-## 構造体
-
-
-## インタフェース
-
-

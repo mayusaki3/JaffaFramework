@@ -79,7 +79,8 @@ namespace Jaffa
                 if (s[1].IndexOf("{DynamicResource") >= 0)
                 {
                     string key = s[1].Replace("{DynamicResource ", "").Replace("}", "");
-                    s[1] = GetCurrentCultureResourceString(key);
+                    string val = GetCurrentCultureResourceString(key);
+                    if (val.Length > 0) s[1] = val;
                 }
                 rt.Add(s[1]);
             }
@@ -274,18 +275,18 @@ namespace Jaffa
 
         #region プロパティ
 
-        #region 起動時のカルチャー名を参照 ([R] startupCulture) [Private]
+        #region 起動時のカルチャー名を取得 ([R] startupCulture) [Private]
 
         private static string startupCulture = "";
 
         #endregion
 
-        #region 現在の設定カルチャー名を参照 ([R] CurrentCultureSetting)
+        #region 現在の設定カルチャー名を取得 ([R] CurrentCultureSetting)
 
         private static string currentCultureSetting = "";
 
         /// <summary>
-        /// 現在の設定カルチャー名を参照します。CurrentCultureプロパティとの違いは "Auto" の有無です。
+        /// 現在の設定カルチャー名を取得します。CurrentCultureプロパティとの違いは "Auto" の有無です。
         /// </summary>
         public static string CurrentCultureSetting
         {
@@ -297,12 +298,12 @@ namespace Jaffa
 
         #endregion
 
-        #region 現在のカルチャー名を参照 ([R] CurrentCulture)
+        #region 現在のカルチャー名を取得 ([R] CurrentCulture)
 
         private static string currentCulture = "";
 
         /// <summary>
-        /// 現在のカルチャー名を参照します。
+        /// 現在のカルチャー名を取得します。
         /// </summary>
         public static string CurrentCulture
         {

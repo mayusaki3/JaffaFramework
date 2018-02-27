@@ -7,11 +7,6 @@ Application ƒNƒ‰ƒX‚ÍAUWP ‚Ü‚½‚Í WPF ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Æ JaffaFramework ‚Æ‚ğŒ‹‚Ñ‚
 ```
 public static class Application : Object
 ```
-						
-## ƒRƒ“ƒXƒgƒ‰ƒNƒ^[
-
-‚È‚µ
-
 ## ƒvƒƒpƒeƒB
 
 <table><tr><td>–¼‘O</td><td>à–¾</td></tr>
@@ -19,27 +14,27 @@ public static class Application : Object
 <tr><td>Current</td><td>
 ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒCƒ“ƒXƒ^ƒ“ƒX‚ğQÆ‚µ‚Ü‚·B<br>
 <b>\•¶</b><br><table>
-<tr><td>UWP</td><td>Windows.UI.Xaml.Application Current</td></tr>
-<tr><td>WPF</td><td>System.Windows.Application Current</td></tr>
+<tr><td>UWP</td><td>static Windows.UI.Xaml.Application Current</td></tr>
+<tr><td>WPF</td><td>static System.Windows.Application Current</td></tr>
 </table></td></tr>
 
 <tr><td>Pages</td><td>
-ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÅƒCƒ“ƒXƒ^ƒ“ƒX‰»‚³‚ê‚½ƒy[ƒW‚ğæ“¾‚µ‚Ü‚·B<br>
+ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÅƒCƒ“ƒXƒ^ƒ“ƒX‰»‚³‚ê‚½ƒy[ƒW‚ğQÆ‚µ‚Ü‚·B<br>
 <b>\•¶</b><br><table>
-<tr><td>UWP</td><td>Windows.UI.Xaml.Controls.Page[] Pages</td></tr>
+<tr><td>UWP</td><td>static Windows.UI.Xaml.Controls.Page[] Pages</td></tr>
 </table></td></tr>
 
 <tr><td>Resource</td><td>
 ƒŠƒ\[ƒXƒ[ƒ_[‚ğQÆ‚µ‚Ü‚·B<br>
 <b>\•¶</b><br><table>
-<tr><td>UWP</td><td>Windows.ApplicationModel.Resources.ResourceLoader Resource</td></tr>
-<tr><td>WPF</td><td>System.Resources.ResourceManager Resource</td></tr>
+<tr><td>UWP</td><td>static Windows.ApplicationModel.Resources.ResourceLoader Resource</td></tr>
+<tr><td>WPF</td><td>static System.Resources.ResourceManager Resource</td></tr>
 </table></td></tr>
 
 <tr><td>StartupPath</td><td>
 ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Ì‹N“®ƒpƒX‚ğQÆ‚µ‚Ü‚·B<br>
 <b>\•¶</b><br><table>
-<tr><td>WPF</td><td>string StatupPath</td></tr>
+<tr><td>WPF</td><td>static string StatupPath</td></tr>
 </table></td></tr>
 
 </table>
@@ -51,8 +46,8 @@ public static class Application : Object
 <tr><td>Start</td><td>
 JaffaƒtƒŒ[ƒ€ƒ[ƒN‚ÉƒAƒvƒŠƒP[ƒVƒ‡ƒ“ŠJn‚ğ’Ê’m‚µ‚Ü‚·B<br>
 <b>\•¶</b><br><table>
-<tr><td>UWP</td><td>void Start();</td></tr>
-<tr><td>WPF</td><td>void Start(System.Windows.Application app);<br>void Start(System.Windows.Application app, string resourceName);</td></tr>
+<tr><td>UWP</td><td>static void Start();</td></tr>
+<tr><td>WPF</td><td>static void Start(System.Windows.Application app);<br>static void Start(System.Windows.Application app, string resourceName);</td></tr>
 </table><b>ƒpƒ‰ƒ[ƒ^[</b><br><table>
 <tr><td>app</td><td>JaffaƒtƒŒ[ƒ€ƒ[ƒN‚ğ—˜—p‚·‚éƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğw’è‚µ‚Ü‚·B</td></tr>
 <tr><td>resourceName</td><td>‘Û‰»‘Î‰‚Ég—p‚·‚éƒŠƒ\[ƒX–¼‚ğw’è‚µ‚Ü‚·B</td></tr>

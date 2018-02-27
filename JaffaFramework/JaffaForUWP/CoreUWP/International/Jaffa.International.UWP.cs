@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jaffa.Diagnostics;
+using System;
 using System.Text;
 
 namespace Jaffa
@@ -8,9 +9,6 @@ namespace Jaffa
     /// </summary>
     public static partial class International : Object
     {
-        #region イベント
-        #endregion
-
         #region メソッド
 
         #region 現在のカルチャーに対応するKey値で指定された文字列リソースを取得 (GetCurrentCultureResourceString) [Private]
@@ -108,7 +106,8 @@ namespace Jaffa
                 }
                 catch (Exception es)
                 {
-                    return "ResourceLoader Initialize failed. " + es.Message;
+                    Logging.Write(Logging.LogTypes.Error, Logging.ExceptionToList(es));
+                    return text;
                 }
             }
             string[] tl = text.Split(new char[] { '{' });
@@ -139,9 +138,6 @@ namespace Jaffa
 
         #endregion
 
-        #endregion
-
-        #region プロパティ
         #endregion
     }
 }

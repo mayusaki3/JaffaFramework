@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jaffa.Diagnostics;
+using System;
 using System.Reflection;
 using System.Resources;
 using System.Text;
@@ -11,12 +12,6 @@ namespace Jaffa
     /// </summary>
     public partial class International : Object
     {
-        #region コンストラクター
-        #endregion
-
-        #region イベント
-        #endregion
-
         #region メソッド
 
         #region 現在のカルチャーに対応するKey値で指定された文字列リソースを取得 (GetCurrentCultureResourceString) [Private]
@@ -27,11 +22,18 @@ namespace Jaffa
         /// <param name="key">Key値</param>
         static private string GetCurrentCultureResourceString(string key)
         {
-            string rt = key;
+            string rt = "";
             key = key.Replace("{DynamicResource ", "").Replace("}", "");
             ResourceDictionary dic = new ResourceDictionary();
-            dic.Source = new Uri("Resources/Dictionary_" + currentCulture + ".xaml", UriKind.Relative);
-            rt = dic[key] as string;
+            try
+            {
+                dic.Source = new Uri("Resources/Dictionary_" + currentCulture + ".xaml", UriKind.Relative);
+                rt = dic[key] as string;
+            }
+            catch(Exception es)
+            {
+                Logging.Write(Logging.LogTypes.Error, Logging.ExceptionToList(es));
+            }
             return rt;
         }
 
@@ -109,9 +111,6 @@ namespace Jaffa
 
         #endregion
 
-        #endregion
-
-        #region プロパティ
         #endregion
     }
 }

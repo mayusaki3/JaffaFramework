@@ -16,7 +16,7 @@ namespace WpfAppSample
         public App()
         {
             // Jaffaフレームワーク開始
-            Jaffa.Application.Start(this);//, "WpfAppSample.Properties.Resources");
+            Jaffa.Application.Start(this, "WpfAppSample.Properties.Resources");
         }
     }
 }

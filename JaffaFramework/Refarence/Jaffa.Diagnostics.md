@@ -3,9 +3,3 @@
 ## クラス
 
 - [Logging クラス](Jaffa.Diagnostics.Logging.md)
-
-## 構造体
-
-## インタフェース
-
-
