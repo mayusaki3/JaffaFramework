@@ -120,7 +120,7 @@
   <data name="Dictionarys" xml:space="preserve">
     <value>Auto,{DynamicResource CultureAuto}
 en-US,English
- ja-JP,日本語</value>
+ja-JP,日本語</value>
     <comment>アプリケーションで利用可能な言語リストです。</comment>
   </data>
 </root>

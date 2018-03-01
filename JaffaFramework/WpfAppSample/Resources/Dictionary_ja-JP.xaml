@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:DBSheets.Resources"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- タイトル -->
+    <system:String x:Key="AppTitle">Jaffa Framework WPFサンプルアプリ</system:String>
+
+    <!-- タブ１タイトル -->
+    <system:String x:Key="Tab1Title">言語切替とロギング</system:String>
+
+    <!-- 言語オプション -->
+    <system:String x:Key="CultureAuto">Microsoft Windows と同じ</system:String>
+
+</ResourceDictionary>

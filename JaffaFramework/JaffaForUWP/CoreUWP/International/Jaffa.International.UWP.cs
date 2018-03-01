@@ -67,19 +67,35 @@ namespace Jaffa
             // キャッシュされているページを破棄
             foreach (var page in Jaffa.Application.Pages)
             {
-                int csize = page.Frame.CacheSize;
-                page.Frame.CacheSize = 0;
-                page.Frame.CacheSize = csize;
+                Logging.Write("page: " + page.Name);
+
+                if (page.Frame != null)
+                {
+                    // Navigation使用時
+                    int csize = page.Frame.CacheSize;
+                    page.Frame.CacheSize = 0;
+                    page.Frame.CacheSize = csize;
+                }
+                else
+                {
+                }
             }
 
             // ナビゲーション情報を使ってページ再表示
-            string snav = Jaffa.Application.Pages[0].Frame.GetNavigationState();
-            Jaffa.Application.Pages[0].Frame.SetNavigationState(snav);
-
-            if(raiseEvent)
+            if(Jaffa.Application.Pages[0].Frame != null)
             {
-                // カルチャー変更通知イベント
-                OnChangeCulture();
+                // Navigation使用時
+                string snav = Jaffa.Application.Pages[0].Frame.GetNavigationState();
+                Jaffa.Application.Pages[0].Frame.SetNavigationState(snav);
+
+                if (raiseEvent)
+                {
+                    // カルチャー変更通知イベント
+                    OnChangeCulture();
+                }
+            }
+            else
+            {
             }
         }
 

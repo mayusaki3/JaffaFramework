@@ -31,8 +31,14 @@ namespace UwpAppSample
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            // Jaffaフレームワーク開始
+            // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
+            Jaffa.Diagnostics.Logging.Write("Jaffa Framework for UWP Sample Application Start.");
+
+            // Jaffa: フレームワーク開始
             Jaffa.Application.Start();
+
+            // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
+            Jaffa.Diagnostics.Logging.Write("App Initialized.");
         }
 
         /// <summary>

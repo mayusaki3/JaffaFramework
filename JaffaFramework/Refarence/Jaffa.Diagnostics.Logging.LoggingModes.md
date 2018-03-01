@@ -1,6 +1,6 @@
-# Jaffa.Diagnostics.Logging クラス
+# Jaffa.Diagnostics.Logging.LoggingModes 列挙型
 
-Logging クラスは、アプリケーションのロギング対応をサポートします。
+LoggingModes 列挙型は、ロギング対応をサポートします。
 
 ## 構文
 

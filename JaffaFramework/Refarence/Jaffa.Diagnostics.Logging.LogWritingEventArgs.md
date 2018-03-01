@@ -1,4 +1,4 @@
-# Jaffa.Diagnostics.Logging クラス
+# Jaffa.Diagnostics.Logging.LogWritingEventArgs クラス
 
 Logging クラスは、アプリケーションのロギング対応をサポートします。
 

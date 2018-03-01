@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DBSheets.Resources"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Title -->
+    <system:String x:Key="AppTitle">Jaffa Framework WPF Sample application</system:String>
+
+    <!-- Tab1 Title -->
+    <system:String x:Key="Tab1Title">Languages and Logging</system:String>
+
+    <!-- Language Option -->
+    <system:String x:Key="CultureAuto">Same as Microsoft Windows</system:String>
+
+</ResourceDictionary>

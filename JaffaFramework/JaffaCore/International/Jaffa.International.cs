@@ -154,6 +154,7 @@ namespace Jaffa
                 foreach (string lang in langs)
                 {
                     string[] s = lang.Split(new char[] { ',', '\r', '\n' });
+                    s[0] = s[0].Trim();
                     if (!s[0].Equals("Auto"))
                     {
                         if (rt.Equals(""))

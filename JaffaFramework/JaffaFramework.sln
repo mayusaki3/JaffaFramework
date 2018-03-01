@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FDC56DC3-A00B-496E-8D57-675353893F60}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,7 +21,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refarence", "Refarence", "{211B455B-EE72-41D0-ACF8-B984C02051C8}"
 	ProjectSection(SolutionItems) = preProject
 		Refarence\Jaffa.Application.md = Refarence\Jaffa.Application.md
+		Refarence\Jaffa.Diagnostics.Logging.LoggingModes.md = Refarence\Jaffa.Diagnostics.Logging.LoggingModes.md
+		Refarence\Jaffa.Diagnostics.Logging.LogTypes.md = Refarence\Jaffa.Diagnostics.Logging.LogTypes.md
+		Refarence\Jaffa.Diagnostics.Logging.LogWritingEventArgs.md = Refarence\Jaffa.Diagnostics.Logging.LogWritingEventArgs.md
 		Refarence\Jaffa.Diagnostics.Logging.md = Refarence\Jaffa.Diagnostics.Logging.md
+		Refarence\Jaffa.Diagnostics.Logging.Settings.md = Refarence\Jaffa.Diagnostics.Logging.Settings.md
 		Refarence\Jaffa.Diagnostics.md = Refarence\Jaffa.Diagnostics.md
 		Refarence\Jaffa.Internal.Core.md = Refarence\Jaffa.Internal.Core.md
 		Refarence\Jaffa.Internal.md = Refarence\Jaffa.Internal.md

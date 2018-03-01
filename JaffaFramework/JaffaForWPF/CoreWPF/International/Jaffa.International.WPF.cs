@@ -30,10 +30,7 @@ namespace Jaffa
                 dic.Source = new Uri("Resources/Dictionary_" + currentCulture + ".xaml", UriKind.Relative);
                 rt = dic[key] as string;
             }
-            catch(Exception es)
-            {
-                Logging.Write(Logging.LogTypes.Error, Logging.ExceptionToList(es));
-            }
+            catch { }
             return rt;
         }
 
@@ -75,14 +72,7 @@ namespace Jaffa
             if (resManager == null)
             {
                 // リソースマネージャ初期化
-                try
-                {
-                    resManager = new ResourceManager("JaffaForWPF.Resources.Resources_" + currentCulture, Assembly.GetExecutingAssembly());
-                }
-                catch(Exception es)
-                {
-                    return "ResourceManager Initialize failed. " + es.Message;
-                }
+                resManager = new ResourceManager("JaffaForWPF.Resources.Resources_" + currentCulture, Assembly.GetExecutingAssembly());
             }
             string[] tl = text.Split(new char[] { '{' });
             StringBuilder rt = new StringBuilder();

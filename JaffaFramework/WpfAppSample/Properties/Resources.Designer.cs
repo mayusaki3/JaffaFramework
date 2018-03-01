@@ -63,7 +63,7 @@ namespace WpfAppSample.Properties {
         /// <summary>
         ///   Auto,{DynamicResource CultureAuto}
         ///en-US,English
-        /// ja-JP,日本語 に類似しているローカライズされた文字列を検索します。
+        ///ja-JP,日本語 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Dictionarys {
             get {

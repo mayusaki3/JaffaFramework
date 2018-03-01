@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot Title="JaffaFramework Sample" FlowDirection="LeftToRight">
+        <Pivot FlowDirection="LeftToRight">
                 <PivotItem Header="Lang and Logging" Margin="0,0,0,0">
                     <local:SubPage1/>
                 </PivotItem>

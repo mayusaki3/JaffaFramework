@@ -15,8 +15,14 @@ namespace WpfAppSample
     {
         public App()
         {
-            // Jaffaフレームワーク開始
+            // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
+            Jaffa.Diagnostics.Logging.Write("Jaffa Framework for WPF Sample Application Start.");
+
+            // Jaffa: フレームワーク開始
             Jaffa.Application.Start(this, "WpfAppSample.Properties.Resources");
+
+            // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
+            Jaffa.Diagnostics.Logging.Write("App Initialized.");
         }
     }
 }
