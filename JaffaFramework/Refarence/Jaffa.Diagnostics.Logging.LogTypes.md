@@ -1,29 +1,21 @@
 # Jaffa.Diagnostics.Logging.LogTypes 列挙型
 
-Logging クラスは、アプリケーションのロギング対応をサポートします。
+LogTypes 列挙型は、ログメッセージの種類を表します。
+
 
 ## 構文
 
 ```
-public static class Logging : Object
+public enum LogTypes : byte
 ```
 
-## プロパティ
+## フィールド
 
-なし
+<table><tr><td>名前</td><td>説明</td></tr>
 
-## メソッド
+<tr><td>Information</td><td>情報メッセージです。</td></tr>
+<tr><td>Warning</td><td>警告メッセージです。</td></tr>
+<tr><td>Error</td><td>エラーメッセージです。</td></tr>
 
-なし
-
-## イベント
-
-なし
-
-## 関連
-
-- [Settings クラス](Jaffa.Diagnostics.Logging.Settings.md)
-- [LogWritingEventArgs クラス](Jaffa.Diagnostics.Logging.LogWritingEventArgs.md)
-- [LogTypes 列挙型](Jaffa.Diagnostics.Logging.LogTypes.md)
-- [LoggingModes 列挙型](Jaffa.Diagnostics.Logging.LoggingModes.md)
+</table>
 

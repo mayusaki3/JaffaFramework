@@ -1,6 +1,7 @@
 ﻿using Jaffa.Diagnostics;
 using System;
 using System.Text;
+using Windows.UI.Xaml.Controls;
 
 namespace Jaffa
 {
@@ -82,7 +83,7 @@ namespace Jaffa
             }
 
             // ナビゲーション情報を使ってページ再表示
-            if(Jaffa.Application.Pages[0].Frame != null)
+            if (Jaffa.Application.Pages[0].Frame != null)
             {
                 // Navigation使用時
                 string snav = Jaffa.Application.Pages[0].Frame.GetNavigationState();

@@ -31,13 +31,6 @@ Jaffa.Application.Start();から呼ばれます。<br>
 <tr><td>static void Initialize();</td></tr>
 </table></td></tr>
 
-<tr><td>Terminate</td><td>
-コアライブラリの後処理を行います。<br>
-アプリケーション終了時に呼ばれます。<br>
-<b>構文</b><br><table>
-<tr><td>static void Terminate();</td></tr>
-</table></td></tr>
-
 <tr><td>MakeMessage</td><td>
 コアライブラリ内メッセージを構築します。<br>
 このメソッドが参照するリソースは、Jaffaフレームワーク内のものです。<br>

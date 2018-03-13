@@ -1,5 +1,4 @@
-﻿using Jaffa.Diagnostics;
-using System;
+﻿using System;
 using System.Reflection;
 using System.Resources;
 using System.Text;

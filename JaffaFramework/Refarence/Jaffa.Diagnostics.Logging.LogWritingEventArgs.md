@@ -1,29 +1,43 @@
 # Jaffa.Diagnostics.Logging.LogWritingEventArgs クラス
 
-Logging クラスは、アプリケーションのロギング対応をサポートします。
+LogWritingEventArgs クラスは、ログ出力イベントのイベントデータです。
 
 ## 構文
 
 ```
-public static class Logging : Object
+public class LogWritingEventArgs : Object
 ```
+
+## コンストラクタ―
+
+<table><tr><td>説明</td></tr>
+
+<tr><td>
+ログ出力イベント引数を初期化します。<br>
+<b>構文</b><br><table>
+<tr><td>LogWritingEventArgs(DateTime dateTime, string[] messages);</td></tr>
+</table><b>パラメーター</b><br><table>
+<tr><td>dateTime</td><td>発生日時を指定します。</td></tr>
+<tr><td>messages</td><td>メッセージリストを指定します。</td></tr>
+</table></td></tr>
+
+</table>
+
 
 ## プロパティ
 
-なし
+<table><tr><td>名前</td><td>説明</td></tr>
 
-## メソッド
+<tr><td>DateTime</td><td>
+発生日時を参照します。<br>
+<b>構文</b><br><table>
+<tr><td>DateTime DateTime</td></tr>
+</table></td></tr>
 
-なし
+<tr><td>Messages</td><td>
+メッセージリストを参照します。<br>
+<b>構文</b><br><table>
+<tr><td>string[] Messages</td></tr>
+</table></td></tr>
 
-## イベント
-
-なし
-
-## 関連
-
-- [Settings クラス](Jaffa.Diagnostics.Logging.Settings.md)
-- [LogWritingEventArgs クラス](Jaffa.Diagnostics.Logging.LogWritingEventArgs.md)
-- [LogTypes 列挙型](Jaffa.Diagnostics.Logging.LogTypes.md)
-- [LoggingModes 列挙型](Jaffa.Diagnostics.Logging.LoggingModes.md)
-
+</table>

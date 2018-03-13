@@ -378,7 +378,7 @@ namespace Jaffa.Diagnostics
         /// <summary>
         /// ログ出力イベント引数クラス
         /// </summary>
-        public class LogWritingEventArgs
+        public class LogWritingEventArgs : Object
         {
             #region コンストラクター
 
@@ -402,7 +402,7 @@ namespace Jaffa.Diagnostics
             private DateTime dateTime;
 
             /// <summary>
-            /// ログタイプを参照します。
+            /// 発生日時を参照します。
             /// </summary>
             public DateTime DateTime
             {
@@ -723,7 +723,7 @@ namespace Jaffa.Diagnostics
             {
                 try
                 {
-                    rt.Add(Jaffa.International.MakeMessage("**{LOGGING_EXCEPTION}: ") + es.Message.Remove('\r').Split(new char[] { '\n' })[0]);
+                    rt.Add(Jaffa.International.MakeCoreMessage("**{LOGGING_EXCEPTION}: ") + es.Message.Remove('\r').Split(new char[] { '\n' })[0]);
                 }
                 catch
                 {

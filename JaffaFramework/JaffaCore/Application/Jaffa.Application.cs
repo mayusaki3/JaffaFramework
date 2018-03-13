@@ -5,7 +5,7 @@ namespace Jaffa
     /// <summary>
     /// Jaffaフレームワーク・アプリケーションサポート
     /// </summary>
-    //[System.Diagnostics.DebuggerNonUserCode]
+    [System.Diagnostics.DebuggerNonUserCode]
     public static partial class Application : Object
     { }
 }

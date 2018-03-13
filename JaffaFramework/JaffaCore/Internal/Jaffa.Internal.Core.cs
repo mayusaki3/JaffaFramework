@@ -1,12 +1,13 @@
 ﻿using Jaffa.Diagnostics;
 using System;
+using System.ComponentModel;
 
 namespace Jaffa.Internal
 {
     /// <summary>
     /// Jaffaフレームワーク・共通コアライブラリ
     /// </summary>
-    ///[EditorBrowsable(EditorBrowsableState.Never)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public static partial class Core : Object
     {
         #region インナークラス
@@ -63,8 +64,8 @@ namespace Jaffa.Internal
             if (coreHelper == null)
             {
                 coreHelper = new CoreHelper();
+                Logging.Write(MakeMessage("{JAFFA_TITLE} {JAFFA_VERSION} " + Version + " {JAFFA_START}"));
             }
-            Logging.Write(MakeMessage("{JAFFA_TITLE} {JAFFA_VERSION} " + Version + " {JAFFA_START}"));
         }
 
         private static CoreHelper coreHelper = null;
@@ -79,11 +80,12 @@ namespace Jaffa.Internal
         private static void Terminate()
         {
             Logging.Write(new string[] { MakeMessage("{JAFFA_TITLE} {JAFFA_END}"), "", ""});
+            coreHelper = null;
         }
 
         #endregion
 
-        #region コアライブラリ内メッセージを構築 (MakeMessage)
+        #region コアライブラリ内メッセージを構築 (MakeCoreMessage)
 
         /// <summary>
         /// コアライブラリ内メッセージを構築します。
@@ -114,8 +116,7 @@ namespace Jaffa.Internal
         /// </remarks>
         public static string MakeMessage(string message, string[] paramList)
         {
-            return Jaffa.International.MakeMessage(message, paramList);
-        }
+            return Jaffa.International.MakeCoreMessage(message, paramList);        }
 
         #endregion
 

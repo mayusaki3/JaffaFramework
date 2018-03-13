@@ -8,7 +8,7 @@ namespace Jaffa
     /// <summary>
     /// Jaffaフレームワーク・国際化対応サポート
     /// </summary>
-    //[System.Diagnostics.DebuggerNonUserCode]
+    ///[System.Diagnostics.DebuggerNonUserCode]
     public static partial class International
     {
         #region イベント
@@ -33,7 +33,7 @@ namespace Jaffa
             if (ChangeCultureEvent != null)
             {
                 // カルチャー変更を通知
-                ChangeCultureEvent(null, new EventArgs());
+                ChangeCultureEvent(currentCulture, new EventArgs());
             }
         }
 
@@ -54,7 +54,7 @@ namespace Jaffa
         /// 例. Auto,{DynamicResource CultureAuto}
         ///     en-US,English
         ///     ja-JP,日本語
-        /// この例の「{DynamicResource CultureAuto}」部分は、
+        /// この例の「{DynamicResource CultureAuto}」部分は、言語コードのリソースで置き換わります。
         /// </remarks>
         public static string[] GetAvailableLanguageList()
         {
@@ -193,7 +193,7 @@ namespace Jaffa
         #region 現在のカルチャーを変更 (ChangeCultureFromDisplayLanguageName)
 
         /// <summary>
-        /// 現在のカルチャーを言語名で変更します。ユニバーサルアプリのページキャッシュはクリアされます。
+        /// 現在のカルチャーを言語名で変更します。UWPアプリのページキャッシュはクリアされます。
         /// </summary>
         /// <param name="name">表示名</param>
         public static void ChangeCultureFromDisplayLanguageName(string name)
@@ -231,22 +231,19 @@ namespace Jaffa
 
         #endregion
 
-        #region フレームワーク内メッセージを構築 (MakeMessage)
+        #region フレームワーク内メッセージを構築 (MakeCoreMessage)
 
         /// <summary>
         /// フレームワーク内メッセージを構築します。
         /// </summary>
         /// <param name="message">メッセージ</param>
-        /// <param name="paramList">メッセージに埋め込むパラメータのリスト</param>
         /// <returns>構築したメッセージ</returns>
         /// <remarks>
-        /// メッセージは、テキスト中に {resource-name} と %paramList-index を指定できます。
-        /// パラメータは、テキスト中に {resource-name} を指定できます。
-        /// メッセージとパラメータは、それぞれリソースを参照してから、１つに編集します。
+        /// メッセージは、テキスト中に {resource-name} を指定できます。
         /// </remarks>
-        public static string MakeMessage(string message)
+        public static string MakeCoreMessage(string message)
         {
-            return MakeMessage(message, new string[0]);
+            return MakeCoreMessage(message, new string[0]);
         }
 
         /// <summary>
@@ -260,7 +257,7 @@ namespace Jaffa
         /// パラメータは、テキスト中に {resource-name} を指定できます。
         /// メッセージとパラメータは、それぞれリソースを参照してから、１つに編集します。
         /// </remarks>
-        public static string MakeMessage(string message, string[] paramList)
+        public static string MakeCoreMessage(string message, string[] paramList)
         {
             StringBuilder rt = new StringBuilder(ConvertCurrentCultureResourceString(message));
             for(int i = 0; i < paramList.Length; i++)

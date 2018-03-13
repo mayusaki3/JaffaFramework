@@ -47,6 +47,8 @@
     <Compile Include="CoreWPF\Diagnostics\Jaffa.Diagnostics.Logging.WPF.cs" />
     <Compile Include="CoreWPF\Internal\Jaffa.Internal.Core.WPF.cs" />
     <Compile Include="CoreWPF\International\Jaffa.International.WPF.cs" />
+    <Compile Include="CoreWPF\UI\Controls\Jaffa.UI.Controls.ConsoleBox.WPF.cs" />
+    <Compile Include="CoreWPF\UI\Controls\Jaffa.UI.Controls.PropertyGrid.WPF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resources_en-US.Designer.cs">
       <AutoGen>True</AutoGen>
