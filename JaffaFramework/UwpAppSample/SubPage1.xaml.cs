@@ -44,7 +44,7 @@ namespace UwpAppSample
 
             // 国際化対応のサンプル
 
-            // Jaffa: ダイナミックリソース以外をカルチャ切替するためのイベントを設定
+            // Jaffa: カルチャ切替するためのイベントを設定
             Jaffa.International.ChangeCultureEvent += Jaffa_ChangeCultureEvent;
 
             // 言語リスト読み込み

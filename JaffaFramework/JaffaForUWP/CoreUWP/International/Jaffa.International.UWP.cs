@@ -1,6 +1,7 @@
 ﻿using Jaffa.Diagnostics;
 using System;
 using System.Text;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Jaffa
@@ -20,8 +21,13 @@ namespace Jaffa
         /// <param name="key">Key値</param>
         static private string GetCurrentCultureResourceString(string key)
         {
-            key = key.Replace("{DynamicResource ", "").Replace("}", "");
-            string rt = Jaffa.Application.Resource.GetString(key);
+            key = key.Replace("{DynamicResource ", "").Replace("{StaticResource ", "").Replace("}", "");
+            string rt = "";
+            try
+            {
+                rt = Application.Current.Resources[key] as string;
+            }
+            catch { }
             return rt;
         }
 
@@ -39,6 +45,15 @@ namespace Jaffa
 
             // Coreリソース切り替えのため解放
             resLoader = null;
+
+            // アプリケーションのリソースを更新
+            Application.Current.Resources.Source = new Uri("ms-appx:///Resources/Dictionary_" + currentCulture + ".xaml");
+
+            // 各ページのリソースを更新
+            foreach (Page page in Jaffa.Application.Pages)
+            {
+                page.Resources.Source = new Uri("ms-appx:///Resources/Dictionary_" + currentCulture + ".xaml");
+            }
 
             if (changePageTimer == null) {
                 changePageTimer = new Windows.UI.Xaml.DispatcherTimer();
@@ -66,6 +81,7 @@ namespace Jaffa
         static private void ChangePages(bool raiseEvent)
         {
             // キャッシュされているページを破棄
+            Page curpage = null;
             foreach (var page in Jaffa.Application.Pages)
             {
                 Logging.Write("page: " + page.Name);
@@ -76,6 +92,7 @@ namespace Jaffa
                     int csize = page.Frame.CacheSize;
                     page.Frame.CacheSize = 0;
                     page.Frame.CacheSize = csize;
+                    curpage = page;
                 }
                 else
                 {
@@ -83,11 +100,11 @@ namespace Jaffa
             }
 
             // ナビゲーション情報を使ってページ再表示
-            if (Jaffa.Application.Pages[0].Frame != null)
+            if (curpage != null)
             {
                 // Navigation使用時
-                string snav = Jaffa.Application.Pages[0].Frame.GetNavigationState();
-                Jaffa.Application.Pages[0].Frame.SetNavigationState(snav);
+                string snav = curpage.Frame.GetNavigationState();
+                curpage.Frame.SetNavigationState(snav);
 
                 if (raiseEvent)
                 {

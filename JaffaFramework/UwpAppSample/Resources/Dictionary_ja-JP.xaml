@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UwpAppSample.Resources">
+
+    <!-- タイトル -->
+    <x:String x:Key="AppTitle">Jaffa Framework UWPサンプルアプリ</x:String>
+
+    <!-- タブ１タイトル -->
+    <x:String x:Key="Tab1Title">言語切替とロギング</x:String>
+
+    <!-- 言語オプション -->
+    <x:String x:Key="CultureAuto">Microsoft Windows と同じ</x:String>
+
+</ResourceDictionary>

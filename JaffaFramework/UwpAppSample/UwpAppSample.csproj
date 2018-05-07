@@ -111,8 +111,6 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <PRIResource Include="Resources.resw" />
-    <PRIResource Include="Resources\Resources.lang-en-US.resw" />
-    <PRIResource Include="Resources\Resources.lang-ja-JP.resw" />
     <None Include="UwpAppSample_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +131,16 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Dictionary_en-US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Resources\Dictionary_ja-JP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="SubPage1.xaml">
       <SubType>Designer</SubType>

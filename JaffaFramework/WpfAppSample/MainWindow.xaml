@@ -5,6 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppSample"
         mc:Ignorable="d" Height="768" Width="1280" Title="{DynamicResource AppTitle}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Dictionary_ja-JP.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <TabControl Margin="0" VerticalContentAlignment="Center" FontSize="24">
             <TabItem Header="{DynamicResource Tab1Title}" SnapsToDevicePixels="True">

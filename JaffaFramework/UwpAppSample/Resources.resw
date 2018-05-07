@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Dictionarys" xml:space="preserve">
-    <value>Auto,{DynamicResource CultureAuto}
+    <value>Auto,{StaticResource CultureAuto}
 en-US,English
 ja-JP,日本語</value>
     <comment>アプリケーションで利用可能な言語リストです。</comment>

@@ -76,9 +76,10 @@ namespace Jaffa
             foreach (string lang in langs)
             {
                 string[] s = lang.Split(new char[] { ',', '\r', '\n' });
-                if (s[1].IndexOf("{DynamicResource") >= 0)
+                if (s[1].IndexOf("{DynamicResource") >= 0 ||
+                    s[1].IndexOf("{StaticResource") >= 0)
                 {
-                    string key = s[1].Replace("{DynamicResource ", "").Replace("}", "");
+                    string key = s[1].Replace("{DynamicResource ", "").Replace("{StaticResource ", "").Replace("}", "");
                     string val = GetCurrentCultureResourceString(key);
                     if (val.Length > 0) s[1] = val;
                 }
@@ -115,9 +116,10 @@ namespace Jaffa
                 string[] s = lang.Split(new char[] { ',', '\r', '\n' });
                 if(s[0].Equals(culture))
                 {
-                    if (s[1].IndexOf("{DynamicResource") >= 0)
+                    if (s[1].IndexOf("{DynamicResource") >= 0 ||
+                        s[1].IndexOf("{StaticResource") >= 0)
                     {
-                        string key = s[1].Replace("{DynamicResource ", "").Replace("}", "");
+                        string key = s[1].Replace("{DynamicResource ", "").Replace("{StaticResource ", "").Replace("}", "");
                         s[1] = GetCurrentCultureResourceString(key);
                     }
                     rt = s[1];
@@ -209,12 +211,14 @@ namespace Jaffa
             foreach (string lang in langs)
             {
                 string[] s = lang.Split(new char[] { ',', '\r', '\n' });
-                if (s[1].IndexOf("{DynamicResource") >= 0)
+                if (s[1].IndexOf("{DynamicResource") >= 0 ||
+                    s[1].IndexOf("{StaticResource") >= 0)
                 {
                     s[1] = GetCurrentCultureResourceString(s[1]);
                 }
                 if (s[1].Equals(name))
                 {
+                    string saveCulture = currentCulture;
                     currentCultureSetting = s[0];
                     if (s[0].Equals("Auto"))
                     {
@@ -224,10 +228,15 @@ namespace Jaffa
                     {
                         currentCulture = s[0];
                     }
-                    ChangeCulture();
+                    if(saveCulture != currentCulture || isChangeCulture)
+                    {
+                        isChangeCulture = false;
+                        ChangeCulture();
+                    }
                 }
             }
         }
+        private static bool isChangeCulture = true;
 
         #endregion
 
