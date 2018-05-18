@@ -5,7 +5,7 @@ namespace Jaffa.UI
     /// <summary>
     /// Jaffaフレームワーク・UWP版ページサポート
     /// </summary>
-    [System.Diagnostics.DebuggerNonUserCode]
+//    [System.Diagnostics.DebuggerNonUserCode]
     public static class Page : Object
     {
         #region イベント
@@ -39,10 +39,19 @@ namespace Jaffa.UI
         public static void Start(Windows.UI.Xaml.Controls.Page page)
         {
             // ページ生成通知イベント
-            if (CreatePageEvent != null)
-            {
-                CreatePageEvent(page, new EventArgs());
-            }
+            CreatePageEvent?.Invoke(page, new EventArgs());
+
+            // カルチャに合わせてリソースを切り替え
+            page.Resources = Internal.Core.ChangeResources(page.Resources, Jaffa.International.GetAvailableLanguageCodeList(), Jaffa.International.CurrentCulture);
+
+
+            Jaffa.Application.Current.Resources = Internal.Core.ChangeResources(Jaffa.Application.Current.Resources, Jaffa.International.GetAvailableLanguageCodeList(), Jaffa.International.CurrentCulture);
+
+
+
+
+
+
         }
 
         #endregion

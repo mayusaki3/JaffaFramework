@@ -8,33 +8,30 @@ namespace Jaffa
     /// <summary>
     /// Jaffaフレームワーク・国際化対応サポート
     /// </summary>
-    ///[System.Diagnostics.DebuggerNonUserCode]
+//    [System.Diagnostics.DebuggerNonUserCode]
     public static partial class International
     {
         #region イベント
 
-        #region カルチャー変更通知イベント (ChangeCultureEvent)
+        #region カルチャー変更通知イベント (CultureChangedEvent)
 
-        public delegate void ChangeCultureEventHandler(object sender, EventArgs e);
+        public delegate void CultureChangedEventHandler(object sender, EventArgs e);
         /// <summary>
         /// CurrentCultureが変更されたことを通知します。
         /// </summary>
-        public static event ChangeCultureEventHandler ChangeCultureEvent;
+        public static event CultureChangedEventHandler CultureChangedEvent;
 
         #endregion
 
-        #region カルチャー変更通知イベント呼び出し ([private] OnChangeCulture)
+        #region カルチャー変更通知イベント呼び出し ([private] OnCultureChanged)
 
         /// <summary>
         /// カルチャー変更通知イベントを呼び出します。
         /// </summary>
-        private static void OnChangeCulture()
+        private static void OnCultureChanged()
         {
-            if (ChangeCultureEvent != null)
-            {
-                // カルチャー変更を通知
-                ChangeCultureEvent(currentCulture, new EventArgs());
-            }
+            // カルチャー変更を通知
+            CultureChangedEvent?.Invoke(currentCulture, new EventArgs());
         }
 
         #endregion
@@ -51,10 +48,10 @@ namespace Jaffa
         /// <remarks>
         /// アプリケーションの Resources.resw(UWP) / Resources.resx(WPF) に 文字列 Dictionarys を追加し、
         /// 次のようにサポートする{言語コード},{言語名} の行を設定します。
-        /// 例. Auto,{DynamicResource CultureAuto}
+        /// 例. Auto,{CultureAuto}
         ///     en-US,English
         ///     ja-JP,日本語
-        /// この例の「{DynamicResource CultureAuto}」部分は、言語コードのリソースで置き換わります。
+        /// この例の「{CultureAuto}」部分は、言語コードのリソースで置き換わります。
         /// </remarks>
         public static string[] GetAvailableLanguageList()
         {
@@ -76,14 +73,55 @@ namespace Jaffa
             foreach (string lang in langs)
             {
                 string[] s = lang.Split(new char[] { ',', '\r', '\n' });
-                if (s[1].IndexOf("{DynamicResource") >= 0 ||
-                    s[1].IndexOf("{StaticResource") >= 0)
+                if (s[1].IndexOf("{") >= 0)
                 {
-                    string key = s[1].Replace("{DynamicResource ", "").Replace("{StaticResource ", "").Replace("}", "");
+                    string key = s[1].Replace("{", "").Replace("}", "");
                     string val = GetCurrentCultureResourceString(key);
                     if (val.Length > 0) s[1] = val;
                 }
                 rt.Add(s[1]);
+            }
+            return rt.ToArray();
+        }
+
+        #endregion
+
+        #region アプリケーションで利用可能な言語コードリストを取得 (GetAvailableLanguageCodeList)
+
+        /// <summary>
+        /// アプリケーションで利用可能な言語コードリストを取得します。
+        /// </summary>
+        /// <remarks>
+        /// アプリケーションの Resources.resw(UWP) / Resources.resx(WPF) に 文字列 Dictionarys を追加し、
+        /// 次のようにサポートする{言語コード},{言語名} の行を設定します。
+        /// 例. Auto,{CultureAuto}
+        ///     en-US,English
+        ///     ja-JP,日本語
+        /// </remarks>
+        public static string[] GetAvailableLanguageCodeList()
+        {
+            string res = null;
+            try
+            {
+                res = Jaffa.Application.Resource.GetString("Dictionarys");
+            }
+            catch (Exception es)
+            {
+                Logging.Write(Logging.LogTypes.Error, Logging.ExceptionToList(es));
+            }
+            if (res == null)
+            {
+                return new string[0];
+            }
+            string[] langs = res.Split(new char[] { '\n' });
+            List<string> rt = new List<string>();
+            foreach (string lang in langs)
+            {
+                string[] s = lang.Split(new char[] { ',', '\r', '\n' });
+                if (s[0].Equals("Auto") == false)
+                {
+                    rt.Add(s[0]);
+                }
             }
             return rt.ToArray();
         }
@@ -116,10 +154,9 @@ namespace Jaffa
                 string[] s = lang.Split(new char[] { ',', '\r', '\n' });
                 if(s[0].Equals(culture))
                 {
-                    if (s[1].IndexOf("{DynamicResource") >= 0 ||
-                        s[1].IndexOf("{StaticResource") >= 0)
+                    if (s[1].IndexOf("{") >= 0)
                     {
-                        string key = s[1].Replace("{DynamicResource ", "").Replace("{StaticResource ", "").Replace("}", "");
+                        string key = s[1].Replace("{", "").Replace("}", "");
                         s[1] = GetCurrentCultureResourceString(key);
                     }
                     rt = s[1];
@@ -211,8 +248,7 @@ namespace Jaffa
             foreach (string lang in langs)
             {
                 string[] s = lang.Split(new char[] { ',', '\r', '\n' });
-                if (s[1].IndexOf("{DynamicResource") >= 0 ||
-                    s[1].IndexOf("{StaticResource") >= 0)
+                if (s[1].IndexOf("{") >= 0)
                 {
                     s[1] = GetCurrentCultureResourceString(s[1]);
                 }

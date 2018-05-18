@@ -9,9 +9,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Dictionary_ja-JP.xaml"/>
+                <ResourceDictionary Source="Resources/Theme_ja-JP.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
     </Application.Resources>
-    
 </Application>

@@ -368,6 +368,27 @@ namespace Jaffa.Diagnostics
 
             #endregion
 
+            #region フレームワークログ出力が有効かどうかを参照または設定 ([R/W] FrameworkLogging)
+
+            private static bool frameworkLogging = false;
+
+            /// <summary>
+            /// フレームワークログ出力が有効かどうかを参照または設定します。
+            /// </summary>
+            public static bool FrameworkLogging
+            {
+                get
+                {
+                    return frameworkLogging;
+                }
+                set
+                {
+                    frameworkLogging = value;
+                }
+            }
+
+            #endregion
+
             #endregion
         }
 
@@ -502,6 +523,15 @@ namespace Jaffa.Diagnostics
         public static void Write(List<string> messages)
         {
             Write(LogTypes.Information, messages);
+        }
+
+        /// <summary>
+        /// ログにメッセージを書き込みます。
+        /// </summary>
+        /// <param name="ex">例外</param>
+        public static void Write(Exception exp)
+        {
+            Write(LogTypes.Error, ExceptionToList(exp));
         }
 
         /// <summary>
@@ -775,13 +805,12 @@ namespace Jaffa.Diagnostics
                     {
                         #region ログ通知
 
-                        if (muteLoggingEvent == false && LogWritingEvent != null)
+                        if (muteLoggingEvent == false)
                         {
                             try
                             {
                                 // イベント通知
-                                LogWritingEventArgs e = new LogWritingEventArgs(log.DateTime, log.ToShortStrings());
-                                LogWritingEvent(e);
+                                LogWritingEvent?.Invoke(new LogWritingEventArgs(log.DateTime, log.ToShortStrings()));
                             }
                             catch
                             {

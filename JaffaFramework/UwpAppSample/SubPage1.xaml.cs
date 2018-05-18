@@ -44,8 +44,11 @@ namespace UwpAppSample
 
             // 国際化対応のサンプル
 
+            // Jaffa: カルチャ切替時のページデータ処理のためのイベントを設定
+            Jaffa.International.PageDataProcessingEvent += Jaffa_PageDataProcessingEvent;
+
             // Jaffa: カルチャ切替するためのイベントを設定
-            Jaffa.International.ChangeCultureEvent += Jaffa_ChangeCultureEvent;
+            Jaffa.International.CultureChangedEvent += Jaffa_CultureChangedEvent;
 
             // 言語リスト読み込み
             listLanguages_Reload();
@@ -82,16 +85,35 @@ namespace UwpAppSample
             Logging.Write("Event: listLanguages_SelectionChanged");
             if (listLanguages.SelectedIndex < 0) return;
 
+            // ログを退避
+            savelog = logText.Text;
+
             // Jaffa: カルチャを切り替え
             Jaffa.International.ChangeCultureFromDisplayLanguageName(listLanguages.Items[listLanguages.SelectedIndex].ToString());
         }
+        private string savelog = "";
 
-        private void Jaffa_ChangeCultureEvent(object sender, EventArgs e)
+        private void Jaffa_PageDataProcessingEvent(object sender, Jaffa.International.PageDataProcessingEventArgs e)
         {
-            Logging.Write("Event: Jaffa_ChangeCultureEvent - " + Jaffa.International.CurrentCulture);
+            // ページリロード時にデータを維持するための処理
+            if (e.Request == Jaffa.International.PageDataProcessingRequests.Save)
+            {
+                // ログを退避
+                logSaves = logText.Text;
+            }
+            if (e.Request == Jaffa.International.PageDataProcessingRequests.Restore)
+            {
+                // ログを復元
+                logText.Text = logSaves;
+                logSaves = "";
+            }
+        }
+        private string logSaves = "";
 
-            // 言語リスト再読み込み
-            listLanguages_Reload();
+        private void Jaffa_CultureChangedEvent(object sender, EventArgs e)
+        {
+            logText.Text = savelog;
+            Logging.Write("Event: Jaffa_CultureChangedEvent - " + Jaffa.International.CurrentCulture);
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using Jaffa.Diagnostics;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -11,6 +12,100 @@ namespace Jaffa
     /// </summary>
     public static partial class International : Object
     {
+        #region インナークラス
+
+        #region カルチャを切り替え時のページデータ処理要求 (PageDataProcessingRequests)
+
+        /// <summary>
+        /// カルチャを切り替え時のページデータ処理要求
+        /// </summary>
+        public enum PageDataProcessingRequests : byte
+        {
+            /// <summary>
+            /// データ退避
+            /// </summary>
+            Save,
+            /// <summary>
+            /// データ復元
+            /// </summary>
+            Restore
+        }
+
+        #endregion
+
+        #region カルチャを切り替え時のページデータ処理イベント引数クラス (PageDataProcessingEventArgs)
+
+        /// <summary>
+        /// カルチャを切り替え時のページデータ処理イベント引数クラス
+        /// </summary>
+        public class PageDataProcessingEventArgs : Object
+        {
+            #region コンストラクター
+
+            /// <summary>
+            /// カルチャを切り替え時のページデータ処理イベント引数を初期化します。
+            /// </summary>
+            /// <param name="request">カルチャを切り替え時のページデータ処理要求</param>
+            public PageDataProcessingEventArgs(PageDataProcessingRequests request)
+            {
+                this.request = request;
+            }
+
+            #endregion
+
+            #region プロパティ
+
+            #region ページデータ処理要求 ([R] Request)
+
+            private PageDataProcessingRequests request;
+
+            /// <summary>
+            /// ページデータ処理要求を参照します。
+            /// </summary>
+            public PageDataProcessingRequests Request
+            {
+                get
+                {
+                    return request;
+                }
+            }
+
+            #endregion
+
+            #endregion
+        }
+
+        #endregion
+
+        #endregion
+
+        #region イベント
+
+        #region カルチャを切り替え時のページデータ処理通知イベント (PageDataProcessingEvent)
+
+        public delegate void PageDataProcessingEventHandler(object sender, PageDataProcessingEventArgs e);
+        /// <summary>
+        /// カルチャを切り替え時のページデータの退避及び復元タイミングを通知します。
+        /// </summary>
+        public static event PageDataProcessingEventHandler PageDataProcessingEvent;
+
+        #endregion
+
+        #region カルチャを切り替え時のページデータ処理通知イベント呼び出し ([private] OnPageDataProcessing)
+
+        /// <summary>
+        /// カルチャを切り替え時のページデータ処理通知イベントを呼び出します。
+        /// </summary>
+        private static void OnPageDataProcessing(PageDataProcessingRequests request)
+        {
+            // ページデータ処理を通知
+            PageDataProcessingEvent?.Invoke(Application.Pages, new PageDataProcessingEventArgs(request));
+        }
+
+        #endregion
+
+        #endregion
+
         #region メソッド
 
         #region 現在のカルチャーに対応するKey値で指定された文字列リソースを取得 (GetCurrentCultureResourceString) [Private]
@@ -21,7 +116,7 @@ namespace Jaffa
         /// <param name="key">Key値</param>
         static private string GetCurrentCultureResourceString(string key)
         {
-            key = key.Replace("{DynamicResource ", "").Replace("{StaticResource ", "").Replace("}", "");
+            key = key.Replace("{", "").Replace("}", "");
             string rt = "";
             try
             {
@@ -40,81 +135,41 @@ namespace Jaffa
         /// </summary>
         static private void ChangeCulture()
         {
+            // カルチャーコードリスト取得
+            var codes = Jaffa.International.GetAvailableLanguageCodeList();
+
             // 言語設定を更新
             Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = currentCulture;
 
             // Coreリソース切り替えのため解放
             resLoader = null;
 
+            bool isChanged = false;
+
             // アプリケーションのリソースを更新
-            Application.Current.Resources.Source = new Uri("ms-appx:///Resources/Dictionary_" + currentCulture + ".xaml");
+            try
+            {
+                Application.Current.Resources = Jaffa.Internal.Core.ChangeResources(Application.Current.Resources, codes, currentCulture);
+                isChanged = true;
+            }
+            catch
+            { }
 
             // 各ページのリソースを更新
-            foreach (Page page in Jaffa.Application.Pages)
-            {
-                page.Resources.Source = new Uri("ms-appx:///Resources/Dictionary_" + currentCulture + ".xaml");
-            }
-
-            if (changePageTimer == null) {
-                changePageTimer = new Windows.UI.Xaml.DispatcherTimer();
-                changePageTimer.Tick += ChangePageTimer_Tick;
-                changePageTimer.Interval = new TimeSpan(0, 0, 0, 0, 50);
-            }
-
-            // ページに反映 - 一回では再表示でカルチャーが変更されないことがあるため、時間を空けて二回実行
-            ChangePages(true);
-            changePageTimer.Start();
-        }
-
-        private static void ChangePageTimer_Tick(object sender, object e)
-        {
-            changePageTimer.Stop();
-            ChangePages(false);
-        }
-
-        static private Windows.UI.Xaml.DispatcherTimer changePageTimer = null;
-
-        /// <summary>
-        /// 現在のカルチャーをすべてのページに反映します。ページキャッシュはクリアされます。
-        /// </summary>
-        /// <param name="raiseEvent">イベントを発生される場合はtrueを設定</param>
-        static private void ChangePages(bool raiseEvent)
-        {
-            // キャッシュされているページを破棄
-            Page curpage = null;
             foreach (var page in Jaffa.Application.Pages)
             {
-                Logging.Write("page: " + page.Name);
-
-                if (page.Frame != null)
-                {
-                    // Navigation使用時
-                    int csize = page.Frame.CacheSize;
-                    page.Frame.CacheSize = 0;
-                    page.Frame.CacheSize = csize;
-                    curpage = page;
-                }
-                else
-                {
-                }
+                page.Resources = Jaffa.Internal.Core.ChangeResources(page.Resources, codes, currentCulture);
+                isChanged = true;
             }
 
-            // ナビゲーション情報を使ってページ再表示
-            if (curpage != null)
+            if (isChanged)
             {
-                // Navigation使用時
-                string snav = curpage.Frame.GetNavigationState();
-                curpage.Frame.SetNavigationState(snav);
+                // リソースを更新した場合はページをリロード
+                Jaffa.Application.PageReload();
+            }
 
-                if (raiseEvent)
-                {
-                    // カルチャー変更通知イベント
-                    OnChangeCulture();
-                }
-            }
-            else
-            {
-            }
+            // カルチャー変更通知イベント
+            OnCultureChanged();
         }
 
         #endregion
@@ -134,9 +189,9 @@ namespace Jaffa
                 // リソースローダー初期化
                 try
                 {
-#pragma warning disable 0618
+//#pragma warning disable 0618
                     resLoader = new Windows.ApplicationModel.Resources.ResourceLoader("JaffaForUWP/Resources");
-#pragma warning restore 0618
+//#pragma warning restore 0618
                 }
                 catch (Exception es)
                 {

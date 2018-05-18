@@ -25,6 +25,9 @@ namespace WpfAppSample
         {
             InitializeComponent();
 
+            // Jaffa: ウィンドウ開始を通知 (Required)
+            Jaffa.UI.Window.Start(this);
+
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Logging.Write("MainWindow Start!");
 
@@ -39,8 +42,11 @@ namespace WpfAppSample
 
             // 国際化対応のサンプル
 
+            // Jaffa: 初期表示前にカルチャを切り替える
+            Jaffa.International.ChangeCultureFromDisplayLanguageName("English");
+
             // Jaffa: ダイナミックリソース以外をカルチャ切替するためのイベントを設定
-            Jaffa.International.ChangeCultureEvent += Jaffa_ChangeCultureEvent;
+            Jaffa.International.CultureChangedEvent += Jaffa_CultureChangedEvent;
 
             // 言語リスト読み込み
             listLanguages_Reload();
@@ -79,9 +85,9 @@ namespace WpfAppSample
             Jaffa.International.ChangeCultureFromDisplayLanguageName(listLanguages.Items[listLanguages.SelectedIndex].ToString());
         }
 
-        private void Jaffa_ChangeCultureEvent(object sender, EventArgs e)
+        private void Jaffa_CultureChangedEvent(object sender, EventArgs e)
         {
-            Logging.Write("Event: Jaffa_ChangeCultureEvent - " + Jaffa.International.CurrentCulture);
+            Logging.Write("Event: Jaffa_CultureChangedEvent - " + Jaffa.International.CurrentCulture);
 
             // 言語リスト再読み込み
             listLanguages_Reload();

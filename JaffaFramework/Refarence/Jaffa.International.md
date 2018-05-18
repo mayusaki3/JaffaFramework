@@ -84,10 +84,10 @@ public static class International
 
 <table><tr><td>名前</td><td>説明</td></tr>
 
-<tr><td>ChangeCultureEvent</td><td>
+<tr><td>CultureChangedEvent</td><td>
 CurrentCultureが変更されたことを通知します。<br>
 <b>構文</b><br><table>
-<tr><td>delegate void ChangeCultureEventHandler(object sender, EventArgs e);</td></tr>
+<tr><td>delegate void CultureChangedEventHandler(object sender, EventArgs e);</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>sender</td><td>currentCulture オブジェクトです。</td></tr>
 <tr><td>e</td><td>既定のイベントデータです。</td></tr>

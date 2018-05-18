@@ -31,11 +31,17 @@ namespace UwpAppSample
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
+            // Jaffa: フレームワークのログも出力させます
+            Jaffa.Diagnostics.Logging.Settings.FrameworkLogging = true;
+
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Jaffa.Diagnostics.Logging.Write("Jaffa Framework for UWP Sample Application Start.");
 
             // Jaffa: フレームワーク開始
             Jaffa.Application.Start();
+
+            // Jaffa: 初期表示前にカルチャを切り替える
+            Jaffa.International.ChangeCultureFromDisplayLanguageName("English");
 
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Jaffa.Diagnostics.Logging.Write("App Initialized.");

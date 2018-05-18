@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:UwpAppSample.Resources">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- タイトル -->
     <x:String x:Key="AppTitle">Jaffa Framework UWPサンプルアプリ</x:String>
@@ -11,5 +10,7 @@
 
     <!-- 言語オプション -->
     <x:String x:Key="CultureAuto">Microsoft Windows と同じ</x:String>
+
+    <x:String x:Key="Sample">サンプル</x:String>
 
 </ResourceDictionary>

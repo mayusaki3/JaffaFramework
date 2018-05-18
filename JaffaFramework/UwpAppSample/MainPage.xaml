@@ -6,15 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Dictionary_ja-JP.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot FlowDirection="LeftToRight">
+        <TextBox Text="{StaticResource Sample}"/>
+        <Pivot FlowDirection="LeftToRight" Background="{StaticResource MyBrush}">
             <PivotItem Margin="0,0,0,0" Header="{StaticResource Tab1Title}">
                 <local:SubPage1/>
             </PivotItem>

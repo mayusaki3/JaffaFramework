@@ -22,7 +22,7 @@ namespace Jaffa
         static private string GetCurrentCultureResourceString(string key)
         {
             string rt = "";
-            key = key.Replace("{DynamicResource ", "").Replace("}", "");
+            key = key.Replace("{", "").Replace("}", "");
             ResourceDictionary dic = new ResourceDictionary();
             try
             {
@@ -42,17 +42,23 @@ namespace Jaffa
         /// </summary>
         static private void ChangeCulture()
         {
+            // カルチャーコードリスト取得
+            var codes = Jaffa.International.GetAvailableLanguageCodeList();
+
             // Coreリソース切り替えのため解放
             resManager = null;
 
+            // アプリケーションのリソースを更新
+            Jaffa.Application.Current.Resources = Internal.Core.ChangeResources(Jaffa.Application.Current.Resources, codes, Jaffa.International.CurrentCulture);
+
             // 各ウィンドウのリソースを更新
-            foreach (Window win in Jaffa.Application.Current.Windows)
+            foreach (Window window in Jaffa.Application.Current.Windows)
             {
-                win.Resources.Source = new Uri("Resources/Dictionary_" + currentCulture + ".xaml", UriKind.Relative);
+                window.Resources = Internal.Core.ChangeResources(window.Resources, codes, Jaffa.International.CurrentCulture);
             }
 
             // カルチャー変更通知イベント
-            OnChangeCulture();
+            OnCultureChanged();
         }
 
         #endregion

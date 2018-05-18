@@ -49,6 +49,7 @@
     <Compile Include="CoreWPF\International\Jaffa.International.WPF.cs" />
     <Compile Include="CoreWPF\UI\Controls\Jaffa.UI.Controls.ConsoleBox.WPF.cs" />
     <Compile Include="CoreWPF\UI\Controls\Jaffa.UI.Controls.PropertyGrid.WPF.cs" />
+    <Compile Include="CoreWPF\UI\Jaffa.UI.Window.WPF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resources_en-US.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -62,6 +63,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CoreWPF\Mvvm\" />
     <Folder Include="CoreWPF\UI\Popups\" />
   </ItemGroup>
   <ItemGroup>

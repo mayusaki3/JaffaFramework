@@ -1,20 +1,32 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace Jaffa
 {
     /// <summary>
     /// Jaffaフレームワーク・WPF版アプリケーションサポート
     /// </summary>
-    public static partial class Application : Object
+    public static partial class Application
     {
+        #region インナークラス
+
+        #region 安全で副作用がない P/Invoke メソッドクラス (SafeNativeMethods)
+
+        [SuppressUnmanagedCodeSecurityAttribute]
+        internal static class SafeNativeMethods
+        {
+            [DllImport("kernel32.dll", SetLastError = true)]
+            internal static extern int GetUserDefaultLCID();
+        }
+        #endregion
+
+        #endregion
+
         #region メソッド
 
         #region アプリケーション開始 (Start)
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern int GetUserDefaultLCID();
 
         /// <summary>
         /// Jaffaフレームワークにアプリケーション開始を通知します。
@@ -43,7 +55,7 @@ namespace Jaffa
             resMan = new System.Resources.ResourceManager(resourceName, thisAsm);
 
             // 起動時のカルチャー名を記憶
-            int cid = GetUserDefaultLCID();
+            int cid = SafeNativeMethods.GetUserDefaultLCID();
             CultureInfo ci = new CultureInfo(cid);
             Jaffa.International.GetResourceCultureName(ci.Name);
 

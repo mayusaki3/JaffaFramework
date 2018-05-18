@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace Jaffa
 {
     /// <summary>
     /// Jaffaフレームワーク・UWP版アプリケーションサポート
     /// </summary>
-    public static partial class Application : Object
+    public static partial class Application
     {
         #region イベント
 
@@ -16,11 +18,17 @@ namespace Jaffa
         {
             Windows.UI.Xaml.Controls.Page page = sender as Windows.UI.Xaml.Controls.Page;
 
+            System.Diagnostics.Debug.Write("[Page_CreatePageEvent] " + sender.GetType().ToString() + " ");
+            System.Diagnostics.Debug.Write(instPages.Count.ToString() + " --> ");
+
+
             // Pageインスタンスを記憶
             instPages.Add(page);
 
             // Unloadイベントを設定
             page.Unloaded += Page_Unloaded;
+
+            System.Diagnostics.Debug.WriteLine(instPages.Count.ToString());
         }
 
         private static List<Windows.UI.Xaml.Controls.Page> instPages = new List<Windows.UI.Xaml.Controls.Page>();
@@ -31,8 +39,14 @@ namespace Jaffa
 
         private static void Page_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+
+            System.Diagnostics.Debug.Write("[Page_Unloaded] " + sender.GetType().ToString() + " ");
+            System.Diagnostics.Debug.Write(instPages.Count.ToString() + " --> ");
+
             // Pageインスタンスを除外
             instPages.Remove(sender as Windows.UI.Xaml.Controls.Page);
+
+            System.Diagnostics.Debug.WriteLine(instPages.Count.ToString());
         }
 
         #endregion
@@ -63,6 +77,38 @@ namespace Jaffa
 
             // コアライブラリ初期化
             Jaffa.Internal.Core.Initialize();
+        }
+
+        #endregion
+
+        #region ページをリロード (PageReload)
+
+        /// <summary>
+        /// ルートフレームのページをリロードします。
+        /// </summary>
+        public static void PageReload()
+        {
+            var frame = Window.Current.Content as Windows.UI.Xaml.Controls.Frame;
+            if (frame != null)
+            {
+                PageReload(frame);
+            }
+        }
+
+        /// <summary>
+        /// ページをリロードします。
+        /// </summary>
+        /// <param name="frame">フレーム</param>
+        public static void PageReload(Windows.UI.Xaml.Controls.Frame frame)
+        {
+            // キャッシュ破棄
+            int size = frame.CacheSize;
+            frame.CacheSize = 0;
+            frame.CacheSize = size;
+
+            // 再読み込み
+            frame.Navigate(frame.CurrentSourcePageType);
+            frame.GoBack();
         }
 
         #endregion

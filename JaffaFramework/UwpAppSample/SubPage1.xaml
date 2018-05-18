@@ -6,12 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    
     <Grid Background="#FFFFC24C">
         <ScrollViewer HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="300" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <ListBox x:Name="listLanguages" Background="#00000000" SelectionChanged="listLanguages_SelectionChanged"/>
         </ScrollViewer>
-        <Grid Margin="300,0,0,0" Background="#FFFFDC3E">
+        <Grid Margin="300,0,0,0" Background="{StaticResource MyBrush}">
+            <TextBox Text="{StaticResource Sample}"></TextBox>
             <ScrollViewer x:Name="LogTextScroll" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled" Background="Black" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,100,0,0">
                 <TextBlock x:Name="logText" Text="TextBlock" TextWrapping="NoWrap" FontFamily="MS Gothic" Foreground="White" FontSize="12" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
             </ScrollViewer>
