@@ -28,7 +28,7 @@ namespace WpfAppSample
             Jaffa.Diagnostics.Logging.Write("App Initialized.");
 
             // Jaffa: 初期表示前にカルチャを切り替える
-            //Jaffa.International.ChangeCultureFromDisplayLanguageName("English");
+            Jaffa.International.ChangeCultureFromDisplayLanguageName("English");
         }
     }
 }

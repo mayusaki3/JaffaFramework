@@ -2,6 +2,7 @@
     x:Class="UwpAppSample.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:jaffa="clr-namespace:Jaffa.UI;assembly=JaffaForUWP"
     xmlns:local="using:UwpAppSample"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,10 +12,10 @@
         <TextBox Text="{StaticResource Sample}"/>
         <Pivot FlowDirection="LeftToRight" Background="{StaticResource MyBrush}">
             <PivotItem Margin="0,0,0,0" Header="{StaticResource Tab1Title}">
-                <local:SubPage1/>
+                <local:SubPage1 x:Name="subPage1"/>
             </PivotItem>
             <PivotItem Header="PivotItem 1" Margin="0,0,0,0">
-                <local:SubPage2/>
+                <local:SubPage2 x:Name="subPage2"/>
             </PivotItem>
         </Pivot>
     </Grid>

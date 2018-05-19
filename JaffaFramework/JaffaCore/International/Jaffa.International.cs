@@ -268,6 +268,7 @@ namespace Jaffa
                     {
                         isChangeCulture = false;
                         ChangeCulture();
+                        break;
                     }
                 }
             }

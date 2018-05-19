@@ -1,9 +1,6 @@
 ﻿using Jaffa.Diagnostics;
 using System;
 using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Jaffa
 {
@@ -12,100 +9,6 @@ namespace Jaffa
     /// </summary>
     public static partial class International : Object
     {
-        #region インナークラス
-
-        #region カルチャを切り替え時のページデータ処理要求 (PageDataProcessingRequests)
-
-        /// <summary>
-        /// カルチャを切り替え時のページデータ処理要求
-        /// </summary>
-        public enum PageDataProcessingRequests : byte
-        {
-            /// <summary>
-            /// データ退避
-            /// </summary>
-            Save,
-            /// <summary>
-            /// データ復元
-            /// </summary>
-            Restore
-        }
-
-        #endregion
-
-        #region カルチャを切り替え時のページデータ処理イベント引数クラス (PageDataProcessingEventArgs)
-
-        /// <summary>
-        /// カルチャを切り替え時のページデータ処理イベント引数クラス
-        /// </summary>
-        public class PageDataProcessingEventArgs : Object
-        {
-            #region コンストラクター
-
-            /// <summary>
-            /// カルチャを切り替え時のページデータ処理イベント引数を初期化します。
-            /// </summary>
-            /// <param name="request">カルチャを切り替え時のページデータ処理要求</param>
-            public PageDataProcessingEventArgs(PageDataProcessingRequests request)
-            {
-                this.request = request;
-            }
-
-            #endregion
-
-            #region プロパティ
-
-            #region ページデータ処理要求 ([R] Request)
-
-            private PageDataProcessingRequests request;
-
-            /// <summary>
-            /// ページデータ処理要求を参照します。
-            /// </summary>
-            public PageDataProcessingRequests Request
-            {
-                get
-                {
-                    return request;
-                }
-            }
-
-            #endregion
-
-            #endregion
-        }
-
-        #endregion
-
-        #endregion
-
-        #region イベント
-
-        #region カルチャを切り替え時のページデータ処理通知イベント (PageDataProcessingEvent)
-
-        public delegate void PageDataProcessingEventHandler(object sender, PageDataProcessingEventArgs e);
-        /// <summary>
-        /// カルチャを切り替え時のページデータの退避及び復元タイミングを通知します。
-        /// </summary>
-        public static event PageDataProcessingEventHandler PageDataProcessingEvent;
-
-        #endregion
-
-        #region カルチャを切り替え時のページデータ処理通知イベント呼び出し ([private] OnPageDataProcessing)
-
-        /// <summary>
-        /// カルチャを切り替え時のページデータ処理通知イベントを呼び出します。
-        /// </summary>
-        private static void OnPageDataProcessing(PageDataProcessingRequests request)
-        {
-            // ページデータ処理を通知
-            PageDataProcessingEvent?.Invoke(Application.Pages, new PageDataProcessingEventArgs(request));
-        }
-
-        #endregion
-
-        #endregion
-
         #region メソッド
 
         #region 現在のカルチャーに対応するKey値で指定された文字列リソースを取得 (GetCurrentCultureResourceString) [Private]
@@ -144,28 +47,21 @@ namespace Jaffa
             // Coreリソース切り替えのため解放
             resLoader = null;
 
-            bool isChanged = false;
-
             // アプリケーションのリソースを更新
             try
             {
                 Application.Current.Resources = Jaffa.Internal.Core.ChangeResources(Application.Current.Resources, codes, currentCulture);
-                isChanged = true;
             }
             catch
-            { }
+            {
+                // ページ開始時に更新するように設定
+                Jaffa.Application.WaitingChangeCulture = true;
+            }
 
             // 各ページのリソースを更新
             foreach (var page in Jaffa.Application.Pages)
             {
                 page.Resources = Jaffa.Internal.Core.ChangeResources(page.Resources, codes, currentCulture);
-                isChanged = true;
-            }
-
-            if (isChanged)
-            {
-                // リソースを更新した場合はページをリロード
-                Jaffa.Application.PageReload();
             }
 
             // カルチャー変更通知イベント

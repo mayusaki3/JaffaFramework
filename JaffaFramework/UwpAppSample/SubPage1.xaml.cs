@@ -25,13 +25,13 @@ namespace UwpAppSample
     {
         public SubPage1()
         {
+            // Jaffa: InitializeComponentの前にページ開始を通知 (Required)
+            Jaffa.UI.Page.Start(this);
+
             this.InitializeComponent();
 
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Logging.Write("SubPage1 Start");
-
-            // Jaffa: ページ開始を通知
-            Jaffa.UI.Page.Start(this);
 
             // 画面のログをクリア
             logText.Text = "";
@@ -42,16 +42,8 @@ namespace UwpAppSample
             // Jaffa: ログ出力開始（キャッシュされていたログはこのタイミングで出力されます）
             Logging.LogWriteWaiting = false;
 
-            // 国際化対応のサンプル
-
-            // Jaffa: カルチャ切替時のページデータ処理のためのイベントを設定
-            Jaffa.International.PageDataProcessingEvent += Jaffa_PageDataProcessingEvent;
-
-            // Jaffa: カルチャ切替するためのイベントを設定
-            Jaffa.International.CultureChangedEvent += Jaffa_CultureChangedEvent;
-
             // 言語リスト読み込み
-            listLanguages_Reload();
+            if (listLanguages.Items.Count == 0) listLanguages_Reload();
         }
 
         private void Logging_LogWritingEvent(Logging.LogWritingEventArgs e)
@@ -82,38 +74,11 @@ namespace UwpAppSample
 
         private void listLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (listLanguagesReloading == true || listLanguages.SelectedIndex < 0) return;
             Logging.Write("Event: listLanguages_SelectionChanged");
-            if (listLanguages.SelectedIndex < 0) return;
-
-            // ログを退避
-            savelog = logText.Text;
 
             // Jaffa: カルチャを切り替え
             Jaffa.International.ChangeCultureFromDisplayLanguageName(listLanguages.Items[listLanguages.SelectedIndex].ToString());
-        }
-        private string savelog = "";
-
-        private void Jaffa_PageDataProcessingEvent(object sender, Jaffa.International.PageDataProcessingEventArgs e)
-        {
-            // ページリロード時にデータを維持するための処理
-            if (e.Request == Jaffa.International.PageDataProcessingRequests.Save)
-            {
-                // ログを退避
-                logSaves = logText.Text;
-            }
-            if (e.Request == Jaffa.International.PageDataProcessingRequests.Restore)
-            {
-                // ログを復元
-                logText.Text = logSaves;
-                logSaves = "";
-            }
-        }
-        private string logSaves = "";
-
-        private void Jaffa_CultureChangedEvent(object sender, EventArgs e)
-        {
-            logText.Text = savelog;
-            Logging.Write("Event: Jaffa_CultureChangedEvent - " + Jaffa.International.CurrentCulture);
         }
 
         /// <summary>
@@ -121,9 +86,25 @@ namespace UwpAppSample
         /// </summary>
         private void listLanguages_Reload()
         {
+            listLanguagesReloading = true;
             listLanguages.ItemsSource = Jaffa.International.GetAvailableLanguageList();
             listLanguages.SelectedItem = Jaffa.International.GetDisplayLanguageName(Jaffa.International.CurrentCultureSetting);
             Logging.Write("Selected Languages: " + listLanguages.SelectedValue);
+            listLanguagesReloading = false;
         }
+        private bool listLanguagesReloading = false;
+
+        public void SaveContents(ref List<object> save)
+        {
+            save.Clear();
+            save.Add(logText.Text);
+        }
+
+        public void RestoreContents(List<object> save)
+        {
+            logText.Text = save[0] as string;
+        }
+
+        private string savlogtext = "";
     }
 }

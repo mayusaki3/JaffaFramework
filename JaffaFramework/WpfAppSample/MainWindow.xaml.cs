@@ -23,10 +23,10 @@ namespace WpfAppSample
     {
         public MainWindow()
         {
-            InitializeComponent();
-
-            // Jaffa: ウィンドウ開始を通知 (Required)
+            // Jaffa: InitializeComponentの前にウィンドウ開始を通知 (Required)
             Jaffa.UI.Window.Start(this);
+
+            InitializeComponent();
 
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Logging.Write("MainWindow Start!");
@@ -42,14 +42,14 @@ namespace WpfAppSample
 
             // 国際化対応のサンプル
 
-            // Jaffa: 初期表示前にカルチャを切り替える
-            Jaffa.International.ChangeCultureFromDisplayLanguageName("English");
-
             // Jaffa: ダイナミックリソース以外をカルチャ切替するためのイベントを設定
             Jaffa.International.CultureChangedEvent += Jaffa_CultureChangedEvent;
 
+            // Jaffa: 初期表示前にカルチャを切り替える
+            Jaffa.International.ChangeCultureFromDisplayLanguageName("English");
+
             // 言語リスト読み込み
-            listLanguages_Reload();
+            if (listLanguages.Items.Count == 0) listLanguages_Reload();
         }
 
         private void Logging_LogWritingEvent(Logging.LogWritingEventArgs e)
@@ -78,8 +78,8 @@ namespace WpfAppSample
 
         private void listLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (listLanguagesReloading == true || listLanguages.SelectedIndex < 0) return;
             Logging.Write("Event: listLanguages_SelectionChanged");
-            if (listLanguages.SelectedIndex < 0) return;
 
             // Jaffa: カルチャを切り替え
             Jaffa.International.ChangeCultureFromDisplayLanguageName(listLanguages.Items[listLanguages.SelectedIndex].ToString());
@@ -98,9 +98,12 @@ namespace WpfAppSample
         /// </summary>
         private void listLanguages_Reload()
         {
+            listLanguagesReloading = true;
             listLanguages.ItemsSource = Jaffa.International.GetAvailableLanguageList();
             listLanguages.SelectedItem = Jaffa.International.GetDisplayLanguageName(Jaffa.International.CurrentCultureSetting);
             Logging.Write("Selected Languages: " + listLanguages.SelectedValue);
+            listLanguagesReloading = false;
         }
+        private bool listLanguagesReloading = false;
     }
 }

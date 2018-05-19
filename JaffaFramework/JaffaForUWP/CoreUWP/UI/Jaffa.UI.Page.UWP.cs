@@ -42,16 +42,12 @@ namespace Jaffa.UI
             CreatePageEvent?.Invoke(page, new EventArgs());
 
             // カルチャに合わせてリソースを切り替え
+            if (Jaffa.Application.WaitingChangeCulture == true)
+            {
+                Jaffa.Application.Current.Resources = Internal.Core.ChangeResources(Jaffa.Application.Current.Resources, Jaffa.International.GetAvailableLanguageCodeList(), Jaffa.International.CurrentCulture);
+                Jaffa.Application.WaitingChangeCulture = false;
+            }
             page.Resources = Internal.Core.ChangeResources(page.Resources, Jaffa.International.GetAvailableLanguageCodeList(), Jaffa.International.CurrentCulture);
-
-
-            Jaffa.Application.Current.Resources = Internal.Core.ChangeResources(Jaffa.Application.Current.Resources, Jaffa.International.GetAvailableLanguageCodeList(), Jaffa.International.CurrentCulture);
-
-
-
-
-
-
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jaffa.Diagnostics;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,8 +25,13 @@ namespace UwpAppSample
     {
         public SubPage2()
         {
-            this.InitializeComponent();
+            // Jaffa: InitializeComponentの前にページ開始を通知 (Required)
             Jaffa.UI.Page.Start(this);
+
+            this.InitializeComponent();
+
+            // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
+            Logging.Write("SubPage2 Start");
         }
     }
 }
