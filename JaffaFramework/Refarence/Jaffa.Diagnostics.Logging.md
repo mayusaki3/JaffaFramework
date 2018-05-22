@@ -44,11 +44,14 @@ static void Write(LogTypes type, String message);<br>
 static void Write(String[] messages);<br>
 static void Write(LogTypes type, String[] messages);<br>
 static void Write(List&lt;string&gt; messages);<br>
-static void Write(LogTypes type, List&lt;string&gt; messages);<br></td></tr>
+static void Write(LogTypes type, List&lt;string&gt; messages);<br>
+static void Write(Exception exp);<br>
+static void Write(LogTypes type, Exception exp);<br></td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>type</td><td>ログタイプを指定します。省略時は LogTypes.Information です。</td></tr>
 <tr><td>message</td><td>メッセージを指定します。</td></tr>
 <tr><td>messages</td><td>メッセージリストを指定します。</td></tr>
+<tr><td>exp</td><td>例外を指定します。</td></tr>
 </table></td></tr>
 
 <tr><td>WriteDump</td><td>
@@ -62,16 +65,6 @@ static void WriteDump(LogTypes type, byte[] bytes, uint start, uint size);<br></
 <tr><td>bytes</td><td>ダンプ対象のバイト配列を指定します。</td></tr>
 <tr><td>start</td><td>0から始まるダンプの開始位置を指定します。</td></tr>
 <tr><td>size</td><td>出力するバイト数を指定します。</td></tr>
-</table></td></tr>
-
-<tr><td>WriteException</td><td>
-ログにエラーとして例外メッセージを書き込みます。<br>
-<b>構文</b><br><table>
-<tr><td>static void WriteException(Exception exp);<br>
-static void WriteException(LogTypes type, Exception exp);<br></td></tr>
-</table><b>パラメーター</b><br><table>
-<tr><td>type</td><td>ログタイプを指定します。省略時は LogTypes.Error です。</td></tr>
-<tr><td>exp</td><td>例外を指定します。</td></tr>
 </table></td></tr>
 
 <tr><td>BytesToHexDump</td><td>
@@ -99,10 +92,10 @@ static List&lt;string&gt; BytesToHexDump(byte[] bytes, uint start, uint size);<b
 
 <table><tr><td>名前</td><td>説明</td></tr>
 
-<tr><td>LogWritingEvent</td><td>
+<tr><td>LogWriting</td><td>
 ログ出力の内容を通知します。<br>
 <b>構文</b><br><table>
-<tr><td>delegate void LogWritingEventHandler(LogWritingEventArgs e);</td></tr>
+<tr><td>delegate void LogWritingHandler(LogWritingEventArgs e);</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>e</td><td>ログ出力の内容を通知するイベントデータです。</td></tr>
 </table></td></tr>

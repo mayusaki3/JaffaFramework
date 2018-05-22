@@ -37,7 +37,7 @@ namespace UwpAppSample
             logText.Text = "";
 
             // Jaffa: ログを画面に転送するためのイベントを設定
-            Logging.LogWritingEvent += Logging_LogWritingEvent;
+            Logging.LogWriting += Logging_LogWriting;
 
             // Jaffa: ログ出力開始（キャッシュされていたログはこのタイミングで出力されます）
             Logging.LogWriteWaiting = false;
@@ -46,7 +46,7 @@ namespace UwpAppSample
             if (listLanguages.Items.Count == 0) listLanguages_Reload();
         }
 
-        private void Logging_LogWritingEvent(Logging.LogWritingEventArgs e)
+        private void Logging_LogWriting(Logging.LogWritingEventArgs e)
         {
             // ログを行ごとに転送
             foreach (string log in e.Messages)
@@ -69,7 +69,7 @@ namespace UwpAppSample
             }
 
             // 末尾にスクロール
-            LogTextScroll.ScrollToVerticalOffset(LogTextScroll.Height);
+            //LogTextScroll.ScrollToVerticalOffset(LogTextScroll.Height);
         }
 
         private void listLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,7 +87,7 @@ namespace UwpAppSample
         private void listLanguages_Reload()
         {
             listLanguagesReloading = true;
-            listLanguages.ItemsSource = Jaffa.International.GetAvailableLanguageList();
+            listLanguages.ItemsSource = Jaffa.International.GetAvailableLanguageNameList();
             listLanguages.SelectedItem = Jaffa.International.GetDisplayLanguageName(Jaffa.International.CurrentCultureSetting);
             Logging.Write("Selected Languages: " + listLanguages.SelectedValue);
             listLanguagesReloading = false;
@@ -104,7 +104,5 @@ namespace UwpAppSample
         {
             logText.Text = save[0] as string;
         }
-
-        private string savlogtext = "";
     }
 }

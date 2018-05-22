@@ -55,5 +55,27 @@ Jaffa.Application.Start();から呼ばれます。<br>
 
 </td></tr>
 
+<tr><td>MakeChangedResources</td><td>
+変更されたリソースを作成します。<br>
+<b>構文</b><br><table>
+<tr><td>static ResourceDictionary MakeChangedResources(ResourceDictionary currentResource, string[] prefixList, string newPrefix);</td></tr>
+</table><b>パラメーター</b><br><table>
+<tr><td>currentResource</td><td>現在のリソースを指定します。</td></tr>
+<tr><td>prefixList</td><td>リソースファイル名のプレフィックスリストを指定します。</td></tr>
+<tr><td>newPrefix</td><td>新しいリソースファイル名のプレフィックスを指定します。</td></tr>
+</table>
+
+<b>戻り値</b><br><table>
+<tr><td>変更されたリソース。</td></tr>
+</table>
+
+<b>解説</b><br><table>
+<tr><td>
+現在のリソース内のMergedDictionariesすべてのソースについて、プレフィックスリストに含まれる部分を新しいプレフィックスに書き換え、変更されたリソースを作成します。
+</td></tr>
+</table>
+
+</td></tr>
+
 </table></td></tr>
 </table>

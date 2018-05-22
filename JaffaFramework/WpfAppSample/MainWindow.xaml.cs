@@ -35,7 +35,7 @@ namespace WpfAppSample
             logText.Text = "";
 
             // Jaffa: ログを画面に転送するためのイベントを設定
-            Logging.LogWritingEvent += Logging_LogWritingEvent;
+            Logging.LogWriting += Logging_LogWriting;
 
             // Jaffa: ログ出力開始（キャッシュされていたログはこのタイミングで出力されます）
             Logging.LogWriteWaiting = false;
@@ -43,7 +43,7 @@ namespace WpfAppSample
             // 国際化対応のサンプル
 
             // Jaffa: ダイナミックリソース以外をカルチャ切替するためのイベントを設定
-            Jaffa.International.CultureChangedEvent += Jaffa_CultureChangedEvent;
+            Jaffa.International.CultureChanged += Jaffa_CultureChanged;
 
             // Jaffa: 初期表示前にカルチャを切り替える
             Jaffa.International.ChangeCultureFromDisplayLanguageName("English");
@@ -52,7 +52,7 @@ namespace WpfAppSample
             if (listLanguages.Items.Count == 0) listLanguages_Reload();
         }
 
-        private void Logging_LogWritingEvent(Logging.LogWritingEventArgs e)
+        private void Logging_LogWriting(Logging.LogWritingEventArgs e)
         {
             // ログを行ごとに転送
             foreach (string log in e.Messages)
@@ -85,9 +85,9 @@ namespace WpfAppSample
             Jaffa.International.ChangeCultureFromDisplayLanguageName(listLanguages.Items[listLanguages.SelectedIndex].ToString());
         }
 
-        private void Jaffa_CultureChangedEvent(object sender, EventArgs e)
+        private void Jaffa_CultureChanged(object sender, EventArgs e)
         {
-            Logging.Write("Event: Jaffa_CultureChangedEvent - " + Jaffa.International.CurrentCulture);
+            Logging.Write("Event: Jaffa_CultureChanged - " + Jaffa.International.CurrentCulture);
 
             // 言語リスト再読み込み
             listLanguages_Reload();
@@ -99,7 +99,7 @@ namespace WpfAppSample
         private void listLanguages_Reload()
         {
             listLanguagesReloading = true;
-            listLanguages.ItemsSource = Jaffa.International.GetAvailableLanguageList();
+            listLanguages.ItemsSource = Jaffa.International.GetAvailableLanguageNameList();
             listLanguages.SelectedItem = Jaffa.International.GetDisplayLanguageName(Jaffa.International.CurrentCultureSetting);
             Logging.Write("Selected Languages: " + listLanguages.SelectedValue);
             listLanguagesReloading = false;

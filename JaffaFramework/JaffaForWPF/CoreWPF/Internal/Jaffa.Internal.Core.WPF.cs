@@ -9,25 +9,6 @@ namespace Jaffa.Internal
     /// </summary>
     public static partial class Core : Object
     {
-        #region プロパティ
-
-        #region Jaffaフレームワークのバージョンを取得 ([R} Version)
-
-        /// <summary>
-        /// Jaffaフレームワークのバージョンを取得します。
-        /// </summary>
-        public static System.Version Version
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version;
-            }
-        }
-
-        #endregion
-
-        #endregion
-
         #region メソッド
 
         #region 変更されたリソース作成 (MakeChangedResources)
@@ -42,7 +23,7 @@ namespace Jaffa.Internal
         /// <remarks>
         /// 現在のリソース内のMergedDictionariesすべてのソースについて、プレフィックスリストに含まれる部分を新しいプレフィックスに書き換え、変更されたリソースを作成します。
         /// </remarks>
-        static public ResourceDictionary ChangeResources(ResourceDictionary currentResource, string[] prefixList, string newPrefix)
+        static public ResourceDictionary MakeChangedResources(ResourceDictionary currentResource, string[] prefixList, string newPrefix)
         {
             var rt = new ResourceDictionary();
             rt.MergedDictionaries.Clear();
@@ -58,6 +39,25 @@ namespace Jaffa.Internal
                 rt.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(newsrc, UriKind.Relative) });
             }
             return rt;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region プロパティ
+
+        #region Jaffaフレームワークのバージョンを取得 ([R} Version)
+
+        /// <summary>
+        /// Jaffaフレームワークのバージョンを取得します。
+        /// </summary>
+        public static System.Version Version
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version;
+            }
         }
 
         #endregion

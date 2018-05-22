@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JaffaForUWP", "JaffaForUWP\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JaffaForWPF", "JaffaForWPF\JaffaForWPF.csproj", "{3F309D54-60E5-45D8-8981-3C006BEC6087}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UwpAppSample", "UwpAppSample\UwpAppSample.csproj", "{2270E227-EB46-41D2-B8BF-D8877381DFA0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppSample", "WpfAppSample\WpfAppSample.csproj", "{8117CE11-B29D-49C8-ACBB-9F3517110A0B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refarence", "Refarence", "{211B455B-EE72-41D0-ACF8-B984C02051C8}"
@@ -33,7 +31,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refarence", "Refarence", "{
 		Refarence\Jaffa.md = Refarence\Jaffa.md
 		Refarence\Jaffa.UI.md = Refarence\Jaffa.UI.md
 		Refarence\Jaffa.UI.Page.md = Refarence\Jaffa.UI.Page.md
+		Refarence\Jaffa.UI.Window.md = Refarence\Jaffa.UI.Window.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UwpAppSample", "UwpAppSample\UwpAppSample.csproj", "{2270E227-EB46-41D2-B8BF-D8877381DFA0}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -84,6 +85,22 @@ Global
 		{3F309D54-60E5-45D8-8981-3C006BEC6087}.Release|x64.Build.0 = Release|Any CPU
 		{3F309D54-60E5-45D8-8981-3C006BEC6087}.Release|x86.ActiveCfg = Release|Any CPU
 		{3F309D54-60E5-45D8-8981-3C006BEC6087}.Release|x86.Build.0 = Release|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|x64.Build.0 = Debug|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|x86.Build.0 = Debug|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|ARM.Build.0 = Release|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|x64.ActiveCfg = Release|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|x64.Build.0 = Release|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|x86.ActiveCfg = Release|Any CPU
+		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|x86.Build.0 = Release|Any CPU
 		{2270E227-EB46-41D2-B8BF-D8877381DFA0}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{2270E227-EB46-41D2-B8BF-D8877381DFA0}.Debug|Any CPU.Build.0 = Debug|x86
 		{2270E227-EB46-41D2-B8BF-D8877381DFA0}.Debug|Any CPU.Deploy.0 = Debug|x86
@@ -106,22 +123,6 @@ Global
 		{2270E227-EB46-41D2-B8BF-D8877381DFA0}.Release|x86.ActiveCfg = Release|x86
 		{2270E227-EB46-41D2-B8BF-D8877381DFA0}.Release|x86.Build.0 = Release|x86
 		{2270E227-EB46-41D2-B8BF-D8877381DFA0}.Release|x86.Deploy.0 = Release|x86
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|ARM.Build.0 = Debug|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|x64.Build.0 = Debug|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Debug|x86.Build.0 = Debug|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|ARM.ActiveCfg = Release|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|ARM.Build.0 = Release|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|x64.ActiveCfg = Release|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|x64.Build.0 = Release|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|x86.ActiveCfg = Release|Any CPU
-		{8117CE11-B29D-49C8-ACBB-9F3517110A0B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

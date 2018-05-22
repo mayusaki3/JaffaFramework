@@ -11,9 +11,6 @@ namespace Jaffa.Diagnostics
     /// </summary>
     public static partial class Logging
     {
-        #region イベント
-        #endregion
-
         #region メソッド 
 
         #region ログ書き込み・ログバッファ消去 (writeLogBufferToFileAsync) [private]
@@ -100,9 +97,6 @@ namespace Jaffa.Diagnostics
 
         #endregion
 
-        #endregion
-
-        #region プロパティ
         #endregion
     }
 }

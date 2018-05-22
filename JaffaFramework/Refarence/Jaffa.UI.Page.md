@@ -12,8 +12,26 @@ public static class Page : Object
 
 <table><tr><td>名前</td><td>説明</td></tr>
 
+<tr><td>Reload</td><td>
+ページをリロードします。<br>
+<b>構文</b><br><table>
+<tr><td>UWP</td><td>static void Reload(Windows.UI.Xaml.Controls.Page page);</td></tr>
+</table><b>パラメーター</b><br><table>
+<tr><td>page</td><td>リロードするページのインスタンスを指定します。</td></tr>
+</table>
+
+<b>解説</b><br><table>
+<tr><td>
+指定したページのInitializeComponent相当の処理を行います。<br>
+※親子関係のページについても再作成されますが、一度表示しないとアンロードされません。
+</td></tr>
+</table>
+
+</td></tr>
+
 <tr><td>Start</td><td>
 Jaffaフレームワークにページ開始を通知します。<br>
+InitializeComponentの前に実行する必要があります。<br>
 <b>構文</b><br><table>
 <tr><td>UWP</td><td>static void Start(Windows.UI.Xaml.Controls.Page page);</td></tr>
 </table><b>パラメーター</b><br><table>
@@ -26,10 +44,10 @@ Jaffaフレームワークにページ開始を通知します。<br>
 
 <table><tr><td>名前</td><td>説明</td></tr>
 
-<tr><td>CreatePageEvent</td><td>
+<tr><td>Creating</td><td>
 ページインスタンスが生成されたことを通知します。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>delegate void CreatePageEventHandler(object sender, EventArgs e)</td></tr>
+<tr><td>UWP</td><td>delegate void CreatingHandler(object sender, EventArgs e)</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>sender</td><td>生成された Windows.UI.Xaml.Controls.Page オブジェクトです。</td></tr>
 <tr><td>e</td><td>既定のイベントデータです。</td></tr>

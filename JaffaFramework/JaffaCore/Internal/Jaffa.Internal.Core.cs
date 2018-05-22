@@ -7,7 +7,7 @@ namespace Jaffa.Internal
     /// <summary>
     /// Jaffaフレームワーク・共通コアライブラリ
     /// </summary>
-//    [EditorBrowsable(EditorBrowsableState.Never)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public static partial class Core : Object
     {
         #region インナークラス
@@ -64,7 +64,7 @@ namespace Jaffa.Internal
             if (coreHelper == null)
             {
                 coreHelper = new CoreHelper();
-                if (Logging.Settings.FrameworkLogging) Logging.Write(MakeMessage("JFW00001 {JAFFA_TITLE} {JAFFA_VERSION} " + Version + " {JAFFA_START}"));
+                if (Logging.Settings.FrameworkMessage) Logging.Write(MakeMessage("JFW00001 {JAFFA_TITLE} {JAFFA_VERSION} " + Version + " {JAFFA_START}"));
             }
         }
 
@@ -79,13 +79,13 @@ namespace Jaffa.Internal
         /// </summary>
         private static void Terminate()
         {
-            if (Logging.Settings.FrameworkLogging) Logging.Write(new string[] { MakeMessage("JFW00002 [Jaffa] {JAFFA_TITLE} {JAFFA_END}"), "", ""});
+            if (Logging.Settings.FrameworkMessage) Logging.Write(new string[] { MakeMessage("JFW00002 [Jaffa] {JAFFA_TITLE} {JAFFA_END}"), "", ""});
             coreHelper = null;
         }
 
         #endregion
 
-        #region コアライブラリ内メッセージを構築 (MakeCoreMessage)
+        #region コアライブラリ内メッセージを構築 (MakeMessage)
 
         /// <summary>
         /// コアライブラリ内メッセージを構築します。

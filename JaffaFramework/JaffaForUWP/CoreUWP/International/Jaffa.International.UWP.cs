@@ -50,7 +50,7 @@ namespace Jaffa
             // アプリケーションのリソースを更新
             try
             {
-                Application.Current.Resources = Jaffa.Internal.Core.ChangeResources(Application.Current.Resources, codes, currentCulture);
+                Application.Current.Resources = Jaffa.Internal.Core.MakeChangedResources(Application.Current.Resources, codes, currentCulture);
             }
             catch
             {
@@ -61,7 +61,7 @@ namespace Jaffa
             // 各ページのリソースを更新
             foreach (var page in Jaffa.Application.Pages)
             {
-                page.Resources = Jaffa.Internal.Core.ChangeResources(page.Resources, codes, currentCulture);
+                page.Resources = Jaffa.Internal.Core.MakeChangedResources(page.Resources, codes, currentCulture);
             }
 
             // カルチャー変更通知イベント

@@ -24,21 +24,21 @@ namespace UwpAppSample
     {
         /// <summary>
         /// 単一アプリケーション オブジェクトを初期化します。これは、実行される作成したコードの
-        ///最初の行であるため、main() または WinMain() と論理的に等価です。
+        /// 最初の行であるため、main() または WinMain() と論理的に等価です。
         /// </summary>
         public App()
         {
+            // Jaffa: フレームワークのログも出力させます
+            Jaffa.Diagnostics.Logging.Settings.FrameworkMessage = true;
+
+            // Jaffa: フレームワーク開始
+            Jaffa.Application.Start(this);
+
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            // Jaffa: フレームワークのログも出力させます
-            Jaffa.Diagnostics.Logging.Settings.FrameworkLogging = true;
-
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Jaffa.Diagnostics.Logging.Write("Jaffa Framework for UWP Sample Application Start.");
-
-            // Jaffa: フレームワーク開始
-            Jaffa.Application.Start();
 
             // Jaffa: 初期表示前にカルチャを切り替える
             Jaffa.International.ChangeCultureFromDisplayLanguageName("English");

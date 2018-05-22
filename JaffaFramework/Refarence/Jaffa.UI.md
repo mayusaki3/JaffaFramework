@@ -2,4 +2,5 @@
  
 ## クラス
 
-- [Page クラス](Jaffa.UI.Page.md)
+- [Page クラス [UWP]](Jaffa.UI.Page.md)
+- [Window クラス [WPF]](Jaffa.UI.Window.md)

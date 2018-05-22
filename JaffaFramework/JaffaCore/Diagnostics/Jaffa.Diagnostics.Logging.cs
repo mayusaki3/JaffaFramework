@@ -368,22 +368,22 @@ namespace Jaffa.Diagnostics
 
             #endregion
 
-            #region フレームワークログ出力が有効かどうかを参照または設定 ([R/W] FrameworkLogging)
+            #region フレームワークメッセージのログ出力が有効かどうかを参照または設定 ([R/W] FrameworkMessage)
 
-            private static bool frameworkLogging = false;
+            private static bool frameworkMessage = false;
 
             /// <summary>
             /// フレームワークログ出力が有効かどうかを参照または設定します。
             /// </summary>
-            public static bool FrameworkLogging
+            public static bool FrameworkMessage
             {
                 get
                 {
-                    return frameworkLogging;
+                    return frameworkMessage;
                 }
                 set
                 {
-                    frameworkLogging = value;
+                    frameworkMessage = value;
                 }
             }
 
@@ -461,13 +461,13 @@ namespace Jaffa.Diagnostics
 
         #region イベント
 
-        #region ログ出力イベント (LogWritingEvent)
+        #region ログ出力イベント (LogWriting)
 
-        public delegate void LogWritingEventHandler(LogWritingEventArgs e);
+        public delegate void LogWritingHandler(LogWritingEventArgs e);
         /// <summary>
         /// ログ出力の内容を通知します。
         /// </summary>
-        public static event LogWritingEventHandler LogWritingEvent;
+        public static event LogWritingHandler LogWriting;
 
         #endregion
 
@@ -528,10 +528,20 @@ namespace Jaffa.Diagnostics
         /// <summary>
         /// ログにメッセージを書き込みます。
         /// </summary>
-        /// <param name="ex">例外</param>
+        /// <param name="exp">例外</param>
         public static void Write(Exception exp)
         {
             Write(LogTypes.Error, ExceptionToList(exp));
+        }
+
+        /// <summary>
+        /// ログにメッセージを書き込みます。
+        /// </summary>
+        /// <param name="type">ログタイプ</param>
+        /// <param name="exp">例外</param>
+        public static void Write(LogTypes type, Exception exp)
+        {
+            Write(type, ExceptionToList(exp));
         }
 
         /// <summary>
@@ -667,29 +677,6 @@ namespace Jaffa.Diagnostics
 
         #endregion
 
-        #region ログ例外メッセージ書き込み (WriteException)
-
-        /// <summary>
-        /// ログにエラーとして例外メッセージを書き込みます。
-        /// </summary>
-        /// <param name="exp">例外</param>
-        public static void WriteException(Exception exp)
-        {
-            WriteException(LogTypes.Error, exp);
-        }
-
-        /// <summary>
-        /// ログに例外メッセージを書き込みます。
-        /// </summary>
-        /// <param name="type">ログタイプ</param>
-        /// <param name="exp">例外</param>
-        public static void WriteException(LogTypes type, Exception exp)
-        {
-            Write(type, ExceptionToList(exp));
-        }
-
-        #endregion
-
         #region バイト配列16進ダンプ変換 (BytesToHexDump)
 
         /// <summary>
@@ -810,7 +797,7 @@ namespace Jaffa.Diagnostics
                             try
                             {
                                 // イベント通知
-                                LogWritingEvent?.Invoke(new LogWritingEventArgs(log.DateTime, log.ToShortStrings()));
+                                LogWriting?.Invoke(new LogWritingEventArgs(log.DateTime, log.ToShortStrings()));
                             }
                             catch
                             {

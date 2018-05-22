@@ -31,9 +31,16 @@ Monthの場合は1～12の値を取ります。<br>
 <tr><td>static string Folder</td></tr>
 </table></td></tr>
 
+<tr><td>FrameworkMessage</td><td>
+フレームワークメッセージをログに出力するかどうかを参照または設定します。<br>
+既定値は false です。<br>
+<b>構文</b><br><table>
+<tr><td>static bool FrameworkMessage</td></tr>
+</table></td></tr>
+
 <tr><td>LoggingMode</td><td>
 ロギングモードを参照または設定します。<br>
-既定値はLoggingModes.Noneです。<br>
+既定値は LoggingModes.None です。<br>
 <b>構文</b><br><table>
 <tr><td>static LoggingModes LoggingMode</td></tr>
 </table></td></tr>
@@ -42,7 +49,7 @@ Monthの場合は1～12の値を取ります。<br>
 ログファイルサイズ上限を参照または設定します。<br>
 2～32767の範囲(単位KByte)で指定し、範囲外の場合は自動調整します。<br>
 LoggingModeがSizeの場合に有効で、サイズを超えると1世代のみバックアップを作成します。<br>
-既定値は2048です。<br>
+既定値は 2048 です。<br>
 <b>構文</b><br><table>
 <tr><td>static int MaxFileSizeKB</td></tr>
 </table></td></tr>

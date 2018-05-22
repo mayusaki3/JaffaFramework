@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -36,30 +37,86 @@ namespace UwpAppSample
             // 国際化対応のサンプル
 
             // Jaffa: カルチャ切替時のページデータ処理のためのイベントを設定
-            Jaffa.International.CultureChangedEvent += Jaffa_CultureChangedEvent;
+            Jaffa.International.CultureChanged += Jaffa_CultureChanged;
 
             // Jaffa: 初期表示前にカルチャを切り替える
             Jaffa.International.ChangeCultureFromDisplayLanguageName("English");
+
+            // ページアンロード時の開放状況表示用に設定
+            Jaffa.Application.PageUnloaded += Application_PageUnloaded;
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(200);
+            timer.Tick += Timer_Tick;
         }
 
-        private void Jaffa_CultureChangedEvent(object sender, EventArgs e)
+        private async void Jaffa_CultureChanged(object sender, EventArgs e)
         {
-            Logging.Write("Event: Jaffa_CultureChangedEvent - " + Jaffa.International.CurrentCulture);
+            Logging.Write("Event: Jaffa_CultureChanged - " + Jaffa.International.CurrentCulture);
 
             List<object> save = new List<object>();
+
+
+            // 画面のデータを退避
+            Logging.LogWriteWaiting = true;
             subPage1.SaveContents(ref save);
 
-            this._contentLoaded = false;
-            this.InitializeComponent();
-
-            subPage1.RestoreContents(save);
-
-            Logging.Write("Page Count = " + Jaffa.Application.Pages.Length.ToString());
-            foreach(var page in Jaffa.Application.Pages)
+            // Pivotでは、ページは一度表示しないとUnloadされない
+            for (int i = 0; i < pivot.Items.Count; i++)
             {
-                Logging.Write(page.ToString());
+                pivot.SelectedIndex = i;
+                await Task.Delay(100);
             }
 
+            // ページのリロード
+            Jaffa.UI.Page.Reload(Window.Current.Content as Frame, this);//, typeof(SplashPage));
+
+            // 画面のデータを復元
+            subPage1.RestoreContents(save);
+            Logging.Write("///");
+            await Task.Delay(1000);
+            Logging.LogWriteWaiting = false;
+
+
+
+            //// ページのリロード
+            //Jaffa.UI.Page.Reload(Window.Current.Content as Frame, this, typeof(SplashPage),async ()=> {
+
+            //    // 画面のデータを退避
+            //    Logging.LogWriteWaiting = true;
+            //    subPage1.SaveContents(ref save);
+
+            //    // Pivotでは、ページは一度表示しないとUnloadされない
+            //    for (int i = 0; i < pivot.Items.Count; i++)
+            //    {
+            //        pivot.SelectedIndex = i;
+            //        await Task.Delay(150);
+            //    }
+            //    return true;
+
+            //}, async () => {
+
+            //    // 画面のデータを復元
+            //    subPage1.RestoreContents(save);
+            //    Logging.LogWriteWaiting = false;
+            //    return true;
+
+            //});
+        }
+
+        private void Application_PageUnloaded(object sender, EventArgs e)
+        {
+            timer.Stop();
+            timer.Start();
+        }
+        private DispatcherTimer timer = null;
+        private void Timer_Tick(object sender, object e)
+        {
+            timer.Stop();
+            Logging.Write("Loaded Page list: ");
+            foreach (var p in Jaffa.Application.Pages)
+            {
+                Logging.Write("- " + p.ToString());
+            }
         }
     }
 }

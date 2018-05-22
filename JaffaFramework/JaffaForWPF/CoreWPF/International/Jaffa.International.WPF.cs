@@ -49,12 +49,12 @@ namespace Jaffa
             resManager = null;
 
             // アプリケーションのリソースを更新
-            Jaffa.Application.Current.Resources = Internal.Core.ChangeResources(Jaffa.Application.Current.Resources, codes, Jaffa.International.CurrentCulture);
+            Jaffa.Application.Current.Resources = Internal.Core.MakeChangedResources(Jaffa.Application.Current.Resources, codes, Jaffa.International.CurrentCulture);
 
             // 各ウィンドウのリソースを更新
             foreach (Window window in Jaffa.Application.Current.Windows)
             {
-                window.Resources = Internal.Core.ChangeResources(window.Resources, codes, Jaffa.International.CurrentCulture);
+                window.Resources = Internal.Core.MakeChangedResources(window.Resources, codes, Jaffa.International.CurrentCulture);
             }
 
             // カルチャー変更通知イベント

@@ -30,8 +30,20 @@ public static class International
 
 <table><tr><td>名前</td><td>説明</td></tr>
 
-<tr><td>GetAvailableLanguageList</td><td>
-アプリケーションで利用可能な言語リストを取得します。<br>
+<tr><td>GetAvailableLanguageCodeList</td><td>
+アプリケーションで利用可能な言語コードリストを取得します。<br>
+アプリケーションの Resources.resw(UWP) / Resources.resx(WPF) に 文字列 Dictionarys を追加し、次のようにサポートする{言語コード},{言語名} の行を設定します。<br>
+<pre>
+例. Auto,{DynamicResource CultureAuto}
+    en-US,English
+    ja-JP,日本語
+</pre>
+<b>構文</b><br><table>
+<tr><td>static string[] GetAvailableLanguageCodeList();</td></tr>
+</table></td></tr>
+
+<tr><td>GetAvailableLanguageNameList</td><td>
+アプリケーションで利用可能な言語名リストを取得します。<br>
 アプリケーションの Resources.resw(UWP) / Resources.resx(WPF) に 文字列 Dictionarys を追加し、次のようにサポートする{言語コード},{言語名} の行を設定します。<br>
 <pre>
 例. Auto,{DynamicResource CultureAuto}
@@ -39,7 +51,7 @@ public static class International
     ja-JP,日本語
 </pre>この例の「{DynamicResource CultureAuto}」部分は、言語コードのリソースで置き換わります。<br>
 <b>構文</b><br><table>
-<tr><td>static string[] GetAvailableLanguageList();</td></tr>
+<tr><td>static string[] GetAvailableLanguageNameList();</td></tr>
 </table></td></tr>
 
 <tr><td>GetDisplayLanguageName</td><td>
@@ -59,7 +71,7 @@ public static class International
 </table></td></tr>
 
 <tr><td>ChangeCultureFromDisplayLanguageName</td><td>
-現在のカルチャーを言語名で変更します。UWPアプリのページキャッシュはクリアされます。<br>
+現在のカルチャーを言語名で変更します。<br>UWPの場合はCultureChangedイベントでページをリロードしてください。<br>
 <b>構文</b><br><table>
 <tr><td>static void ChangeCultureFromDisplayLanguageName(string name);</td></tr>
 </table><b>パラメーター</b><br><table>
@@ -84,10 +96,10 @@ public static class International
 
 <table><tr><td>名前</td><td>説明</td></tr>
 
-<tr><td>CultureChangedEvent</td><td>
+<tr><td>CultureChanged</td><td>
 CurrentCultureが変更されたことを通知します。<br>
 <b>構文</b><br><table>
-<tr><td>delegate void CultureChangedEventHandler(object sender, EventArgs e);</td></tr>
+<tr><td>delegate void CultureChangedHandler(object sender, EventArgs e);</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>sender</td><td>currentCulture オブジェクトです。</td></tr>
 <tr><td>e</td><td>既定のイベントデータです。</td></tr>

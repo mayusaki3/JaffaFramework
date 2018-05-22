@@ -16,7 +16,7 @@ namespace WpfAppSample
         public App()
         {
             // Jaffa: フレームワークのログも出力させます
-            Jaffa.Diagnostics.Logging.Settings.FrameworkLogging = true;
+            Jaffa.Diagnostics.Logging.Settings.FrameworkMessage = true;
             
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Jaffa.Diagnostics.Logging.Write("Jaffa Framework for WPF Sample Application Start.");

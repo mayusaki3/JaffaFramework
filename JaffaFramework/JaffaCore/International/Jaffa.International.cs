@@ -8,22 +8,22 @@ namespace Jaffa
     /// <summary>
     /// Jaffaフレームワーク・国際化対応サポート
     /// </summary>
-//    [System.Diagnostics.DebuggerNonUserCode]
+    [System.Diagnostics.DebuggerNonUserCode]
     public static partial class International
     {
         #region イベント
 
-        #region カルチャー変更通知イベント (CultureChangedEvent)
+        #region カルチャー変更イベント (CultureChanged)
 
-        public delegate void CultureChangedEventHandler(object sender, EventArgs e);
+        public delegate void CultureChangedHandler(object sender, EventArgs e);
         /// <summary>
         /// CurrentCultureが変更されたことを通知します。
         /// </summary>
-        public static event CultureChangedEventHandler CultureChangedEvent;
+        public static event CultureChangedHandler CultureChanged;
 
         #endregion
 
-        #region カルチャー変更通知イベント呼び出し ([private] OnCultureChanged)
+        #region カルチャー変更イベント呼び出し ([private] OnCultureChanged)
 
         /// <summary>
         /// カルチャー変更通知イベントを呼び出します。
@@ -31,7 +31,7 @@ namespace Jaffa
         private static void OnCultureChanged()
         {
             // カルチャー変更を通知
-            CultureChangedEvent?.Invoke(currentCulture, new EventArgs());
+            CultureChanged?.Invoke(currentCulture, new EventArgs());
         }
 
         #endregion
@@ -40,10 +40,10 @@ namespace Jaffa
 
         #region メソッド
 
-        #region アプリケーションで利用可能な言語リストを取得 (GetAvailableLanguageList)
+        #region アプリケーションで利用可能な言語名リストを取得 (GetAvailableLanguageNameList)
 
         /// <summary>
-        /// アプリケーションで利用可能な言語リストを取得します。
+        /// アプリケーションで利用可能な言語名リストを取得します。
         /// </summary>
         /// <remarks>
         /// アプリケーションの Resources.resw(UWP) / Resources.resx(WPF) に 文字列 Dictionarys を追加し、
@@ -53,7 +53,7 @@ namespace Jaffa
         ///     ja-JP,日本語
         /// この例の「{CultureAuto}」部分は、言語コードのリソースで置き換わります。
         /// </remarks>
-        public static string[] GetAvailableLanguageList()
+        public static string[] GetAvailableLanguageNameList()
         {
             string res = null;
             try
@@ -232,7 +232,7 @@ namespace Jaffa
         #region 現在のカルチャーを変更 (ChangeCultureFromDisplayLanguageName)
 
         /// <summary>
-        /// 現在のカルチャーを言語名で変更します。UWPアプリのページキャッシュはクリアされます。
+        /// 現在のカルチャーを言語名で変更します。UWPの場合はCultureChangedイベントでページをリロードしてください。
         /// </summary>
         /// <param name="name">表示名</param>
         public static void ChangeCultureFromDisplayLanguageName(string name)

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
 
 namespace Jaffa
 {
@@ -12,29 +10,34 @@ namespace Jaffa
     {
         #region イベント
 
-        #region ページインスタンス生成イベント (Page_CreatePageEvent) [Private]
+        #region ページインスタンスアンロードイベント (PageUnloaded)
 
-        private static void Page_CreatePageEvent(object sender, EventArgs e)
+        /// <summary>
+        /// ページインスタンスがアンロードされたことを通知します。
+        /// </summary>
+        /// <param name="sender">アンロードされた Windows.UI.Xaml.Controls.Page オブジェクトです。</param>
+        /// <param name="e">既定のイベントデータです。</param>
+        public delegate void PageUnloadedHandler(object sender, EventArgs e);
+
+        /// <summary>
+        /// ページインスタンスがアンロードされたことを通知します。
+        /// </summary>
+        public static event PageUnloadedHandler PageUnloaded;
+
+        #endregion
+
+        #region ページインスタンス生成イベント (Page_Creating) [Private]
+
+        private static void Page_Creating(object sender, EventArgs e)
         {
             Windows.UI.Xaml.Controls.Page page = sender as Windows.UI.Xaml.Controls.Page;
-
-            System.Diagnostics.Debug.Write("[Page_CreatePageEvent] " + sender.GetType().ToString() + " ");
-            System.Diagnostics.Debug.Write(instPages.Count.ToString() + " --> ");
 
             // Pageインスタンスを記憶
             instPages.Add(page);
 
             // Unloadイベントを設定
             page.Unloaded += Page_Unloaded;
-
-            System.Diagnostics.Debug.WriteLine(instPages.Count.ToString());
-            foreach (var p in instPages)
-            {
-                System.Diagnostics.Debug.WriteLine("- " + p.ToString());
-            }
         }
-
-        private static List<Windows.UI.Xaml.Controls.Page> instPages = new List<Windows.UI.Xaml.Controls.Page>();
 
         #endregion
 
@@ -42,18 +45,11 @@ namespace Jaffa
 
         private static void Page_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-
-            System.Diagnostics.Debug.Write("[Page_Unloaded] " + sender.GetType().ToString() + " ");
-            System.Diagnostics.Debug.Write(instPages.Count.ToString() + " --> ");
-
             // Pageインスタンスを除外
             instPages.Remove(sender as Windows.UI.Xaml.Controls.Page);
 
-            System.Diagnostics.Debug.WriteLine(instPages.Count.ToString());
-            foreach(var p in instPages)
-            {
-                System.Diagnostics.Debug.WriteLine("- " + p.ToString());
-            }
+            // ページ破棄を通知
+            PageUnloaded?.Invoke(sender, new EventArgs());
         }
 
         #endregion
@@ -66,8 +62,10 @@ namespace Jaffa
 
         /// <summary>
         /// Jaffaフレームワークにアプリケーション開始を通知します。
+        /// InitializeComponentの前に実行する必要があります。
         /// </summary>
-        public static void Start()
+        /// <param name="app">Jaffaフレームワークを利用するアプリケーションのインスタンスを指定します。</param>
+        public static void Start(Windows.UI.Xaml.Application app)
         {
             // リソースローダー初期化
             try
@@ -80,7 +78,7 @@ namespace Jaffa
             Jaffa.International.GetResourceCultureName(Windows.System.UserProfile.GlobalizationPreferences.Languages[0]);
 
             // ページ追加通知を設定
-            Jaffa.UI.Page.CreatePageEvent += Page_CreatePageEvent;
+            Jaffa.UI.Page.Creating += Page_Creating;
 
             // コアライブラリ初期化
             Jaffa.Internal.Core.Initialize();
@@ -108,6 +106,8 @@ namespace Jaffa
         #endregion
 
         #region アプリケーションでインスタンス化されたページを参照 ([R} Pages)
+
+        private static List<Windows.UI.Xaml.Controls.Page> instPages = new List<Windows.UI.Xaml.Controls.Page>();
 
         /// <summary>
         /// アプリケーションでインスタンス化されたページを参照します。
