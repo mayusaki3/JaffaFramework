@@ -15,15 +15,20 @@ public static class Page : Object
 <tr><td>Reload</td><td>
 ページをリロードします。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>static void Reload(Windows.UI.Xaml.Controls.Page page);</td></tr>
+<tr><td>UWP</td><td>static async Task Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);<br>
+static async Task Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Preprocess preprocess, Postprocess postprocess);</td></tr>
 </table><b>パラメーター</b><br><table>
+<tr><td>frame</td><td>リロードするフレームのインスタンスを指定します。</td></tr>
 <tr><td>page</td><td>リロードするページのインスタンスを指定します。</td></tr>
+<tr><td>preprocess</td><td>リロードの前処理を指定します。</td></tr>
+<tr><td>postprocess</td><td>リロードの後処理を指定します。</td></tr>
 </table>
 
 <b>解説</b><br><table>
 <tr><td>
 指定したページのInitializeComponent相当の処理を行います。<br>
-※親子関係のページについても再作成されますが、一度表示しないとアンロードされません。
+※リロード中はログ出力をキャッシュします。画面にログを表示している場合は、preprocess / postprocess で退避および復元してください。<br>
+※親子関係のページについても再作成されますが、一度表示しないとアンロードされません。リロード前に一度表示を行ってください。
 </td></tr>
 </table>
 
@@ -55,3 +60,26 @@ InitializeComponentの前に実行する必要があります。<br>
 
 </table>
 
+## ファンクション
+
+<table><tr><td>名前</td><td>説明</td></tr>
+
+<tr><td>Preprocess</td><td>
+リロードの前処理を行えます。<br>
+<b>テンプレート</b><br><table>
+<tr><td>UWP</td><td>delegate Task Preprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);</td></tr>
+</table><b>パラメーター</b><br><table>
+<tr><td>frame</td><td>リロードするフレームのインスタンスです。</td></tr>
+<tr><td>page</td><td>リロードするページのインスタンスです。</td></tr>
+</table></td></tr>
+
+<tr><td>Postprocess</td><td>
+リロードの後処理を行えます。<br>
+<b>テンプレート</b><br><table>
+<tr><td>UWP</td><td>delegate Task Postprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);</td></tr>
+</table><b>パラメーター</b><br><table>
+<tr><td>frame</td><td>リロードしたフレームのインスタンスです。</td></tr>
+<tr><td>page</td><td>リロードしたページのインスタンスです。</td></tr>
+</table></td></tr>
+
+</table>

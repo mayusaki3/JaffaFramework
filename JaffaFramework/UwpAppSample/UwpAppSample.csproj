@@ -99,9 +99,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SplashPage.xaml.cs">
-      <DependentUpon>SplashPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SubPage2.xaml.cs">
       <DependentUpon>SubPage2.xaml</DependentUpon>
     </Compile>
@@ -113,10 +110,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Page Include="SplashPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="SubPage2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

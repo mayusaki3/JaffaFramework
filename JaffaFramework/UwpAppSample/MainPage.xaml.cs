@@ -55,52 +55,27 @@ namespace UwpAppSample
 
             List<object> save = new List<object>();
 
-
-            // 画面のデータを退避
-            Logging.LogWriteWaiting = true;
-            subPage1.SaveContents(ref save);
-
-            // Pivotでは、ページは一度表示しないとUnloadされない
-            for (int i = 0; i < pivot.Items.Count; i++)
-            {
-                pivot.SelectedIndex = i;
-                await Task.Delay(100);
-            }
-
             // ページのリロード
-            Jaffa.UI.Page.Reload(Window.Current.Content as Frame, this);//, typeof(SplashPage));
+            await Jaffa.UI.Page.Reload(Window.Current.Content as Frame, this, async (f, p) => {
+                // 画面のデータを退避
+                subPage1.SaveContents(ref save);
 
-            // 画面のデータを復元
-            subPage1.RestoreContents(save);
-            Logging.Write("///");
-            await Task.Delay(1000);
-            Logging.LogWriteWaiting = false;
+                // Pivotでは、ページは一度表示しないとUnloadされない
+                int savidx = pivot.SelectedIndex;
+                pivot.Opacity = 0;
+                for (int i = 0; i < pivot.Items.Count; i++)
+                {
+                    pivot.SelectedIndex = i;
+                    await Task.Delay(50);
+                }
+                pivot.SelectedIndex = savidx;
+                await Task.Delay(50);
+                pivot.Opacity = 100;
 
-
-
-            //// ページのリロード
-            //Jaffa.UI.Page.Reload(Window.Current.Content as Frame, this, typeof(SplashPage),async ()=> {
-
-            //    // 画面のデータを退避
-            //    Logging.LogWriteWaiting = true;
-            //    subPage1.SaveContents(ref save);
-
-            //    // Pivotでは、ページは一度表示しないとUnloadされない
-            //    for (int i = 0; i < pivot.Items.Count; i++)
-            //    {
-            //        pivot.SelectedIndex = i;
-            //        await Task.Delay(150);
-            //    }
-            //    return true;
-
-            //}, async () => {
-
-            //    // 画面のデータを復元
-            //    subPage1.RestoreContents(save);
-            //    Logging.LogWriteWaiting = false;
-            //    return true;
-
-            //});
+            }, async (f, p) => {
+                // 画面のデータを復元
+                subPage1.RestoreContents(save);
+            });
         }
 
         private void Application_PageUnloaded(object sender, EventArgs e)

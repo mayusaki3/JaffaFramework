@@ -783,73 +783,70 @@ namespace Jaffa.Diagnostics
 
         private static async void writeLogFileAsync()
         {
-            if (logWriteWaiting == false)
+            while (logWriteWaiting == false && syslogWriteWaiting == false && !loggingBuffer.IsEmpty)
             {
-                while (!loggingBuffer.IsEmpty)
+                LoggingData log;
+                if (loggingBuffer.TryDequeue(out log))
                 {
-                    LoggingData log;
-                    if (loggingBuffer.TryDequeue(out log))
+                    #region ログ通知
+
+                    if (muteLoggingEvent == false)
                     {
-                        #region ログ通知
-
-                        if (muteLoggingEvent == false)
+                        try
                         {
-                            try
-                            {
-                                // イベント通知
-                                LogWriting?.Invoke(new LogWritingEventArgs(log.DateTime, log.ToShortStrings()));
-                            }
-                            catch
-                            {
-                            }
+                            // イベント通知
+                            LogWriting?.Invoke(new LogWritingEventArgs(log.DateTime, log.ToShortStrings()));
                         }
-
-                        #endregion
-
-                        #region ログ書き込み
-
-                        if (Settings.LoggingMode != LoggingModes.None)
+                        catch
                         {
-                            await writeisLock.WaitAsync();
-                            try
-                            {
-                                // ファイル名生成
-                                string logName1 = "";
-                                string logName2 = "";
-                                switch (Settings.LoggingMode)
-                                {
-                                    case LoggingModes.Size:
-                                        logName1 = Settings.FileName.Replace("[@]", "01");
-                                        logName2 = Settings.FileName.Replace("[@]", "02");
-                                        break;
-                                    case LoggingModes.Day:
-                                        logName1 = Settings.FileName.Replace("[@]", log.DateTime.ToString("dd"));
-                                        break;
-                                    case LoggingModes.Week:
-                                        logName1 = Settings.FileName.Replace("[@]", (log.DateTime.DayOfWeek + 1).ToString("00"));
-                                        break;
-                                    case LoggingModes.Month:
-                                        logName1 = Settings.FileName.Replace("[@]", log.DateTime.ToString("MM"));
-                                        break;
-                                }
-
-                                // 書き込み
-                                writeLogBufferToFileAsync(log, logName1, logName2);
-                            }
-                            catch
-                            {
-                                // エラー・無視する
-                            }
-                            finally
-                            {
-                                writeisLock.Release();
-                            }
                         }
-
-                        #endregion
                     }
-				}
-            }
+
+                    #endregion
+
+                    #region ログ書き込み
+
+                    if (Settings.LoggingMode != LoggingModes.None)
+                    {
+                        await writeisLock.WaitAsync();
+                        try
+                        {
+                            // ファイル名生成
+                            string logName1 = "";
+                            string logName2 = "";
+                            switch (Settings.LoggingMode)
+                            {
+                                case LoggingModes.Size:
+                                    logName1 = Settings.FileName.Replace("[@]", "01");
+                                    logName2 = Settings.FileName.Replace("[@]", "02");
+                                    break;
+                                case LoggingModes.Day:
+                                    logName1 = Settings.FileName.Replace("[@]", log.DateTime.ToString("dd"));
+                                    break;
+                                case LoggingModes.Week:
+                                    logName1 = Settings.FileName.Replace("[@]", (log.DateTime.DayOfWeek + 1).ToString("00"));
+                                    break;
+                                case LoggingModes.Month:
+                                    logName1 = Settings.FileName.Replace("[@]", log.DateTime.ToString("MM"));
+                                    break;
+                            }
+
+                            // 書き込み
+                            writeLogBufferToFileAsync(log, logName1, logName2);
+                        }
+                        catch
+                        {
+                            // エラー・無視する
+                        }
+                        finally
+                        {
+                            writeisLock.Release();
+                        }
+                    }
+
+                    #endregion
+                }
+			}
         }
         private static SemaphoreSlim writeisLock = new SemaphoreSlim(1, 1);
 
@@ -884,7 +881,32 @@ namespace Jaffa.Diagnostics
 
         #endregion
 
-        #region ログ出力時のLoggingイベント無効化を参照または設定 ([R/W] MuteLogging)
+        #region Jaffaフレームワーク内ログ出力中断を参照または設定 ([R/W] SysLogWriteWaiting)
+
+        private static bool syslogWriteWaiting = false;
+
+        /// <summary>
+        /// ログ出力中断を参照または設定します。Jaffaフレームワーク内で使用します。
+        /// </summary>
+        public static bool SysLogWriteWaiting
+        {
+            get
+            {
+                return syslogWriteWaiting;
+            }
+            set
+            {
+                syslogWriteWaiting = value;
+                if (!syslogWriteWaiting)
+                {
+                    writeLogFileAsync();
+                }
+            }
+        }
+
+        #endregion
+
+        #region ログ出力時のLoggingイベント無効化を参照または設定 ([R/W] MuteLoggingEvent)
 
         private static bool muteLoggingEvent = false;
 

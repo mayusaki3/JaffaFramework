@@ -8,9 +8,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBox Text="{StaticResource Sample}"/>
+
+    <Grid Background="#FFB9B9B9">
         <Pivot Name="pivot" FlowDirection="LeftToRight" Background="{StaticResource MyBrush}">
             <PivotItem Margin="0,0,0,0" Header="{StaticResource Tab1Title}">
                 <local:SubPage1 x:Name="subPage1"/>

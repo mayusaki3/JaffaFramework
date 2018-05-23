@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Jaffa.Diagnostics;
+using System;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
 
 namespace Jaffa.UI
 {
     /// <summary>
     /// Jaffaフレームワーク・UWP版ページサポート
     /// </summary>
-//    [System.Diagnostics.DebuggerNonUserCode]
+    [System.Diagnostics.DebuggerNonUserCode]
     public static class Page : Object
     {
         #region インナークラス
@@ -81,17 +81,14 @@ namespace Jaffa.UI
 
         #region ページリロード (Reload)
 
-        public delegate Task<bool> Preprocess();
-        public delegate Task<bool> Postprocess();
-
         /// <summary>
         /// ページをリロードします。
         /// </summary>
         /// <param name="frame">フレームのインスタンス</param>
         /// <param name="page">ページのインスタンス</param>
-        public static async void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page)
+        public static async Task Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page)
         {
-            Reload(frame, page, null, null, null);
+            await Reload(frame, page, null, null);
         }
 
         /// <summary>
@@ -99,72 +96,52 @@ namespace Jaffa.UI
         /// </summary>
         /// <param name="frame">フレームのインスタンス</param>
         /// <param name="page">ページのインスタンス</param>
-        /// <param name="transitionPage">リロード中に表示するページ</param>
-        public static async void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Type transitionPage)
+        /// <param name="preprocess">リロードの前処理 (async)</param>
+        /// <param name="postprocess">リロードの後処理 (async)</param>
+        /// <returns></returns>
+        public static async Task Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Preprocess preprocess, Postprocess postprocess)
         {
-            Reload(frame, page, transitionPage, null, null);
-        }
-
-        /// <summary>
-        /// ページをリロードします。
-        /// </summary>
-        /// <param name="frame">フレームのインスタンス</param>
-        /// <param name="page">ページのインスタンス</param>
-        /// <param name="transitionPage">リロード中に表示するページ</param>
-        /// <param name="preprocess">リロードの前処理</param>
-        public static async void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Type transitionPage, Preprocess preprocess)
-        {
-            Reload(frame, page, transitionPage, preprocess, null);
-        }
-
-        /// <summary>
-        /// ページをリロードします。
-        /// </summary>
-        /// <param name="frame">フレームのインスタンス</param>
-        /// <param name="page">ページのインスタンス</param>
-        /// <param name="transitionPage">リロード中に表示するページ</param>
-        /// <param name="postprocess">リロードの後処理</param>
-        public static async void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Type transitionPage, Postprocess postprocess)
-        {
-            Reload(frame, page, transitionPage, null, postprocess);
-        }
-
-        /// <summary>
-        /// ページをリロードします。
-        /// </summary>
-        /// <param name="frame">フレームのインスタンス</param>
-        /// <param name="page">ページのインスタンス</param>
-        /// <param name="transitionPage">リロード中に表示するページ</param>
-        /// <param name="preprocess">リロードの前処理</param>
-        /// <param name="postprocess">リロードの後処理</param>
-        public static async void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Type transitionPage, Preprocess preprocess, Postprocess postprocess)
-        {
-            // リロード中表示
-            UIElement savContent = null;
-            if(transitionPage != null)
-            {
-                savContent = Window.Current.Content;
-                Window.Current.Content = Activator.CreateInstance(transitionPage) as UIElement;
-                await Task.Delay(100);
-            }
+            Logging.SysLogWriteWaiting = true;
 
             // 前処理
-            if (preprocess != null) await preprocess();
+            if (preprocess != null) await preprocess(frame, page);
 
             // コンポーネント再構築
             Windows.UI.Xaml.Application.LoadComponent(page, page.BaseUri, Windows.UI.Xaml.Controls.Primitives.ComponentResourceLocation.Application);
-            await Task.Delay(100);
 
             // 後処理
-            if (postprocess != null) await postprocess();
+            if (postprocess != null) await postprocess(frame, page);
 
-            // リロード中表示を消去
-            if (savContent != null)
-            {
-                Window.Current.Content = savContent;
-                await Task.Delay(1000);
-            }
+            Logging.SysLogWriteWaiting = false;
         }
+
+        #endregion
+
+        #endregion
+
+        #region ファンクション
+
+        #region リロードの前処理 (Preprocess)
+
+        /// <summary>
+        /// リロードの前処理を行います。
+        /// </summary>
+        /// <param name="frame">フレームのインスタンス</param>
+        /// <param name="page">ページのインスタンス</param>
+        /// <returns>タスク</returns>
+        public delegate Task Preprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);
+
+        #endregion
+
+        #region リロードの後処理 (Postprocess)
+
+        /// <summary>
+        /// リロードの後処理を行います。
+        /// </summary>
+        /// <param name="frame">フレームのインスタンス</param>
+        /// <param name="page">ページのインスタンス</param>
+        /// <returns>タスク</returns>
+        public delegate Task Postprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);
 
         #endregion
 
