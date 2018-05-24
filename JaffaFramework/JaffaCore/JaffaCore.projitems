@@ -20,5 +20,6 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Mvvm\" />
     <Folder Include="$(MSBuildThisFileDirectory)UI\Popups\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Direct3D\" />
   </ItemGroup>
 </Project>

@@ -53,26 +53,27 @@ namespace UwpAppSample
         {
             Logging.Write("Event: Jaffa_CultureChanged - " + Jaffa.International.CurrentCulture);
 
+            // Pivotでは、ページは一度表示しないとUnloadされない
+            int savidx = pivot.SelectedIndex;
+            pivot.Opacity = 0;
+            for (int i = 0; i < pivot.Items.Count; i++)
+            {
+                pivot.SelectedIndex = i;
+                await Task.Delay(50);
+            }
+            pivot.SelectedIndex = savidx;
+            await Task.Delay(50);
+            pivot.Opacity = 100;
+
             List<object> save = new List<object>();
 
             // ページのリロード
-            await Jaffa.UI.Page.Reload(Window.Current.Content as Frame, this, async (f, p) => {
+            Jaffa.UI.Page.Reload(Window.Current.Content as Frame, this, (f, p) => {
                 // 画面のデータを退避
                 subPage1.SaveContents(ref save);
 
-                // Pivotでは、ページは一度表示しないとUnloadされない
-                int savidx = pivot.SelectedIndex;
-                pivot.Opacity = 0;
-                for (int i = 0; i < pivot.Items.Count; i++)
-                {
-                    pivot.SelectedIndex = i;
-                    await Task.Delay(50);
-                }
-                pivot.SelectedIndex = savidx;
-                await Task.Delay(50);
-                pivot.Opacity = 100;
 
-            }, async (f, p) => {
+            }, (f, p) => {
                 // 画面のデータを復元
                 subPage1.RestoreContents(save);
             });

@@ -4,26 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppSample"
+        xmlns:Controls="clr-namespace:Jaffa.UI.Controls;assembly=JaffaForWPF"
         mc:Ignorable="d" Height="768" Width="1280" Title="{DynamicResource AppTitle}">
 
     <Grid>
-        <TabControl Margin="0" VerticalContentAlignment="Center" FontSize="24">
-            <TabItem Header="{DynamicResource Tab1Title}" SnapsToDevicePixels="True">
-                <Grid Background="#FFFFC24C">
-                    <ScrollViewer VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="300" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#00000000">
-                        <ListBox x:Name="listLanguages" Background="#00000000" SelectionChanged="listLanguages_SelectionChanged" FontSize="22"/>
-                    </ScrollViewer>
-                    <Grid Margin="300,0,0,0" Background="#FFFFDC3E">
-                        <ScrollViewer x:Name="LogTextScroll" Margin="0,100,0,0" Background="Black">
-                            <TextBlock x:Name="logText" Foreground="White" FontFamily="MS Gothic" FontSize="12"><Run Text="TextBlock"/><InlineUIContainer>
-                            </InlineUIContainer></TextBlock>
+        <DockPanel ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <Menu HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" VerticalAlignment="Top" DockPanel.Dock="Top">
+                <MenuItem Header="ファイル(_F)">
+                    <MenuItem Header="終了(_X)" Click="MenuEnd_Click"/>
+                </MenuItem>
+            </Menu>
+            <TabControl Margin="0" VerticalContentAlignment="Center" FontSize="24" HorizontalContentAlignment="Center">
+                <TabItem Header="{DynamicResource Tab1Title}" SnapsToDevicePixels="True">
+                    <Grid Background="#FFFFC24C">
+                        <ScrollViewer VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="300" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#00000000">
+                            <ListBox x:Name="listLanguages" Background="#00000000" SelectionChanged="listLanguages_SelectionChanged" FontSize="22"/>
                         </ScrollViewer>
+                        <Grid Margin="300,0,0,0" Background="#FFFFDC3E">
+                            <ScrollViewer x:Name="LogTextScroll" Margin="0,100,0,0" Background="Black">
+                                <TextBlock x:Name="logText" Foreground="White" FontFamily="MS Gothic" FontSize="12"><Run Text="TextBlock"/><InlineUIContainer/></TextBlock>
+                            </ScrollViewer>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
+                </TabItem>
+                <TabItem Header="TabItem">
+                    <Grid Background="#FFE5E5E5">
+                        <Controls:ConsoleBox HorizontalAlignment="Left" Height="190" Margin="82,29,0,0" VerticalAlignment="Top" Width="945"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
     </Grid>
 </Window>

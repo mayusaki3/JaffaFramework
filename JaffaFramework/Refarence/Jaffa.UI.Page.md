@@ -15,8 +15,8 @@ public static class Page : Object
 <tr><td>Reload</td><td>
 ページをリロードします。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>static async Task Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);<br>
-static async Task Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Preprocess preprocess, Postprocess postprocess);</td></tr>
+<tr><td>UWP</td><td>static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);<br>
+static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Preprocess preprocess, Postprocess postprocess);</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>frame</td><td>リロードするフレームのインスタンスを指定します。</td></tr>
 <tr><td>page</td><td>リロードするページのインスタンスを指定します。</td></tr>
@@ -67,7 +67,7 @@ InitializeComponentの前に実行する必要があります。<br>
 <tr><td>Preprocess</td><td>
 リロードの前処理を行えます。<br>
 <b>テンプレート</b><br><table>
-<tr><td>UWP</td><td>delegate Task Preprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);</td></tr>
+<tr><td>UWP</td><td>delegate void Preprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>frame</td><td>リロードするフレームのインスタンスです。</td></tr>
 <tr><td>page</td><td>リロードするページのインスタンスです。</td></tr>
@@ -76,7 +76,7 @@ InitializeComponentの前に実行する必要があります。<br>
 <tr><td>Postprocess</td><td>
 リロードの後処理を行えます。<br>
 <b>テンプレート</b><br><table>
-<tr><td>UWP</td><td>delegate Task Postprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);</td></tr>
+<tr><td>UWP</td><td>delegate void Postprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>frame</td><td>リロードしたフレームのインスタンスです。</td></tr>
 <tr><td>page</td><td>リロードしたページのインスタンスです。</td></tr>

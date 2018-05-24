@@ -85,9 +85,9 @@ namespace Jaffa
                 // リソースローダー初期化
                 try
                 {
-//#pragma warning disable 0618
+#pragma warning disable 0618
                     resLoader = new Windows.ApplicationModel.Resources.ResourceLoader("JaffaForUWP/Resources");
-//#pragma warning restore 0618
+#pragma warning restore 0618
                 }
                 catch (Exception es)
                 {

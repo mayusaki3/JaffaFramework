@@ -79,7 +79,7 @@ namespace Jaffa.Internal
         /// </summary>
         private static void Terminate()
         {
-            if (Logging.Settings.FrameworkMessage) Logging.Write(new string[] { MakeMessage("JFW00002 [Jaffa] {JAFFA_TITLE} {JAFFA_END}"), "", ""});
+            if (Logging.Settings.FrameworkMessage) Logging.Write(MakeMessage("JFW00002 [Jaffa] {JAFFA_TITLE} {JAFFA_END}"));
             coreHelper = null;
         }
 

@@ -17,13 +17,17 @@ namespace WpfAppSample
         {
             // Jaffa: フレームワークのログも出力させます
             Jaffa.Diagnostics.Logging.Settings.FrameworkMessage = true;
-            
+            Jaffa.Diagnostics.Logging.Settings.LoggingMode = Jaffa.Diagnostics.Logging.LoggingModes.Size;
+            Jaffa.Diagnostics.Logging.Settings.MaxFileSizeKB = 1;
+
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Jaffa.Diagnostics.Logging.Write("Jaffa Framework for WPF Sample Application Start.");
 
             // Jaffa: フレームワーク開始 (Required)
             Jaffa.Application.Start(this, "WpfAppSample.Properties.Resources");
-
+            Jaffa.Application.CampanyFolderName = "JaffaFramework";
+            Jaffa.Application.ApplicationFolderName = "WpfAppSample";
+ 
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Jaffa.Diagnostics.Logging.Write("App Initialized.");
 

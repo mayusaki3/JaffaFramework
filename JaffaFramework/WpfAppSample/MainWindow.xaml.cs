@@ -73,7 +73,7 @@ namespace WpfAppSample
             }
 
             // 末尾にスクロール
-            LogTextScroll.ScrollToEnd();
+            //LogTextScroll.ScrollToEnd();
         }
 
         private void listLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -105,5 +105,10 @@ namespace WpfAppSample
             listLanguagesReloading = false;
         }
         private bool listLanguagesReloading = false;
+
+        private void MenuEnd_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

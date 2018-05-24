@@ -86,9 +86,9 @@ namespace Jaffa.UI
         /// </summary>
         /// <param name="frame">フレームのインスタンス</param>
         /// <param name="page">ページのインスタンス</param>
-        public static async Task Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page)
+        public static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page)
         {
-            await Reload(frame, page, null, null);
+            Reload(frame, page, null, null);
         }
 
         /// <summary>
@@ -99,18 +99,18 @@ namespace Jaffa.UI
         /// <param name="preprocess">リロードの前処理 (async)</param>
         /// <param name="postprocess">リロードの後処理 (async)</param>
         /// <returns></returns>
-        public static async Task Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Preprocess preprocess, Postprocess postprocess)
+        public static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Preprocess preprocess, Postprocess postprocess)
         {
             Logging.SysLogWriteWaiting = true;
 
             // 前処理
-            if (preprocess != null) await preprocess(frame, page);
+            if (preprocess != null) preprocess(frame, page);
 
             // コンポーネント再構築
             Windows.UI.Xaml.Application.LoadComponent(page, page.BaseUri, Windows.UI.Xaml.Controls.Primitives.ComponentResourceLocation.Application);
 
             // 後処理
-            if (postprocess != null) await postprocess(frame, page);
+            if (postprocess != null) postprocess(frame, page);
 
             Logging.SysLogWriteWaiting = false;
         }
@@ -128,8 +128,7 @@ namespace Jaffa.UI
         /// </summary>
         /// <param name="frame">フレームのインスタンス</param>
         /// <param name="page">ページのインスタンス</param>
-        /// <returns>タスク</returns>
-        public delegate Task Preprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);
+        public delegate void Preprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);
 
         #endregion
 
@@ -140,8 +139,7 @@ namespace Jaffa.UI
         /// </summary>
         /// <param name="frame">フレームのインスタンス</param>
         /// <param name="page">ページのインスタンス</param>
-        /// <returns>タスク</returns>
-        public delegate Task Postprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);
+        public delegate void Postprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);
 
         #endregion
 

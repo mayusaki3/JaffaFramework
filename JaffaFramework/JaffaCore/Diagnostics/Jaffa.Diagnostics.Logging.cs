@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Jaffa.Diagnostics
 {
     /// <summary>
     /// Jaffaフレームワーク・ロギングサポート
     /// </summary>
-    //[System.Diagnostics.DebuggerNonUserCode]
+    [System.Diagnostics.DebuggerNonUserCode]
     public static partial class Logging : Object
     {
         #region インナークラス
@@ -267,7 +268,7 @@ namespace Jaffa.Diagnostics
 
             #region ログ出力先フォルダを参照または設定 ([R/W] Folder)
 
-            private static string folder = "";
+            private static string folder = @"Logs\";
 
             /// <summary>
             /// ログ出力先フォルダを参照または設定します。
@@ -283,12 +284,9 @@ namespace Jaffa.Diagnostics
                     folder = value;
                     if (folder.Length > 0)
                     {
-                        if (folder.Substring(folder.Length - 1, 1).Equals("\\"))
+                        if (!folder.Substring(folder.Length - 1, 1).Equals(@"\"))
                         {
-                        }
-                        else
-                        {
-                            folder = folder + "\\";
+                            folder = folder + @"\";
                         }
                     }
                 }
@@ -317,7 +315,7 @@ namespace Jaffa.Diagnostics
                 set
                 {
                     fileName = value;
-                    fileName.Replace("\\", "");
+                    fileName.Replace(@"\", "");
                     if (fileName.LastIndexOf(".") < 1)
                     {
                         fileName = fileName + ".txt";
@@ -552,16 +550,16 @@ namespace Jaffa.Diagnostics
         public static void Write(LogTypes type, List<string> messages)
         {
             LoggingData data = new LoggingData(DateTime.Now, type, messages);
-            debugWrite(data);
+            DebugWrite(data);
             loggingBuffer.Enqueue(data);
-            writeLogFileAsync();
+            WriteLogFileAsync();
         }
         private static ConcurrentQueue<LoggingData> loggingBuffer = new ConcurrentQueue<LoggingData>();
 
-        #region debugWrite
+        #region DebugWrite
 
         [Conditional("DEBUG")]
-        private static void debugWrite(LoggingData data)
+        private static void DebugWrite(LoggingData data)
         {
             foreach (string msg in data.ToStrings())
             {
@@ -574,7 +572,7 @@ namespace Jaffa.Diagnostics
         /// </summary>
         /// <param name="message">メッセージ</param>
         [Conditional("DEBUG")]
-        private static void debugWrite(string message)
+        private static void DebugWrite(string message)
         {
             System.Diagnostics.Debug.WriteLine(message);
         }
@@ -585,7 +583,7 @@ namespace Jaffa.Diagnostics
         /// <param name="message">メッセージ</param>
         /// <param name="data">データリスト</param>
         [Conditional("DEBUG")]
-        private static void debugWrite(string message, LoggingData data)
+        private static void DebugWrite(string message, LoggingData data)
         {
             foreach (string msg in data.ToStrings())
             {
@@ -599,7 +597,7 @@ namespace Jaffa.Diagnostics
         /// <param name="message">メッセージ</param>
         /// <param name="data">データリスト</param>
         [Conditional("DEBUG")]
-        private static void debugWrite(string message, ConcurrentQueue<LoggingData> data)
+        private static void DebugWrite(string message, ConcurrentQueue<LoggingData> data)
         {
             foreach (LoggingData log in data)
             {
@@ -616,7 +614,7 @@ namespace Jaffa.Diagnostics
         /// <param name="message">メッセージ</param>
         /// <param name="data">データリスト</param>
         [Conditional("DEBUG")]
-        private static void debugWrite(string message, List<string> data)
+        private static void DebugWrite(string message, List<string> data)
         {
             foreach (string msg in data)
             {
@@ -631,7 +629,7 @@ namespace Jaffa.Diagnostics
         /// <param name="newname">新しいファイル名</param>
         /// <param name="oldname">古いファイル名</param>
         [Conditional("DEBUG")]
-        private static void debugWrite(string message, string newname, string oldname)
+        private static void DebugWrite(string message, string newname, string oldname)
         {
             if (newname.Equals(oldname)) return;
             System.Diagnostics.Debug.WriteLine(message + newname);
@@ -779,37 +777,38 @@ namespace Jaffa.Diagnostics
 
         #endregion
 
-        #region 非同期ログ出力 (writeLogFileAsync) [private]
+        #region 非同期ログ出力 (WriteLogFileAsync) [private]
 
-        private static async void writeLogFileAsync()
+        private static async void WriteLogFileAsync()
         {
             while (logWriteWaiting == false && syslogWriteWaiting == false && !loggingBuffer.IsEmpty)
             {
-                LoggingData log;
-                if (loggingBuffer.TryDequeue(out log))
+                await writeisLock.WaitAsync();
+                try
                 {
-                    #region ログ通知
 
-                    if (muteLoggingEvent == false)
+                    LoggingData log;
+                    if (loggingBuffer.TryDequeue(out log))
                     {
-                        try
+                        #region ログ通知
+
+                        if (muteLoggingEvent == false)
                         {
-                            // イベント通知
-                            LogWriting?.Invoke(new LogWritingEventArgs(log.DateTime, log.ToShortStrings()));
+                            try
+                            {
+                                // イベント通知
+                                LogWriting?.Invoke(new LogWritingEventArgs(log.DateTime, log.ToShortStrings()));
+                            }
+                            catch
+                            {
+                            }
                         }
-                        catch
-                        {
-                        }
-                    }
 
-                    #endregion
+                        #endregion
 
-                    #region ログ書き込み
+                        #region ログ書き込み
 
-                    if (Settings.LoggingMode != LoggingModes.None)
-                    {
-                        await writeisLock.WaitAsync();
-                        try
+                        if (Settings.LoggingMode != LoggingModes.None)
                         {
                             // ファイル名生成
                             string logName1 = "";
@@ -832,23 +831,40 @@ namespace Jaffa.Diagnostics
                             }
 
                             // 書き込み
-                            writeLogBufferToFileAsync(log, logName1, logName2);
+                            WriteQueueCount++;
+                            await WriteLogBufferToFileAsync(log, logName1, logName2);
                         }
-                        catch
-                        {
-                            // エラー・無視する
-                        }
-                        finally
-                        {
-                            writeisLock.Release();
-                        }
-                    }
 
-                    #endregion
+                        #endregion
+                    }
                 }
-			}
+                catch
+                {
+                    // エラー・無視する
+                }
+                finally
+                {
+                    writeisLock.Release();
+                }
+            }
         }
         private static SemaphoreSlim writeisLock = new SemaphoreSlim(1, 1);
+
+        #endregion
+
+        #region キャッシュされたログの書き込みを完了 (FlushAsync)
+
+        /// <summary>
+        /// キャッシュされたログの書き込みを完了します。
+        /// </summary>
+        public static async Task FlushAsync()
+        {
+            WriteLogFileAsync();
+            while (WriteQueueCount > 0)
+            {
+                await Task.Delay(10);
+            }
+        }
 
         #endregion
 
@@ -874,7 +890,7 @@ namespace Jaffa.Diagnostics
                 logWriteWaiting = value;
                 if (!logWriteWaiting)
                 {
-                    writeLogFileAsync();
+                    WriteLogFileAsync();
                 }
             }
         }
@@ -899,7 +915,7 @@ namespace Jaffa.Diagnostics
                 syslogWriteWaiting = value;
                 if (!syslogWriteWaiting)
                 {
-                    writeLogFileAsync();
+                    WriteLogFileAsync();
                 }
             }
         }
@@ -939,6 +955,28 @@ namespace Jaffa.Diagnostics
             get
             {
                 return lastFilename;
+            }
+        }
+
+        #endregion
+
+        #region ログ書き込みタスクキューイング数を参照または設定 ([R/W] WriteQueueCount) [private]
+
+        private static int writeQueueCount = 0;
+
+        /// <summary>
+        /// ログ書き込みタスクキューイング数を参照または設定します。
+        /// </summary>
+        private static int WriteQueueCount
+        {
+            get
+            {
+                return writeQueueCount;
+            }
+            set
+            {
+                writeQueueCount = value;
+                DebugWrite("]]>WriteQueue:" + writeQueueCount.ToString());
             }
         }
 

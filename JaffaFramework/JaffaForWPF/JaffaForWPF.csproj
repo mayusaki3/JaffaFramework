@@ -63,6 +63,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CoreWPF\Direct3D\" />
     <Folder Include="CoreWPF\Mvvm\" />
     <Folder Include="CoreWPF\UI\Popups\" />
   </ItemGroup>

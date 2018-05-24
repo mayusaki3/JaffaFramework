@@ -48,7 +48,7 @@ namespace Jaffa
             appInst = app;
 
             // 起動パス記憶
-            startupPath = System.IO.Path.GetFullPath(Environment.GetCommandLineArgs()[0]);
+            startupPath = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
 
             // リソースマネージャ初期化
             thisAsm = app.GetType().Assembly;

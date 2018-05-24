@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -30,9 +31,13 @@ namespace UwpAppSample
         {
             // Jaffa: フレームワークのログも出力させます
             Jaffa.Diagnostics.Logging.Settings.FrameworkMessage = true;
+            Jaffa.Diagnostics.Logging.Settings.LoggingMode = Jaffa.Diagnostics.Logging.LoggingModes.Size;
+            Jaffa.Diagnostics.Logging.Settings.MaxFileSizeKB = 1;
 
             // Jaffa: フレームワーク開始
             Jaffa.Application.Start(this);
+            Jaffa.Application.CampanyFolderName = "JaffaFramework";
+            Jaffa.Application.ApplicationFolderName = "UwpAppSample";
 
             this.InitializeComponent();
             this.Suspending += OnSuspending;
@@ -54,6 +59,9 @@ namespace UwpAppSample
         /// <param name="e">起動の要求とプロセスの詳細を表示します。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            // Jaffa: ログ
+            Jaffa.Diagnostics.Logging.Write("OnLaunched");
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // ウィンドウに既にコンテンツが表示されている場合は、アプリケーションの初期化を繰り返さずに、
@@ -105,10 +113,15 @@ namespace UwpAppSample
         /// </summary>
         /// <param name="sender">中断要求の送信元。</param>
         /// <param name="e">中断要求の詳細。</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: アプリケーションの状態を保存してバックグラウンドの動作があれば停止します
+
+            // Jaffa: ログ
+            Jaffa.Diagnostics.Logging.Write("OnSuspending");
+            await Jaffa.Diagnostics.Logging.FlushAsync();
+
             deferral.Complete();
         }
     }

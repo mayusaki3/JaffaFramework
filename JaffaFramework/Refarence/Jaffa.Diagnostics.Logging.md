@@ -36,6 +36,12 @@ public static class Logging : Object
 
 <table><tr><td>名前</td><td>説明</td></tr>
 
+<tr><td>FlushAsync</td><td>
+キャッシュされたログの書き込みを完了します。<br>
+<b>構文</b><br><table>
+<tr><td>static async Task FlushAsync();<br></td></tr>
+</table></td></tr>
+
 <tr><td>Write</td><td>
 ログに情報メッセージを書き込みます。<br>
 <b>構文</b><br><table>

@@ -11,6 +11,18 @@ public static class Application : Object
 
 <table><tr><td>名前</td><td>説明</td></tr>
 
+<tr><td>ApplicationFolderName</td><td>
+アプリケーションフォルダー名を参照または設定します。<br>
+<b>構文</b><br><table>
+<tr><td>static string ApplicationFolderName</td></tr>
+</table></td></tr>
+
+<tr><td>CampanyFolderName</td><td>
+カンパニーフォルダー名を参照または設定します。<br>
+<b>構文</b><br><table>
+<tr><td>static string CampanyFolderName</td></tr>
+</table></td></tr>
+
 <tr><td>Current</td><td>
 アプリケーションインスタンスを参照します。<br>
 <b>構文</b><br><table>
