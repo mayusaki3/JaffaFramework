@@ -35,7 +35,8 @@ Jaffa.Application.Start();から呼ばれます。<br>
 コアライブラリ内メッセージを構築します。<br>
 このメソッドが参照するリソースは、Jaffaフレームワーク内のものです。<br>
 <b>構文</b><br><table>
-<tr><td>static string MakeMessage(string message);<br>static string MakeMessage(string message, string[] paramList)</td></tr>
+<tr><td>static string MakeMessage(string message);<br>
+static string MakeMessage(string message, string[] paramList);</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>message</td><td>メッセージを指定します。</td></tr>
 <tr><td>paramList</td><td>メッセージに埋め込むパラメータのリストを指定します。</td></tr>

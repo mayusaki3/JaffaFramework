@@ -38,6 +38,7 @@ namespace UwpAppSample
             Jaffa.Application.Start(this);
             Jaffa.Application.CampanyFolderName = "JaffaFramework";
             Jaffa.Application.ApplicationFolderName = "UwpAppSample";
+            Jaffa.Internal.DateTime.CalcDifferenceNow(new DateTime(2020, 10, 17, 15, 30, 12));
 
             this.InitializeComponent();
             this.Suspending += OnSuspending;
@@ -45,11 +46,11 @@ namespace UwpAppSample
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Jaffa.Diagnostics.Logging.Write("Jaffa Framework for UWP Sample Application Start.");
 
-            // Jaffa: 初期表示前にカルチャを切り替える
-            Jaffa.International.ChangeCultureFromDisplayLanguageName("English");
-
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Jaffa.Diagnostics.Logging.Write("App Initialized.");
+
+            // Jaffa: 初期表示前にカルチャを切り替える
+            Jaffa.International.ChangeCultureFromDisplayLanguageName("English");
         }
 
         /// <summary>

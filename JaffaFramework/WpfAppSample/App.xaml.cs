@@ -27,7 +27,8 @@ namespace WpfAppSample
             Jaffa.Application.Start(this, "WpfAppSample.Properties.Resources");
             Jaffa.Application.CampanyFolderName = "JaffaFramework";
             Jaffa.Application.ApplicationFolderName = "WpfAppSample";
- 
+            Jaffa.Internal.DateTime.CalcDifferenceNow(new DateTime(2020, 10, 17, 15, 30, 12));
+
             // Jaffa: ログはいつでも出力できます(キャッシュに入ります)
             Jaffa.Diagnostics.Logging.Write("App Initialized.");
 

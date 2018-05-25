@@ -3,3 +3,4 @@
 ## クラス
 
 - [Core クラス](Jaffa.Internal.Core.md)
+- [DateTime クラス](Jaffa.Internal.DateTime.md)

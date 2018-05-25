@@ -135,4 +135,10 @@
   <data name="NOT_SUPPORTED" xml:space="preserve">
     <value>未サポートです</value>
   </data>
+  <data name="TIME_CHANGE" xml:space="preserve">
+    <value>Jaffaフレームワークの現在時刻が変更されました</value>
+  </data>
+  <data name="TIME_FORMAT" xml:space="preserve">
+    <value>yyyy/MM/dd HH:mm:ss</value>
+  </data>
 </root>

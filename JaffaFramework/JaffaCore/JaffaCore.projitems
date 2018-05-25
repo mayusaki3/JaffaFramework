@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Application\Jaffa.Application.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\Jaffa.Diagnostics.Logging.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Jaffa.Internal.DateTime.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mvvm\Jaffa.Mvvm.BindingPropertyBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)International\Jaffa.International.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\Jaffa.Internal.Core.cs" />

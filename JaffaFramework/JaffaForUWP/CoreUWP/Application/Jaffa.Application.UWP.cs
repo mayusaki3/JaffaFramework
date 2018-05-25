@@ -75,7 +75,7 @@ namespace Jaffa
             catch { }
 
             // 起動時のカルチャー名を記憶
-            Jaffa.International.GetResourceCultureName(Windows.System.UserProfile.GlobalizationPreferences.Languages[0]);
+            Jaffa.International.GetResourceCultureName(System.Globalization.CultureInfo.CurrentCulture.Name);
 
             // ページ追加通知を設定
             Jaffa.UI.Page.Creating += Page_Creating;

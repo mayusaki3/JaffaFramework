@@ -53,6 +53,8 @@ namespace UwpAppSample
         {
             Logging.Write("Event: Jaffa_CultureChanged - " + Jaffa.International.CurrentCulture);
 
+            Jaffa.Internal.DateTime.DifferenceNow = new TimeSpan();
+
             // Pivotでは、ページは一度表示しないとUnloadされない
             int savidx = pivot.SelectedIndex;
             pivot.Opacity = 0;

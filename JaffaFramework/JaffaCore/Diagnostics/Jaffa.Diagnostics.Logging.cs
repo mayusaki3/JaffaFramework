@@ -98,7 +98,7 @@ namespace Jaffa.Diagnostics
 
             #region 発生時刻を参照 ([R] DateTime)
 
-            private DateTime dateTime = DateTime.Now;
+            private DateTime dateTime = Internal.DateTime.Now;
 
             /// <summary>
             /// 発生時刻を参照します。
@@ -549,7 +549,7 @@ namespace Jaffa.Diagnostics
         /// <param name="messages">メッセージリスト</param>
         public static void Write(LogTypes type, List<string> messages)
         {
-            LoggingData data = new LoggingData(DateTime.Now, type, messages);
+            LoggingData data = new LoggingData(Internal.DateTime.Now, type, messages);
             DebugWrite(data);
             loggingBuffer.Enqueue(data);
             WriteLogFileAsync();

@@ -113,5 +113,23 @@ namespace JaffaForWPF.Resources {
                 return ResourceManager.GetString("NOT_SUPPORTED", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Jaffa Framework current time has changed. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string TIME_CHANGE {
+            get {
+                return ResourceManager.GetString("TIME_CHANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   MM/dd/yyyy hh:mm:ss tt に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string TIME_FORMAT {
+            get {
+                return ResourceManager.GetString("TIME_FORMAT", resourceCulture);
+            }
+        }
     }
 }

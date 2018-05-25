@@ -89,6 +89,8 @@ namespace WpfAppSample
         {
             Logging.Write("Event: Jaffa_CultureChanged - " + Jaffa.International.CurrentCulture);
 
+            Jaffa.Internal.DateTime.DifferenceNow = new TimeSpan();
+
             // 言語リスト再読み込み
             listLanguages_Reload();
         }
