@@ -976,7 +976,6 @@ namespace Jaffa.Diagnostics
             set
             {
                 writeQueueCount = value;
-                DebugWrite("]]>WriteQueue:" + writeQueueCount.ToString());
             }
         }
 

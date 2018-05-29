@@ -90,10 +90,16 @@ namespace Jaffa.Diagnostics
             var sf = await logFolder.CreateFileAsync(logName1, Windows.Storage.CreationCollisionOption.OpenIfExists);
 
             DebugWrite("]]>", sf.Path, lastFilename);
-            DebugWrite("]]", log);
+
+            // 書き込み
+            await FileIO.AppendLinesAsync(sf, new List<string>(log.ToStrings()));
+
+            // タイムスタンプ変更
+            if (Internal.DateTime.DifferenceNow.Ticks != 0) {
+                // できません
+            }
 
             lastFilename = sf.Path;
-            await FileIO.AppendLinesAsync(sf, new List<string>(log.ToStrings()));
 
             WriteQueueCount--;
         }

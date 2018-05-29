@@ -1,6 +1,7 @@
 # Jaffa.Diagnostics.Logging クラス
 
-Logging クラスは、アプリケーションのロギング対応をサポートします。
+Logging クラスは、アプリケーションのロギング対応をサポートします。<br>
+ログの時刻は Jaffa.Internal.DateTime クラスの現在時刻です。WPFではログファイルの時刻もJaffa.Internal.DateTime クラスの現在時刻に設定されますが、UWPでは実際の時刻のままです。
 
 ## 構文
 
@@ -114,4 +115,6 @@ static List&lt;string&gt; BytesToHexDump(byte[] bytes, uint start, uint size);<b
 - [LogWritingEventArgs クラス](Jaffa.Diagnostics.Logging.LogWritingEventArgs.md)
 - [LogTypes 列挙型](Jaffa.Diagnostics.Logging.LogTypes.md)
 - [LoggingModes 列挙型](Jaffa.Diagnostics.Logging.LoggingModes.md)
+- [DateTime クラス](Jaffa.Internal.DateTime.md)
+
 

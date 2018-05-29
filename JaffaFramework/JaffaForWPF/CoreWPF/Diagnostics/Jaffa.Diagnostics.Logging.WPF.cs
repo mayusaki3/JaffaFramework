@@ -110,15 +110,23 @@ namespace Jaffa.Diagnostics
             using (var fs = new FileStream(logFolder + logName1, FileMode.Append))
             {
                 DebugWrite("]]>", fs.Name, lastFilename);
+
+                // 書き込み
                 using (var sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
                 {
-                    DebugWrite("]]", log);
                     foreach (var txt in log.ToStrings())
                     {
                         sw.WriteLine(txt);
                     }
                 }
+
                 lastFilename = fs.Name;
+            }
+
+            // タイムスタンプ変更
+            if (Internal.DateTime.DifferenceNow.Ticks != 0)
+            {
+                File.SetLastWriteTime(lastFilename, Internal.DateTime.Now);
             }
 
             WriteQueueCount--;
