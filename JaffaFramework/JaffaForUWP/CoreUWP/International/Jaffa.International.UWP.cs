@@ -91,7 +91,7 @@ namespace Jaffa
                 }
                 catch (Exception es)
                 {
-                    Logging.Write(Logging.LogTypes.Error, Logging.ExceptionToList(es));
+                    Logging.Write(Logging.ExceptionToList(es), Logging.LogTypes.Error);
                     return text;
                 }
             }

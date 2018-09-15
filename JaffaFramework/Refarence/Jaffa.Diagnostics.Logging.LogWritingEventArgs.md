@@ -5,7 +5,7 @@ LogWritingEventArgs クラスは、ログ出力イベントのイベントデータです。
 ## 構文
 
 ```
-public class LogWritingEventArgs : Object
+public class LogWritingEventArgs : EventArgs
 ```
 
 ## コンストラクタ―
@@ -17,7 +17,7 @@ public class LogWritingEventArgs : Object
 <b>構文</b><br><table>
 <tr><td>LogWritingEventArgs(DateTime dateTime, string[] messages);</td></tr>
 </table><b>パラメーター</b><br><table>
-<tr><td>dateTime</td><td>発生日時を指定します。</td></tr>
+<tr><td>dateTime</td><td>メッセージの発生日時を指定します。</td></tr>
 <tr><td>messages</td><td>メッセージリストを指定します。</td></tr>
 </table></td></tr>
 
@@ -29,15 +29,15 @@ public class LogWritingEventArgs : Object
 <table><tr><td>名前</td><td>説明</td></tr>
 
 <tr><td>DateTime</td><td>
-発生日時を参照します。<br>
+メッセージの発生日時を参照します。<br>
 <b>構文</b><br><table>
-<tr><td>DateTime DateTime</td></tr>
+<tr><td>DateTime DateTime { get; }</td></tr>
 </table></td></tr>
 
 <tr><td>Messages</td><td>
 メッセージリストを参照します。<br>
 <b>構文</b><br><table>
-<tr><td>string[] Messages</td></tr>
+<tr><td>string[] Messages { get; }</td></tr>
 </table></td></tr>
 
 </table>

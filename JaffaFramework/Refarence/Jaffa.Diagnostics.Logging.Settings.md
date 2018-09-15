@@ -21,28 +21,28 @@ Weekの場合は1～7,<br>
 Monthの場合は1～12の値を取ります。<br>
 既定値は"applog[@].txt"です。<br>
 <b>構文</b><br><table>
-<tr><td>static string FileName</td></tr>
+<tr><td>static string FileName { get; set; }</td></tr>
 </table></td></tr>
 
 <tr><td>Folder</td><td>
 ログ出力先フォルダを参照または設定します。<br>
 既定値は""です。<br>
 <b>構文</b><br><table>
-<tr><td>static string Folder</td></tr>
+<tr><td>static string Folder { get; set; }</td></tr>
 </table></td></tr>
 
 <tr><td>FrameworkMessage</td><td>
 フレームワークメッセージをログに出力するかどうかを参照または設定します。<br>
 既定値は false です。<br>
 <b>構文</b><br><table>
-<tr><td>static bool FrameworkMessage</td></tr>
+<tr><td>static bool FrameworkMessage { get; set; }</td></tr>
 </table></td></tr>
 
 <tr><td>LoggingMode</td><td>
 ロギングモードを参照または設定します。<br>
 既定値は LoggingModes.None です。<br>
 <b>構文</b><br><table>
-<tr><td>static LoggingModes LoggingMode</td></tr>
+<tr><td>static LoggingModes LoggingMode { get; set; }</td></tr>
 </table></td></tr>
 
 <tr><td>MaxFileSizeKB</td><td>
@@ -51,7 +51,7 @@ Monthの場合は1～12の値を取ります。<br>
 LoggingModeがSizeの場合に有効で、サイズを超えると1世代のみバックアップを作成します。<br>
 既定値は 2048 です。<br>
 <b>構文</b><br><table>
-<tr><td>static int MaxFileSizeKB</td></tr>
+<tr><td>static int MaxFileSizeKB { get; set; }</td></tr>
 </table></td></tr>
 
 </table>

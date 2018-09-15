@@ -26,7 +26,7 @@ namespace UwpAppSample
         public SubPage1()
         {
             // Jaffa: InitializeComponentの前にページ開始を通知 (Required)
-            Jaffa.UI.Page.Start(this);
+            Jaffa.UI.Controls.Page.Start(this);
 
             this.InitializeComponent();
 
@@ -46,7 +46,7 @@ namespace UwpAppSample
             if (listLanguages.Items.Count == 0) listLanguages_Reload();
         }
 
-        private void Logging_LogWriting(Logging.LogWritingEventArgs e)
+        private void Logging_LogWriting(object sender, Logging.LogWritingEventArgs e)
         {
             // ログを行ごとに転送
             foreach (string log in e.Messages)

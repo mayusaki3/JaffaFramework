@@ -98,25 +98,10 @@ namespace Jaffa.Internal
         /// パラメータは、テキスト中に {resource-name} を指定できます。
         /// メッセージとパラメータは、それぞれリソースを参照してから、１つに編集します。
         /// </remarks>
-        public static string MakeMessage(string message)
+        public static string MakeMessage(string message, string[] paramList = null)
         {
-            return MakeMessage(message, new string[0]);
+            return Jaffa.International.MakeCoreMessage(message, paramList);
         }
-
-        /// <summary>
-        /// フレームワーク内メッセージを構築します。
-        /// </summary>
-        /// <param name="message">メッセージ</param>
-        /// <param name="paramList">メッセージに埋め込むパラメータのリスト</param>
-        /// <returns>構築したメッセージ</returns>
-        /// <remarks>
-        /// メッセージは、テキスト中に {resource-name} と %paramList-index を指定できます。
-        /// パラメータは、テキスト中に {resource-name} を指定できます。
-        /// メッセージとパラメータは、それぞれリソースを参照してから、１つに編集します。
-        /// </remarks>
-        public static string MakeMessage(string message, string[] paramList)
-        {
-            return Jaffa.International.MakeCoreMessage(message, paramList);        }
 
         #endregion
 

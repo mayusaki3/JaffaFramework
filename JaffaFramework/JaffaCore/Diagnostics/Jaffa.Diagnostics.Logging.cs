@@ -397,7 +397,7 @@ namespace Jaffa.Diagnostics
         /// <summary>
         /// ログ出力イベント引数クラス
         /// </summary>
-        public class LogWritingEventArgs : Object
+        public class LogWritingEventArgs : EventArgs
         {
             #region コンストラクター
 
@@ -416,12 +416,12 @@ namespace Jaffa.Diagnostics
 
             #region プロパティ
 
-            #region 発生日時を参照 ([R] LogType)
+            #region メッセージの発生日時を参照 ([R] DateTime)
 
             private DateTime dateTime;
 
             /// <summary>
-            /// 発生日時を参照します。
+            /// メッセージの発生日時を参照します。
             /// </summary>
             public DateTime DateTime
             {
@@ -461,12 +461,11 @@ namespace Jaffa.Diagnostics
 
         #region ログ出力イベント (LogWriting)
 
-        public delegate void LogWritingHandler(LogWritingEventArgs e);
         /// <summary>
         /// ログ出力の内容を通知します。
         /// </summary>
-        public static event LogWritingHandler LogWriting;
-
+        public static event EventHandler<LogWritingEventArgs> LogWriting;
+        
         #endregion
 
         #endregion
@@ -476,31 +475,13 @@ namespace Jaffa.Diagnostics
         #region ログメッセージ書き込み (Write)
 
         /// <summary>
-        /// ログに情報メッセージを書き込みます。
-        /// </summary>
-        /// <param name="message">メッセージ</param>
-        public static void Write(String message)
-        {
-            Write(LogTypes.Information, message);
-        }
-
-        /// <summary>
         /// ログにメッセージを書き込みます。
         /// </summary>
+        /// <param name="message">メッセージ</param>
         /// <param name="type">ログタイプ</param>
-        /// <param name="message">メッセージ</param>
-        public static void Write(LogTypes type, String message)
+        public static void Write(String message, LogTypes type = LogTypes.Information)
         {
-            Write(LogTypes.Information, new string[] { message });
-        }
-
-        /// <summary>
-        /// ログにメッセージを書き込みます。
-        /// </summary>
-        /// <param name="messages">メッセージリスト</param>
-        public static void Write(String[] messages)
-        {
-            Write(LogTypes.Information, messages);
+            Write(new string[] { message }, type);
         }
 
         /// <summary>
@@ -508,46 +489,28 @@ namespace Jaffa.Diagnostics
         /// </summary>
         /// <param name="type">ログタイプ</param>
         /// <param name="messages">メッセージリスト</param>
-        public static void Write(LogTypes type, String[] messages)
+        public static void Write(String[] messages, LogTypes type = LogTypes.Information)
         {
             List<string> msgs = new List<string>(messages);
-            Write(type, msgs);
-        }
-
-        /// <summary>
-        /// ログにメッセージを書き込みます。
-        /// </summary>
-        /// <param name="messages">メッセージリスト</param>
-        public static void Write(List<string> messages)
-        {
-            Write(LogTypes.Information, messages);
+            Write(msgs, type);
         }
 
         /// <summary>
         /// ログにメッセージを書き込みます。
         /// </summary>
         /// <param name="exp">例外</param>
-        public static void Write(Exception exp)
+        /// <param name="type">ログタイプ</param>
+        public static void Write(Exception exp, LogTypes type = LogTypes.Error)
         {
-            Write(LogTypes.Error, ExceptionToList(exp));
+            Write(ExceptionToList(exp), type);
         }
 
         /// <summary>
         /// ログにメッセージを書き込みます。
         /// </summary>
-        /// <param name="type">ログタイプ</param>
-        /// <param name="exp">例外</param>
-        public static void Write(LogTypes type, Exception exp)
-        {
-            Write(type, ExceptionToList(exp));
-        }
-
-        /// <summary>
-        /// ログにメッセージを書き込みます。
-        /// </summary>
-        /// <param name="type">ログタイプ</param>
         /// <param name="messages">メッセージリスト</param>
-        public static void Write(LogTypes type, List<string> messages)
+        /// <param name="type">ログタイプ</param>
+        public static void Write(List<string> messages, LogTypes type = LogTypes.Information)
         {
             LoggingData data = new LoggingData(Internal.DateTime.Now, type, messages);
             DebugWrite(data);
@@ -645,32 +608,23 @@ namespace Jaffa.Diagnostics
         /// ログにバイト配列を16進ダンプとして書き込みます。
         /// </summary>
         /// <param name="bytes">ダンプ対象のバイト配列</param>
-        public static void WriteDump(byte[] bytes)
-        {
-            WriteDump(LogTypes.Information, bytes);
-        }
-
-        /// <summary>
-        /// ログにバイト配列を16進ダンプとして書き込みます。
-        /// </summary>
         /// <param name="type">ログタイプ</param>
-        /// <param name="bytes">ダンプ対象のバイト配列</param>
-        public static void WriteDump(LogTypes type, byte[] bytes)
+        public static void WriteDump(byte[] bytes, LogTypes type = LogTypes.Information)
         {
             uint size = (uint)bytes.Length;
-            WriteDump(LogTypes.Information, bytes, 0, size);
+            WriteDump(bytes, 0, size, type);
         }
 
         /// <summary>
         /// ログにバイト配列を16進ダンプとして書き込みます。
         /// </summary>
-        /// <param name="type">ログタイプ</param>
         /// <param name="bytes">ダンプ対象のバイト配列</param>
         /// <param name="start">0から始まるダンプの開始位置</param>
         /// <param name="size">出力するバイト数</param>
-        public static void WriteDump(LogTypes type, byte[] bytes, uint start, uint size)
+        /// <param name="type">ログタイプ</param>
+        public static void WriteDump(byte[] bytes, uint start, uint size, LogTypes type = LogTypes.Information)
         {
-            Write(type, BytesToHexDump(bytes, start, size));
+            Write(BytesToHexDump(bytes, start, size), type);
         }
 
         #endregion
@@ -797,7 +751,7 @@ namespace Jaffa.Diagnostics
                             try
                             {
                                 // イベント通知
-                                LogWriting?.Invoke(new LogWritingEventArgs(log.DateTime, log.ToShortStrings()));
+                                LogWriting?.Invoke(loggingBuffer, new LogWritingEventArgs(log.DateTime, log.ToShortStrings()));
                             }
                             catch
                             {

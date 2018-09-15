@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Jaffa.UI
+namespace Jaffa.UI.Controls
 {
     /// <summary>
     /// Jaffaフレームワーク・UWP版ページサポート
@@ -41,14 +41,7 @@ namespace Jaffa.UI
         /// <summary>
         /// ページインスタンスが生成されることを通知します。
         /// </summary>
-        /// <param name="sender">生成された Windows.UI.Xaml.Controls.Page オブジェクトです。</param>
-        /// <param name="e">既定のイベントデータです。</param>
-        public delegate void CreatingHandler(object sender, EventArgs e);
-        
-        /// <summary>
-        /// ページインスタンスが生成されることを通知します。
-        /// </summary>
-        public static event CreatingHandler Creating;
+        public static event EventHandler<EventArgs> Creating;
 
         #endregion
 
@@ -86,20 +79,10 @@ namespace Jaffa.UI
         /// </summary>
         /// <param name="frame">フレームのインスタンス</param>
         /// <param name="page">ページのインスタンス</param>
-        public static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page)
-        {
-            Reload(frame, page, null, null);
-        }
-
-        /// <summary>
-        /// ページをリロードします。
-        /// </summary>
-        /// <param name="frame">フレームのインスタンス</param>
-        /// <param name="page">ページのインスタンス</param>
         /// <param name="preprocess">リロードの前処理 (async)</param>
         /// <param name="postprocess">リロードの後処理 (async)</param>
         /// <returns></returns>
-        public static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Preprocess preprocess, Postprocess postprocess)
+        public static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Preprocess preprocess = null, Postprocess postprocess = null)
         {
             Logging.SysLogWriteWaiting = true;
 

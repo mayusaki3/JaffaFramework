@@ -15,13 +15,13 @@ public static class International
 <tr><td>CurrentCultureSetting</td><td>
 現在の設定カルチャー名を取得します。<br>CurrentCultureプロパティとの違いは "Auto" の有無です。<br>
 <b>構文</b><br><table>
-<tr><td>static string CurrentCultureSetting</td></tr>
+<tr><td>static string CurrentCultureSetting { get; }</td></tr>
 </table></td></tr>
 
 <tr><td>CurrentCulture</td><td>
 現在のカルチャー名を参照します。<br>
 <b>構文</b><br><table>
-<tr><td>static string CurrentCulture</td></tr>
+<tr><td>static string CurrentCulture { get; }</td></tr>
 </table></td></tr>
 
 </table>
@@ -39,7 +39,9 @@ public static class International
     ja-JP,日本語
 </pre>
 <b>構文</b><br><table>
-<tr><td>static string[] GetAvailableLanguageCodeList();</td></tr>
+<tr><td>
+static string[] GetAvailableLanguageCodeList();<br>
+</td></tr>
 </table></td></tr>
 
 <tr><td>GetAvailableLanguageNameList</td><td>
@@ -51,7 +53,9 @@ public static class International
     ja-JP,日本語
 </pre>この例の「{DynamicResource CultureAuto}」部分は、言語コードのリソースで置き換わります。<br>
 <b>構文</b><br><table>
-<tr><td>static string[] GetAvailableLanguageNameList();</td></tr>
+<tr><td>
+static string[] GetAvailableLanguageNameList();<br>
+</td></tr>
 </table></td></tr>
 
 <tr><td>GetDisplayLanguageName</td><td>
@@ -59,7 +63,9 @@ public static class International
 <b>構文</b><br><table>
 <tr><td>static string GetDisplayLanguageName(string culture);</td></tr>
 </table><b>パラメーター</b><br><table>
-<tr><td>culture</td><td>カルチャー名を指定します。</td></tr>
+<tr><td>
+culture</td><td>カルチャー名を指定します。<br>
+</td></tr>
 </table></td></tr>
 
 <tr><td>GetResourceCultureName</td><td>
@@ -73,7 +79,9 @@ public static class International
 <tr><td>ChangeCultureFromDisplayLanguageName</td><td>
 現在のカルチャーを言語名で変更します。<br>UWPの場合はCultureChangedイベントでページをリロードしてください。<br>
 <b>構文</b><br><table>
-<tr><td>static void ChangeCultureFromDisplayLanguageName(string name);</td></tr>
+<tr><td>
+static void ChangeCultureFromDisplayLanguageName(string name);<br>
+</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>name</td><td>表示名を指定します。</td></tr>
 </table></td></tr>
@@ -84,10 +92,13 @@ public static class International
 パラメータは、テキスト中に {resource-name} を指定できます。<br>
 メッセージとパラメータは、それぞれリソースを参照してから、１つに編集します。<br>
 <b>構文</b><br><table>
-<tr><td>static string MakeCoreMessage(string message);<br>static string MakeCoreMessage(string message, string[] paramList);</td></tr>
+<tr><td>
+static string MakeCoreMessage(string message, string[] paramList = null);<br>
+</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>message</td><td>メッセージを指定します。</td></tr>
-<tr><td>paramList</td><td>メッセージに埋め込むパラメータのリストを指定します。</td></tr>
+<tr><td>
+paramList</td><td>メッセージに埋め込むパラメータのリストを指定します。</td></tr>
 </table></td></tr>
 
 </table>
@@ -99,10 +110,10 @@ public static class International
 <tr><td>CultureChanged</td><td>
 CurrentCultureが変更されたことを通知します。<br>
 <b>構文</b><br><table>
-<tr><td>delegate void CultureChangedHandler(object sender, EventArgs e);</td></tr>
+<tr><td>static event EventHandler&lt;EventArgs&gt; CultureChanged;</td></tr>
 </table><b>パラメーター</b><br><table>
-<tr><td>sender</td><td>currentCulture オブジェクトです。</td></tr>
 <tr><td>e</td><td>既定のイベントデータです。</td></tr>
+<tr><td>sender</td><td>currentCulture オブジェクトです。</td></tr>
 </table></td></tr>
 
 </table>

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppSample"
-        xmlns:Controls="clr-namespace:Jaffa.UI.Controls;assembly=JaffaForWPF"
+        xmlns:jaffa="clr-namespace:Jaffa.UI.Controls;assembly=JaffaForWPF"
         mc:Ignorable="d" Height="768" Width="1280" Title="{DynamicResource AppTitle}">
 
     <Grid>
@@ -14,7 +14,7 @@
                     <MenuItem Header="終了(_X)" Click="MenuEnd_Click"/>
                 </MenuItem>
             </Menu>
-            <TabControl Margin="0" VerticalContentAlignment="Center" FontSize="24" HorizontalContentAlignment="Center">
+             <TabControl Margin="0" VerticalContentAlignment="Center" FontSize="24" HorizontalContentAlignment="Center">
                 <TabItem Header="{DynamicResource Tab1Title}" SnapsToDevicePixels="True">
                     <Grid Background="#FFFFC24C">
                         <ScrollViewer VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="300" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#00000000">
@@ -29,7 +29,7 @@
                 </TabItem>
                 <TabItem Header="TabItem">
                     <Grid Background="#FFE5E5E5">
-                        <Controls:ConsoleBox HorizontalAlignment="Left" Height="190" Margin="82,29,0,0" VerticalAlignment="Top" Width="945"/>
+                        <jaffa:ConsoleBox HorizontalAlignment="Left" Height="190" Margin="82,29,0,0" VerticalAlignment="Top" Width="945"/>
                     </Grid>
                 </TabItem>
             </TabControl>

@@ -32,17 +32,8 @@ namespace Jaffa
         /// Jaffaフレームワークにアプリケーション開始を通知します。
         /// </summary>
         /// <param name="app">Jaffaフレームワークを利用するアプリケーションのインスタンスを指定します。</param>
-        public static void Start(System.Windows.Application app)
-        {
-            Start(app, "");
-        }
-
-        /// <summary>
-        /// Jaffaフレームワークにアプリケーション開始を通知します。
-        /// </summary>
-        /// <param name="app">Jaffaフレームワークを利用するアプリケーションのインスタンスを指定します。</param>
         /// <param name="resourceName">国際化対応に使用するリソース名を指定します。</param>
-        public static void Start(System.Windows.Application app, string resourceName)
+        public static void Start(System.Windows.Application app, string resourceName = "")
         {
             // アプリケーションへの参照設定
             appInst = app;
