@@ -1,4 +1,4 @@
-# Jaffaフレームワーク説明書  ver 0.0.7 
+# Jaffaフレームワーク説明書  ver 0.0.8 
 
 
 ## はじめに
@@ -26,7 +26,7 @@ Jaffaフレームワークは、Windowsユニバーサルアプリケーション（UWP)とデスクトップア
    ```
 3. 各ページのコンストラクタ―内、this.InitializeComponent();の前の行に、以下のコードを追加します。
     ```
-	Jaffa.UI.Page.Start(this);
+	Jaffa.UI.Controls.Page.Start(this);
    ```
 ### WPFアプリケーションの場合
 

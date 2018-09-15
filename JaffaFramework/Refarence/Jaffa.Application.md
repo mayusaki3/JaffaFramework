@@ -14,45 +14,45 @@ public static class Application : Object
 <tr><td>ApplicationFolderName</td><td>
 アプリケーションフォルダー名を参照または設定します。<br>
 <b>構文</b><br><table>
-<tr><td>static string ApplicationFolderName</td></tr>
+<tr><td>static string ApplicationFolderName { get; set; }</td></tr>
 </table></td></tr>
 
 <tr><td>CampanyFolderName</td><td>
 カンパニーフォルダー名を参照または設定します。<br>
 <b>構文</b><br><table>
-<tr><td>static string CampanyFolderName</td></tr>
+<tr><td>static string CampanyFolderName { get; set; }</td></tr>
 </table></td></tr>
 
 <tr><td>Current</td><td>
 アプリケーションインスタンスを参照します。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>static Windows.UI.Xaml.Application Current</td></tr>
-<tr><td>WPF</td><td>static System.Windows.Application Current</td></tr>
+<tr><td>UWP</td><td>static Windows.UI.Xaml.Application Current { get; }</td></tr>
+<tr><td>WPF</td><td>static System.Windows.Application Current { get; }</td></tr>
 </table></td></tr>
 
 <tr><td>Pages</td><td>
 アプリケーションでインスタンス化されたページを参照します。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>static Windows.UI.Xaml.Controls.Page[] Pages</td></tr>
+<tr><td>UWP</td><td>static Windows.UI.Xaml.Controls.Page[] Pages { get; }</td></tr>
 </table></td></tr>
 
 <tr><td>Resource</td><td>
 リソースローダー/マネージャーを参照します。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>static Windows.ApplicationModel.Resources.ResourceLoader Resource</td></tr>
-<tr><td>WPF</td><td>static System.Resources.ResourceManager Resource</td></tr>
+<tr><td>UWP</td><td>static Windows.ApplicationModel.Resources.ResourceLoader Resource { get; }</td></tr>
+<tr><td>WPF</td><td>static System.Resources.ResourceManager Resource { get; }</td></tr>
 </table></td></tr>
 
 <tr><td>StartupPath</td><td>
 アプリケーションの起動パスを参照します。<br>
 <b>構文</b><br><table>
-<tr><td>WPF</td><td>static string StatupPath</td></tr>
+<tr><td>WPF</td><td>static string StatupPath { get; }</td></tr>
 </table></td></tr>
 
 <tr><td>WaitingChangeCulture</td><td>
 アプリケーションカルチャーが遅延更新状態かを設定または参照します。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>static bool WaitingChangeCulture</td></tr>
+<tr><td>UWP</td><td>static bool WaitingChangeCulture { get; set; }</td></tr>
 </table></td></tr>
 
 </table>
@@ -65,8 +65,12 @@ public static class Application : Object
 Jaffaフレームワークにアプリケーション開始を通知します。<br>
 InitializeComponentの前に実行する必要があります。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>static void Start(Windows.UI.Xaml.Application app);</td></tr>
-<tr><td>WPF</td><td>static void Start(System.Windows.Application app);<br>static void Start(System.Windows.Application app, string resourceName);</td></tr>
+<tr><td>UWP</td><td>
+static void Start(Windows.UI.Xaml.Application app);<br>
+</td></tr>
+<tr><td>WPF</td><td>
+static void Start(System.Windows.Application app, string resourceName = "");<br>
+</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>app</td><td>Jaffaフレームワークを利用するアプリケーションのインスタンスを指定します。</td></tr>
 <tr><td>resourceName</td><td>国際化対応に使用するリソース名を指定します。</td></tr>
@@ -81,10 +85,10 @@ InitializeComponentの前に実行する必要があります。<br>
 <tr><td>PageUnloaded</td><td>
 ページインスタンスがアンロードされたことを通知します。<br>
 <b>構文</b><br><table>
-<tr><td>delegate void PageUnloadedHandler(object sender, EventArgs e);</td></tr>
+<tr><td>static event EventHandler&lt;EventArgs&gt; PageUnloaded;</td></tr>
 </table><b>パラメーター</b><br><table>
-<tr><td>sender</td><td>アンロードされた Windows.UI.Xaml.Controls.Page オブジェクトです。</td></tr>
 <tr><td>e</td><td>既定のイベントデータです。</td></tr>
+<tr><td>sender</td><td>アンロードされた Windows.UI.Xaml.Controls.Page オブジェクトです。</td></tr>
 </table></td></tr>
 
 </table>

@@ -30,8 +30,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refarence", "Refarence", "{
 		Refarence\Jaffa.Internal.md = Refarence\Jaffa.Internal.md
 		Refarence\Jaffa.International.md = Refarence\Jaffa.International.md
 		Refarence\Jaffa.md = Refarence\Jaffa.md
+		Refarence\Jaffa.UI.Controls.md = Refarence\Jaffa.UI.Controls.md
+		Refarence\Jaffa.UI.Controls.Page.md = Refarence\Jaffa.UI.Controls.Page.md
 		Refarence\Jaffa.UI.md = Refarence\Jaffa.UI.md
-		Refarence\Jaffa.UI.Page.md = Refarence\Jaffa.UI.Page.md
 		Refarence\Jaffa.UI.Window.md = Refarence\Jaffa.UI.Window.md
 	EndProjectSection
 EndProject

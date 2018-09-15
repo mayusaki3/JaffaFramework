@@ -27,7 +27,7 @@ namespace UwpAppSample
         public MainPage()
         {
             // Jaffa: InitializeComponentの前にページ開始を通知 (Required)
-            Jaffa.UI.Page.Start(this);
+            Jaffa.UI.Controls.Page.Start(this);
 
             this.InitializeComponent();
 
@@ -70,7 +70,7 @@ namespace UwpAppSample
             List<object> save = new List<object>();
 
             // ページのリロード
-            Jaffa.UI.Page.Reload(Window.Current.Content as Frame, this, (f, p) => {
+            Jaffa.UI.Controls.Page.Reload(Window.Current.Content as Frame, this, (f, p) => {
                 // 画面のデータを退避
                 subPage1.SaveContents(ref save);
 

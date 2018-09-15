@@ -52,7 +52,7 @@ namespace WpfAppSample
             if (listLanguages.Items.Count == 0) listLanguages_Reload();
         }
 
-        private void Logging_LogWriting(Logging.LogWritingEventArgs e)
+        private void Logging_LogWriting(object sender, Logging.LogWritingEventArgs e)
         {
             // ログを行ごとに転送
             foreach (string log in e.Messages)

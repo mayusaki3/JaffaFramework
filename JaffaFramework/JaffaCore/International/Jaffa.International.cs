@@ -15,11 +15,10 @@ namespace Jaffa
 
         #region カルチャー変更イベント (CultureChanged)
 
-        public delegate void CultureChangedHandler(object sender, EventArgs e);
         /// <summary>
         /// CurrentCultureが変更されたことを通知します。
         /// </summary>
-        public static event CultureChangedHandler CultureChanged;
+        public static event EventHandler<EventArgs> CultureChanged;
 
         #endregion
 
@@ -62,7 +61,7 @@ namespace Jaffa
             }
             catch(Exception es)
             {
-                Logging.Write(Logging.LogTypes.Error, Logging.ExceptionToList(es));
+                Logging.Write(Logging.ExceptionToList(es), Logging.LogTypes.Error);
             }
             if (res == null)
             {
@@ -107,7 +106,7 @@ namespace Jaffa
             }
             catch (Exception es)
             {
-                Logging.Write(Logging.LogTypes.Error, Logging.ExceptionToList(es));
+                Logging.Write(Logging.ExceptionToList(es), Logging.LogTypes.Error);
             }
             if (res == null)
             {
@@ -283,19 +282,6 @@ namespace Jaffa
         /// フレームワーク内メッセージを構築します。
         /// </summary>
         /// <param name="message">メッセージ</param>
-        /// <returns>構築したメッセージ</returns>
-        /// <remarks>
-        /// メッセージは、テキスト中に {resource-name} を指定できます。
-        /// </remarks>
-        public static string MakeCoreMessage(string message)
-        {
-            return MakeCoreMessage(message, new string[0]);
-        }
-
-        /// <summary>
-        /// フレームワーク内メッセージを構築します。
-        /// </summary>
-        /// <param name="message">メッセージ</param>
         /// <param name="paramList">メッセージに埋め込むパラメータのリスト</param>
         /// <returns>構築したメッセージ</returns>
         /// <remarks>
@@ -303,12 +289,15 @@ namespace Jaffa
         /// パラメータは、テキスト中に {resource-name} を指定できます。
         /// メッセージとパラメータは、それぞれリソースを参照してから、１つに編集します。
         /// </remarks>
-        public static string MakeCoreMessage(string message, string[] paramList)
+        public static string MakeCoreMessage(string message, string[] paramList = null)
         {
             StringBuilder rt = new StringBuilder(ConvertCurrentCultureResourceString(message));
-            for(int i = 0; i < paramList.Length; i++)
+            if (paramList != null)
             {
-                rt.Replace("%" + i.ToString(), ConvertCurrentCultureResourceString(paramList[i]));
+                for (int i = 0; i < paramList.Length; i++)
+                {
+                    rt.Replace("%" + i.ToString(), ConvertCurrentCultureResourceString(paramList[i]));
+                }
             }
             return rt.ToString();
         }

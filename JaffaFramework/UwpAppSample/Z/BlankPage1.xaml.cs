@@ -26,7 +26,7 @@ namespace UwpAppSample.Z
         public BlankPage1()
         {
             // Jaffa: InitializeComponentの前にページ開始を通知 (Required)
-            Jaffa.UI.Page.Start(this);
+            Jaffa.UI.Controls.Page.Start(this);
 
             this.InitializeComponent();
 

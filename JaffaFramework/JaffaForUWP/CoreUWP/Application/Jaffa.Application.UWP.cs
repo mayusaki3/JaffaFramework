@@ -12,17 +12,10 @@ namespace Jaffa
 
         #region ページインスタンスアンロードイベント (PageUnloaded)
 
-        /// <summary>
+         /// <summary>
         /// ページインスタンスがアンロードされたことを通知します。
         /// </summary>
-        /// <param name="sender">アンロードされた Windows.UI.Xaml.Controls.Page オブジェクトです。</param>
-        /// <param name="e">既定のイベントデータです。</param>
-        public delegate void PageUnloadedHandler(object sender, EventArgs e);
-
-        /// <summary>
-        /// ページインスタンスがアンロードされたことを通知します。
-        /// </summary>
-        public static event PageUnloadedHandler PageUnloaded;
+        public static event EventHandler<EventArgs> PageUnloaded;
 
         #endregion
 
@@ -78,7 +71,7 @@ namespace Jaffa
             Jaffa.International.GetResourceCultureName(System.Globalization.CultureInfo.CurrentCulture.Name);
 
             // ページ追加通知を設定
-            Jaffa.UI.Page.Creating += Page_Creating;
+            Jaffa.UI.Controls.Page.Creating += Page_Creating;
 
             // コアライブラリ初期化
             Jaffa.Internal.Core.Initialize();

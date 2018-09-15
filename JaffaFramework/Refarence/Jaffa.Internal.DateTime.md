@@ -15,13 +15,13 @@ public static class Core : Object
 <tr><td>DifferenceNow</td><td>
 現在時刻のオフセット値を参照または設定または設定します。<br>
 <b>構文</b><br><table>
-<tr><td>static System.TimeSpan DifferenceNow</td></tr>
+<tr><td>static System.TimeSpan DifferenceNow { get; set; }</td></tr>
 </table></td></tr>
 
 <tr><td>Now</td><td>
 オフセットされた現在時刻を参照します。<br>
 <b>構文</b><br><table>
-<tr><td>static System.DateTime Now</td></tr>
+<tr><td>static System.DateTime Now { get; }</td></tr>
 </table></td></tr>
 
 </table>

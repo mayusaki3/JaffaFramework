@@ -1,4 +1,4 @@
-# Jaffa.UI.Page クラス
+# Jaffa.UI.Controls.Page クラス
 
 Page クラスは、UWP アプリケーションの Page と JaffaFramework とを結びつける、基本的な機能を提供します。
 
@@ -15,8 +15,9 @@ public static class Page : Object
 <tr><td>Reload</td><td>
 ページをリロードします。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);<br>
-static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Preprocess preprocess, Postprocess postprocess);</td></tr>
+<tr><td>UWP</td><td>
+static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page, Preprocess preprocess = null, Postprocess postprocess = null);<br>
+</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>frame</td><td>リロードするフレームのインスタンスを指定します。</td></tr>
 <tr><td>page</td><td>リロードするページのインスタンスを指定します。</td></tr>
@@ -38,7 +39,9 @@ static void Reload(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Control
 Jaffaフレームワークにページ開始を通知します。<br>
 InitializeComponentの前に実行する必要があります。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>static void Start(Windows.UI.Xaml.Controls.Page page);</td></tr>
+<tr><td>UWP</td><td>
+static void Start(Windows.UI.Xaml.Controls.Page page);<br>
+</td></tr>
 </table><b>パラメーター</b><br><table>
 <tr><td>page</td><td>Jaffaフレームワークを利用するページのインスタンスを指定します。</td></tr>
 </table></td></tr>
@@ -52,10 +55,10 @@ InitializeComponentの前に実行する必要があります。<br>
 <tr><td>Creating</td><td>
 ページインスタンスが生成されたことを通知します。<br>
 <b>構文</b><br><table>
-<tr><td>UWP</td><td>delegate void CreatingHandler(object sender, EventArgs e)</td></tr>
+<tr><td>UWP</td><td>static event EventHandler&lt;EventArgs&gt; Creating;</td></tr>
 </table><b>パラメーター</b><br><table>
-<tr><td>sender</td><td>生成された Windows.UI.Xaml.Controls.Page オブジェクトです。</td></tr>
 <tr><td>e</td><td>既定のイベントデータです。</td></tr>
+<tr><td>sender</td><td>生成された Windows.UI.Xaml.Controls.Page オブジェクトです。</td></tr>
 </table></td></tr>
 
 </table>
@@ -65,7 +68,7 @@ InitializeComponentの前に実行する必要があります。<br>
 <table><tr><td>名前</td><td>説明</td></tr>
 
 <tr><td>Preprocess</td><td>
-リロードの前処理を行えます。<br>
+リロードの前処理を行えます。一時的な情報の退避などに使用します。<br>
 <b>テンプレート</b><br><table>
 <tr><td>UWP</td><td>delegate void Preprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);</td></tr>
 </table><b>パラメーター</b><br><table>
@@ -74,7 +77,7 @@ InitializeComponentの前に実行する必要があります。<br>
 </table></td></tr>
 
 <tr><td>Postprocess</td><td>
-リロードの後処理を行えます。<br>
+リロードの後処理を行えます。一時的な情報の復元などに使用します。<br>
 <b>テンプレート</b><br><table>
 <tr><td>UWP</td><td>delegate void Postprocess(Windows.UI.Xaml.Controls.Frame frame, Windows.UI.Xaml.Controls.Page page);</td></tr>
 </table><b>パラメーター</b><br><table>
