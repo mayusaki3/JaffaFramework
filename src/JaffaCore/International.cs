@@ -72,7 +72,7 @@ namespace Jaffa
             string res = null;
             try
             {
-                res = Internal.Resource(Internal.JaffaCulture).GetString("SUPPORT_LIST");
+                res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
             }
             catch (Exception es)
             {
@@ -89,7 +89,7 @@ namespace Jaffa
                 string[] s = lang.Split(new char[] { ',', '\r', '\n' });
                 if (s[1].Contains("{", StringComparison.CurrentCulture))
                 {
-                    string val = ConvertCurrentCultureResourceString(Internal.Jaffa, s[1]);
+                    string val = ConvertCurrentCultureResourceString(Core.Jaffa, s[1]);
                     if (val.Length > 0) s[1] = val;
                 }
                 rt.Add(s[1]);
@@ -116,7 +116,7 @@ namespace Jaffa
             string res = null;
             try
             {
-                res = Internal.Resource(Internal.JaffaCulture).GetString("SUPPORT_LIST");
+                res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
             }
             catch (Exception es)
             {
@@ -153,7 +153,7 @@ namespace Jaffa
             string res = null;
             try
             {
-                res = Internal.Resource(Internal.JaffaCulture).GetString("SUPPORT_LIST");
+                res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
             }
             catch { }
             if (res == null)
@@ -169,7 +169,7 @@ namespace Jaffa
                 {
                     if (s[1].Contains("{", StringComparison.CurrentCulture))
                     {
-                        s[1] = ConvertCurrentCultureResourceString(Internal.Jaffa, s[1]);
+                        s[1] = ConvertCurrentCultureResourceString(Core.Jaffa, s[1]);
                     }
                     rt = s[1];
                 }
@@ -193,7 +193,7 @@ namespace Jaffa
             string res = null;
             try
             {
-                res = Internal.Resource(Internal.JaffaCulture).GetString("SUPPORT_LIST");
+                res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
             }
             catch { }
             if (res == null)
@@ -251,7 +251,7 @@ namespace Jaffa
         public static void ChangeCultureFromDisplayLanguageName(string name)
         {
             // 表示名からカルチャー名を取得
-            string res = Internal.Resource(Internal.JaffaCulture).GetString("SUPPORT_LIST");
+            string res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
             if (res == null)
             {
                 return;
@@ -262,7 +262,7 @@ namespace Jaffa
                 string[] s = lang.Split(new char[] { ',', '\r', '\n' });
                 if (s[1].Contains("{", StringComparison.CurrentCulture))
                 {
-                    s[1] = ConvertCurrentCultureResourceString(Internal.Jaffa, s[1]);
+                    s[1] = ConvertCurrentCultureResourceString(Core.Jaffa, s[1]);
                 }
                 if (s[1].Equals(name) || s[0].Equals(name))
                 {
@@ -304,7 +304,7 @@ namespace Jaffa
         /// </remarks>
         static public string ConvertCurrentCultureResourceString(string region, string text)
         {
-            ResourceManager resManager = Internal.Resource(region);
+            ResourceManager resManager = Core.Resource(region);
             string[] tl = text.Split(new char[] { '{' });
             StringBuilder rt = new();
             foreach (string t in tl)

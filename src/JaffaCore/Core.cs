@@ -9,9 +9,9 @@ using System.Threading;
 namespace Jaffa
 {
     /// <summary>
-    /// Jaffaフレームワーク・内部機能
+    /// Jaffaフレームワーク・コア
     /// </summary>
-    public static class Internal
+    public static class Core
     {
         #region 定数
 
@@ -49,10 +49,10 @@ namespace Jaffa
 
         #region メソッド
 
-        #region 内部機能初期化 (Initialize)
+        #region 初期化 (Initialize)
 
         /// <summary>
-        /// 内部機能を初期化します。
+        /// コアを初期化します。
         /// </summary>
         public static void Initialize()
         {
@@ -87,10 +87,10 @@ namespace Jaffa
 
         #endregion
 
-        #region 内部機能終了 (Terminate)
+        #region 終了 (Terminate)
 
         /// <summary>
-        /// 内部機能を終了します。
+        /// コアを終了します。
         /// </summary>
         public static void Terminate()
         {

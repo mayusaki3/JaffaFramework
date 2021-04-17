@@ -248,7 +248,7 @@ namespace Jaffa.Diagnostics
             {
                 try
                 {
-                    rt.Add(Internal.MakeMessage(Internal.Jaffa, "**{LOGGING_EXCEPTION}: ") + es.Message.Remove('\r').Split(new char[] { '\n' })[0]);
+                    rt.Add(Core.MakeMessage(Core.Jaffa, "**{LOGGING_EXCEPTION}: ") + es.Message.Remove('\r').Split(new char[] { '\n' })[0]);
                 }
                 catch { }
             }

@@ -23,7 +23,7 @@ namespace Jaffa.Diagnostics
         private static async Task WriteLogBufferToFileAsync(LoggingData log, string logName1, string logName2)
 #pragma warning restore 1998
         {
-            Uri appUri = new(Path.GetDirectoryName(Internal.StartupPath));
+            Uri appUri = new(Path.GetDirectoryName(Core.StartupPath));
             Uri outUri = new(appUri, Environment.ExpandEnvironmentVariables(LoggingSettings.Folder));
             string logFolder = outUri.LocalPath;
 

@@ -16,7 +16,7 @@ namespace JaffaShell
             LoggingSettings.LoggingMode = LoggingMode.Week;
             LoggingSettings.FrameworkMessage = true;
 
-            Internal.Initialize();
+            Core.Initialize();
 
             Logging.LogWriting += Logging_LogWriting;
             Logging.LogWriteWaiting = false;
@@ -55,15 +55,15 @@ namespace JaffaShell
 
             try
             {
-                Internal.SetResource("SHELL", "JaffaShell.Resources." + International.CurrentCulture + ".Resource", Assembly.GetExecutingAssembly());
-                throw new Exception(Internal.MakeMessage("SHELL", "{TEST_MESSAGE}"));
+                Core.SetResource("SHELL", "JaffaShell.Resources." + International.CurrentCulture + ".Resource", Assembly.GetExecutingAssembly());
+                throw new Exception(Core.MakeMessage("SHELL", "{TEST_MESSAGE}"));
             }
             catch(Exception e)
             {
                 Logging.Write(Logging.ExceptionToList(e), LogType.Error);
             }
 
-            Internal.Terminate();
+            Core.Terminate();
         }
 
         private static void Logging_LogWriting(object sender, LogWritingEventArgs e)
