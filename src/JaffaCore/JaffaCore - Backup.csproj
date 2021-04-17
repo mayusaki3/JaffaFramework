@@ -3,19 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Jaffa</RootNamespace>
-    <Version>0.0.3</Version>
-    <Authors>Mayusaki3</Authors>
-    <PackageProjectUrl>https://github.com/mayusaki3/JaffaFramework</PackageProjectUrl>
-    <Company />
-    <Product>JaffaFramework Core</Product>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\en-US\Resource.resx">
-      <Generator></Generator>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Resources\Resource_en-US.Designer.cs">
@@ -26,15 +14,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\CultureList.resx">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\en-US\Resource.resx">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\CultureList.resx">
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ja-JP\Resource.resx">
       <Generator></Generator>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Resource_en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -10,7 +10,6 @@ namespace Jaffa
     /// <summary>
     /// Jaffaフレームワーク・国際化対応
     /// </summary>
-    [Serializable]
     public static class International
     {
         #region イベント
@@ -251,7 +250,12 @@ namespace Jaffa
         public static void ChangeCultureFromDisplayLanguageName(string name)
         {
             // 表示名からカルチャー名を取得
-            string res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
+            string res = null;
+            try
+            {
+                res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
+            }
+            catch { }
             if (res == null)
             {
                 return;

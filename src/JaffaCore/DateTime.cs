@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Jaffa.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Jaffa.Diagnostics;
 
 namespace Jaffa
 {
     /// <summary>
     /// Jaffaフレームワーク・DateTime拡張
     /// </summary>
-    [Serializable]
     public class DateTime
     {
         #region メソッド
@@ -62,11 +56,11 @@ namespace Jaffa
             set
             {
                 var fp = new CultureInfo(International.CurrentCulture);
-                //string from = Now.ToString(Core.MakeMessage("{TIME_FORMAT}"), fp);
-                //differenceNow = value;
-                //string to = Now.ToString(Core.MakeMessage("{TIME_FORMAT}"), fp);
+                string from = Now.ToString(Core.MakeMessage(Core.Jaffa, "{TIME_FORMAT}"), fp);
+                differenceNow = value;
+                string to = Now.ToString(Core.MakeMessage(Core.Jaffa, "{TIME_FORMAT}"), fp);
 
-                //Logging.Write(Core.MakeMessage("JFW00003 {TIME_CHANGE} ") + from + " => " + to);
+                Logging.Write(Core.MakeMessage(Core.Jaffa, CoreMessages.JFW00002, new string[] { from, to }));
             }
         }
         private static System.TimeSpan differenceNow = new();

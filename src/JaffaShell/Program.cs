@@ -16,8 +16,6 @@ namespace JaffaShell
             LoggingSettings.LoggingMode = LoggingMode.Week;
             LoggingSettings.FrameworkMessage = true;
 
-            Core.Initialize();
-
             Logging.LogWriting += Logging_LogWriting;
             Logging.LogWriteWaiting = false;
 
@@ -42,6 +40,7 @@ namespace JaffaShell
             Logging.Write("--------------------");
 
             International.ChangeCultureFromDisplayLanguageName("English");
+            Jaffa.DateTime.DifferenceNow=new TimeSpan(24,0,0);
 
             Logging.Write("[LangNameList]");
             Logging.Write("--------------------");
@@ -62,8 +61,6 @@ namespace JaffaShell
             {
                 Logging.Write(Logging.ExceptionToList(e), LogType.Error);
             }
-
-            Core.Terminate();
         }
 
         private static void Logging_LogWriting(object sender, LogWritingEventArgs e)

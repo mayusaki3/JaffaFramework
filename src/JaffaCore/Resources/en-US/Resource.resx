@@ -120,12 +120,6 @@
   <data name="CULTURE_AUTO" xml:space="preserve">
     <value>Automatic setting</value>
   </data>
-  <data name="JAFFA_END" xml:space="preserve">
-    <value>end.</value>
-  </data>
-  <data name="JAFFA_START" xml:space="preserve">
-    <value>start.</value>
-  </data>
   <data name="JAFFA_TITLE" xml:space="preserve">
     <value>Jaffa Framework</value>
   </data>

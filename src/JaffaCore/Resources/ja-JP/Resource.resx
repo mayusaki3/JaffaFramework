@@ -120,12 +120,6 @@
   <data name="CULTURE_AUTO" xml:space="preserve">
     <value>自動設定</value>
   </data>
-  <data name="JAFFA_END" xml:space="preserve">
-    <value>終了</value>
-  </data>
-  <data name="JAFFA_START" xml:space="preserve">
-    <value>開始</value>
-  </data>
   <data name="JAFFA_TITLE" xml:space="preserve">
     <value>Jaffaフレームワーク</value>
   </data>

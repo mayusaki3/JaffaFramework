@@ -327,7 +327,7 @@ namespace Jaffa.Diagnostics
                                     logName1 = LoggingSettings.FileName.Replace("[@]", log.DateTime.ToString("dd"));
                                     break;
                                 case LoggingMode.Week:
-                                    logName1 = LoggingSettings.FileName.Replace("[@]", (log.DateTime.DayOfWeek + 1).ToString().PadLeft(2, '0'));
+                                    logName1 = LoggingSettings.FileName.Replace("[@]", ((int)(log.DateTime.DayOfWeek + 1)).ToString("D2"));
                                     break;
                                 case LoggingMode.Month:
                                     logName1 = LoggingSettings.FileName.Replace("[@]", log.DateTime.ToString("MM"));
