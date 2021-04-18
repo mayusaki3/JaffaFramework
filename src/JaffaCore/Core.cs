@@ -27,7 +27,6 @@ namespace Jaffa
             /// コンストラクタ―
             /// </summary>
             public CoreHelper()
-                : base()
             {
                 // 起動パス記憶
                 startupPath = Process.GetCurrentProcess().MainModule.FileName;
