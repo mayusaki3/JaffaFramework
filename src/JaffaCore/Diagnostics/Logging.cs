@@ -241,9 +241,12 @@ namespace Jaffa.Diagnostics
             rt.Add(exp.Message);
             if (exp.StackTrace != null)
             {
-                foreach (string tr in exp.StackTrace.Remove('\r').Split(new char[] { '\n' }))
+                foreach (string tr in exp.StackTrace.Split(new char[] { '\r', '\n' }))
                 {
-                    rt.Add("\t" + tr);
+                    if (tr.Length > 0)
+                    {
+                        rt.Add("\t" + tr);
+                    }
                 }
             }
             return rt;
