@@ -12,19 +12,18 @@ namespace Jaffa
     /// </summary>
     public class Core
     {
-        #region コンストラクタ―/デストラクター
+        #region コンストラクタ―
 
         /// <summary>
         /// コンストラクタ―
         /// </summary>
-        private Core()
+        static Core()
         {
             // 起動パス記憶
-            startupPath = Process.GetCurrentProcess().MainModule.FileName;
+            StartupPath = Process.GetCurrentProcess().MainModule.FileName;
 
             // リソースマネージャ初期化（国際化対応リスト）
             Assembly thisAsm = Assembly.GetExecutingAssembly();
-            ResManLst = new();
             SetResource(JaffaCulture, "Jaffa.Resources.CultureList", thisAsm);
 
             // 国際化対応の初期化
@@ -153,7 +152,7 @@ namespace Jaffa
 
         #region リソースマネージャーリスト ([R/W] ResManLst) [private]
 
-        private static Hashtable ResManLst { get; set; } // 初期化が競合するのでコンストラクターで初期化
+        private static Hashtable ResManLst { get; } = new();
 
         #endregion
 
@@ -162,14 +161,7 @@ namespace Jaffa
         /// <summary>
         /// 起動パスを参照します。
         /// </summary>
-        public static string StartupPath
-        {
-            get
-            {
-                return startupPath;
-            }
-        }
-        private static string startupPath; // 初期化が競合するのでコンストラクターで初期化
+        public static string StartupPath { get; }
 
         #endregion
 
@@ -187,15 +179,6 @@ namespace Jaffa
         }
 
         #endregion
-
-        #endregion
-
-        #region 変数 
-
-        /// <summary>
-        /// コアヘルパー
-        /// </summary>
-        private static readonly Core _ = new();
 
         #endregion
     }
