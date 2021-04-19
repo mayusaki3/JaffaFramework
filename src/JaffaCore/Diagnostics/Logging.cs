@@ -68,6 +68,17 @@ namespace Jaffa.Diagnostics
         /// <param name="type">ログタイプ</param>
         public static void Write(List<string> messages, LogType type = LogType.Information)
         {
+            // 開始メッセージ
+            if (LoggingSettings.FrameworkMessage == false)
+            {
+                IsUseStartMessage = false;
+            }
+            if (IsUseStartMessage == true)
+            {
+                IsUseStartMessage = false;
+                Write(Core.MakeMessage(Core.Jaffa, Messages.JFWI0001, new string[] { Core.Version }));
+            }
+
             LoggingData data = new(Jaffa.DateTime.Now, type, messages);
             DebugWrite(data);
             loggingBuffer.Enqueue(data);
@@ -425,6 +436,15 @@ namespace Jaffa.Diagnostics
         /// ログ書き込みタスクキューイング数を参照または設定します。
         /// </summary>
         private static int WriteTaskQueueCount { get; set; } = 0;
+
+        #endregion
+
+        #region Jaffa起動メッセージ出力使用を参照または設定 ([R/W] IsUseStartMessage) [private]
+
+        /// <summary>
+        /// Jaffa起動メッセージ出力使用
+        /// </summary>
+        private static bool IsUseStartMessage { get; set; } = true;
 
         #endregion
 

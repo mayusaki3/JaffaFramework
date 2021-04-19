@@ -34,12 +34,6 @@ namespace Jaffa
 
             // カルチャー変更イベント設定
             International.CultureChanged += International_CultureChanged;
-
-            // 開始メッセージ
-            if (LoggingSettings.FrameworkMessage)
-            {
-                Logging.Write(MakeMessage(Jaffa, Messages.JFWI0001, new string[] { Version }));
-            }
         }
 
         #endregion
