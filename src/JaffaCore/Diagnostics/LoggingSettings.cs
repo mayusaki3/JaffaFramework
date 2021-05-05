@@ -5,7 +5,7 @@ namespace Jaffa.Diagnostics
     /// <summary>
     /// ロギング設定クラス
     /// </summary>
-    public class LoggingSettings : Object
+    public static class LoggingSettings : Object
     {
         #region プロパティ
 
