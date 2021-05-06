@@ -50,8 +50,6 @@ namespace JaffaShell
             }
             Logging.Write("--------------------");
 
-            International.ChangeCultureFromDisplayLanguageName("日本語");
-
             try
             {
                 Core.SetResource("SHELL", "JaffaShell.Resources." + International.CurrentCulture + ".Resource", Assembly.GetExecutingAssembly());
@@ -61,6 +59,26 @@ namespace JaffaShell
             {
                 Logging.Write(Logging.ExceptionToList(e), LogType.Error);
             }
+
+            International.ChangeCultureFromDisplayLanguageName("日本語");
+
+            Jaffa.DateTime.DifferenceNow = new TimeSpan(0, 0, 0);
+            try
+            {
+                func01();
+            }
+            catch (Exception e)
+            {
+                Logging.Write(Logging.ExceptionToList(e), LogType.Error);
+            }
+            Logging.Write();
+
+        }
+
+        static void func01()
+        {
+            Core.SetResource("SHELL", "JaffaShell.Resources." + International.CurrentCulture + ".Resource", Assembly.GetExecutingAssembly());
+            throw new Exception(Core.MakeMessage("SHELL", "{TEST_MESSAGE}"));
         }
 
         private static void Logging_LogWriting(object sender, LogWritingEventArgs e)

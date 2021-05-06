@@ -55,12 +55,16 @@ namespace Jaffa
             }
             set
             {
-                var fp = new CultureInfo(International.CurrentCulture);
+                CultureInfo fp = new(International.CurrentCulture);
                 string from = Now.ToString(Core.MakeMessage(Core.Jaffa, "{TIME_FORMAT}"), fp);
-                differenceNow = value;
-                string to = Now.ToString(Core.MakeMessage(Core.Jaffa, "{TIME_FORMAT}"), fp);
 
+                string to = Now.Add(value).ToString(Core.MakeMessage(Core.Jaffa, "{TIME_FORMAT}"), fp);
                 Logging.Write(Core.MakeMessage(Core.Jaffa, Messages.JFWI0002, new string[] { from, to }));
+
+                differenceNow = value;
+                to = Now.ToString(Core.MakeMessage(Core.Jaffa, "{TIME_FORMAT}"), fp);
+
+                Logging.Write(Core.MakeMessage(Core.Jaffa, Messages.JFWI0003, new string[] { from, to }));
             }
         }
         private static System.TimeSpan differenceNow = new();

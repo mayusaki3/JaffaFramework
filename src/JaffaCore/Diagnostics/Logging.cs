@@ -35,7 +35,7 @@ namespace Jaffa.Diagnostics
         /// </summary>
         /// <param name="message">メッセージ</param>
         /// <param name="type">ログタイプ</param>
-        public static void Write(String message, LogType type = LogType.Information)
+        public static void Write(String message = "", LogType type = LogType.Information)
         {
             Write(new string[] { message }, type);
         }
