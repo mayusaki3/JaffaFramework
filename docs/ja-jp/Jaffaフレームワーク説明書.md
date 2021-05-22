@@ -31,10 +31,10 @@ Jaffaフレームワークは、アプリケーションに組み込み利用で
 
 ## 提供機能
 
-- [国際化対応リソース管理](Refarence\/国際化対応リソース管理.md)
-- [ロギング機能](Refarence\/ロギング機能.md)
-- [ダミー日時の提供](Refarence\/ダミー日時の提供.md)
+- [国際化対応リソース管理](Refarence/国際化対応リソース管理.md)
+- [ロギング機能](Refarence/ロギング機能.md)
+- [ダミー日時の提供](Refarence/ダミー日時の提供.md)
 
 ## リファレンス
 
-[Jaffa 名前空間](Refarence\/Jaffa.md)
+[Jaffa 名前空間](Refarence/Jaffa.md)
