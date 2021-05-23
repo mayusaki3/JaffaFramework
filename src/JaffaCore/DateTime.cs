@@ -36,7 +36,7 @@ namespace Jaffa
         {
             get
             {
-                return System.DateTime.Now.Add(differenceNow);
+                return System.DateTime.Now.Add(_differenceNow);
             }
         }
 
@@ -51,7 +51,7 @@ namespace Jaffa
         {
             get
             {
-                return differenceNow;
+                return _differenceNow;
             }
             set
             {
@@ -61,13 +61,13 @@ namespace Jaffa
                 string to = Now.Add(value).ToString(Core.MakeMessage(Core.Jaffa, "{TIME_FORMAT}"), fp);
                 Logging.Write(Core.MakeMessage(Core.Jaffa, Messages.JFWI0002, new string[] { from, to }));
 
-                differenceNow = value;
+                _differenceNow = value;
                 to = Now.ToString(Core.MakeMessage(Core.Jaffa, "{TIME_FORMAT}"), fp);
 
                 Logging.Write(Core.MakeMessage(Core.Jaffa, Messages.JFWI0003, new string[] { from, to }));
             }
         }
-        private static System.TimeSpan differenceNow = new();
+        private static System.TimeSpan _differenceNow = new();
 
         #endregion
 

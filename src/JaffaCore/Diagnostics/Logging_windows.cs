@@ -93,7 +93,7 @@ namespace Jaffa.Diagnostics
 
             using (FileStream fs = new(logFolder + logName1, FileMode.Append))
             {
-                DebugWrite("]]>", fs.Name, lastFilename);
+                DebugWrite("]]>", fs.Name, _LastFilename);
 
                 // 書き込み
                 using (StreamWriter sw = new(fs, System.Text.Encoding.UTF8))
@@ -104,13 +104,13 @@ namespace Jaffa.Diagnostics
                     }
                 }
 
-                lastFilename = fs.Name;
+                _LastFilename = fs.Name;
             }
 
             // タイムスタンプ変更
             if (Jaffa.DateTime.DifferenceNow.Ticks != 0)
             {
-                File.SetLastWriteTime(lastFilename, Jaffa.DateTime.Now);
+                File.SetLastWriteTime(_LastFilename, Jaffa.DateTime.Now);
             }
 
             WriteTaskQueueCount--;
