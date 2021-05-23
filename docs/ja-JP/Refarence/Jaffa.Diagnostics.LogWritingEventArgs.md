@@ -10,9 +10,9 @@ public class LogWritingEventArgs : EventArgs
 
 ## コンストラクタ―
 
-<table><tr><td>説明</td></tr>
+<table><tr><td>名前</td><td>説明</td></tr>
 
-<tr><td>
+<tr><td>LogWritingEventArgs</td><td>
 ログ出力イベント引数を初期化します。<br>
 <b>構文</b><br><table>
 <tr><td>LogWritingEventArgs(DateTime dateTime, string[] messages);</td></tr>
