@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Jaffa</RootNamespace>
-    <Version>0.0.3</Version>
+    <Version>$(VersionPrefix)</Version>
     <Authors>Mayusaki3</Authors>
     <PackageProjectUrl>https://github.com/mayusaki3/JaffaFramework</PackageProjectUrl>
     <Company />
