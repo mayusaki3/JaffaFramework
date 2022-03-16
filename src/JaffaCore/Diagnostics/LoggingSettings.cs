@@ -22,6 +22,8 @@ namespace Jaffa.Diagnostics
 
         /// <summary>
         /// ログ出力先フォルダを参照または設定します。
+        /// フォルダの区切りは"\"を使用します。
+        /// 末尾は"\"を自動で付加しますが、パスとして正しいかは保証しません。
         /// </summary>
         public static string Folder
         {
@@ -31,12 +33,15 @@ namespace Jaffa.Diagnostics
             }
             set
             {
-                _Folder = value;
-                if (_Folder.Length > 0)
+                if (value.Length == 0 || value.Replace(@"\", "").Length > 0 && value.IndexOf(@"\\") < 0)
                 {
-                    if (!_Folder.Substring(_Folder.Length - 1, 1).Equals(@"\"))
+                    _Folder = value;
+                    if (_Folder.Length > 0)
                     {
-                        _Folder += @"\";
+                        if (!_Folder.Substring(_Folder.Length - 1, 1).Equals(@"\"))
+                        {
+                            _Folder += @"\";
+                        }
                     }
                 }
             }

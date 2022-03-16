@@ -1,5 +1,4 @@
-﻿using Jaffa.Diagnostics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Resources;
@@ -31,7 +30,7 @@ namespace Jaffa
         private static void OnCultureChanged()
         {
             // カルチャー変更を通知
-            CultureChanged?.Invoke(_currentCulture, new EventArgs());
+            CultureChanged.Invoke(_currentCulture, new EventArgs());
         }
 
         #endregion
@@ -47,8 +46,16 @@ namespace Jaffa
         /// </summary>
         public static void Initialize()
         {
-            // 起動時のカルチャー名で初期化
-            GetResourceCultureName(CultureInfo.CurrentCulture.Name);
+            if(StartupCulture.Length == 0)
+            {
+                // 起動時のカルチャー名で初期化
+                GetResourceCultureName(CultureInfo.CurrentCulture.Name);
+            }
+            else
+            {
+                // 起動時のカルチャー名で再初期化
+                ChangeCultureFromDisplayLanguageName(ConvertCurrentCultureResourceString(Core.Jaffa, "{CULTURE_AUTO}"));
+            }
         }
 
         #endregion
@@ -68,15 +75,7 @@ namespace Jaffa
         /// </remarks>
         public static string[] GetAvailableLanguageNameList()
         {
-            string res = null;
-            try
-            {
-                res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
-            }
-            catch (Exception es)
-            {
-                Logging.Write(Logging.ExceptionToList(es), LogType.Error);
-            }
+            string res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
             if (res == null)
             {
                 return Array.Empty<string>();
@@ -112,15 +111,7 @@ namespace Jaffa
         /// </remarks>
         public static string[] GetAvailableLanguageCodeList()
         {
-            string res = null;
-            try
-            {
-                res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
-            }
-            catch (Exception es)
-            {
-                Logging.Write(Logging.ExceptionToList(es), LogType.Error);
-            }
+            string res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
             if (res == null)
             {
                 return Array.Empty<string>();
@@ -130,10 +121,7 @@ namespace Jaffa
             foreach (string lang in langs)
             {
                 string[] s = lang.Split(new char[] { ',', '\r', '\n' });
-                if (s[0].Equals("Auto") == false)
-                {
-                    rt.Add(s[0]);
-                }
+                rt.Add(s[0]);
             }
             return rt.ToArray();
         }
@@ -149,12 +137,7 @@ namespace Jaffa
         /// <returns>表示名</returns>
         public static string GetDisplayLanguageName(string culture)
         {
-            string res = null;
-            try
-            {
-                res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
-            }
-            catch { }
+            string res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
             if (res == null)
             {
                 return culture;
@@ -189,12 +172,7 @@ namespace Jaffa
         public static string GetResourceCultureName(string name)
         {
             string rt = "";
-            string res = null;
-            try
-            {
-                res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
-            }
-            catch { }
+            string res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
             if (res == null)
             {
                 rt = name;
@@ -250,12 +228,7 @@ namespace Jaffa
         public static void ChangeCultureFromDisplayLanguageName(string name)
         {
             // 表示名からカルチャー名を取得
-            string res = null;
-            try
-            {
-                res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
-            }
-            catch { }
+            string res = Core.Resource(Core.JaffaCulture).GetString("SUPPORT_LIST");
             if (res == null)
             {
                 return;
@@ -311,26 +284,31 @@ namespace Jaffa
             ResourceManager resManager = Core.Resource(region);
             string[] tl = text.Split(new char[] { '{' });
             StringBuilder rt = new();
+            bool foundlcb = false;
             foreach (string t in tl)
             {
                 int s = t.IndexOf('}');
                 if (s < 0)
                 {
-                    if (rt.Length > 0) rt.Append('{');
+                    if (foundlcb == true)
+                    {
+                        rt.Append('{');
+                    }
                     rt.Append(t);
                 }
                 else
                 {
-                    try
+                    if(foundlcb == true)
                     {
                         rt.Append(resManager.GetString(t.Substring(0, s)));
+                        rt.Append(t[(s + 1)..]);
                     }
-                    catch(Exception e)
+                    else
                     {
-                        System.Diagnostics.Debug.Print(e.Message);
+                        rt.Append(t);
                     }
-                    rt.Append(t[(s + 1)..]);
                 }
+                foundlcb = true;
             }
             return rt.ToString();
         }

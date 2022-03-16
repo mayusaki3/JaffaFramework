@@ -1,5 +1,8 @@
 ﻿namespace Jaffa
 {
+    /// <summary>
+    /// Jaffaフレームワーク・メッセージ定義
+    /// </summary>
     public static class Messages
     {
         // Coreメッセージ --------------------------------------------------------------

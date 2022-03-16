@@ -5,7 +5,7 @@ LoggingSettings クラスは、ロギング機能の設定を保持します。
 ## 構文
 
 ```
-ublic static class LoggingSettings : Object
+public static class LoggingSettings : Object
 ```
 
 ## プロパティ
@@ -58,5 +58,5 @@ LoggingModeがSizeの場合に有効で、サイズを超えると1世代のみ�
 
 ## 関連
 
-- [LoggingModes 列挙型](Jaffa.Diagnostics.Logging.LoggingModes.md)
+- [LoggingMode 列挙型](Jaffa.Diagnostics.Logging.LoggingMode.md)
 

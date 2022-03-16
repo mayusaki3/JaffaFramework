@@ -3,14 +3,20 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Jaffa</RootNamespace>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <Authors>Mayusaki3</Authors>
     <PackageProjectUrl>https://github.com/mayusaki3/JaffaFramework</PackageProjectUrl>
     <Company />
     <Product>JaffaFramework Core</Product>
-    <AssemblyVersion>0.0.3.1</AssemblyVersion>
-    <FileVersion>0.0.3.1</FileVersion>
+    <AssemblyVersion>0.0.4.1</AssemblyVersion>
+    <FileVersion>0.0.4.101</FileVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Text\**" />
+    <EmbeddedResource Remove="Text\**" />
+    <None Remove="Text\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\en-US\Resource.resx">

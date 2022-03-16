@@ -1,10 +1,10 @@
-# Jaffaフレームワーク説明書  ver 0.0.3 
+# Jaffaフレームワーク説明書  ver 0.0.4 
 
 
 ## はじめに
 
 Jaffaフレームワークは、アプリケーションに組み込み利用できるライブラリです。  
-.NET 5 以降を対象としており、Windows以外でも動作することを目指しています。
+.NET 6 以降を対象としており、Windows以外でも動作することを目指しています。
 
 以下の機能を提供します。  
 - 国際化対応リソース管理
@@ -25,9 +25,23 @@ Jaffaフレームワークは、アプリケーションに組み込み利用で
 
 ### Windowsアプリケーションの場合
 
+#### DLL参照
+1. release_moduleフォルダの内容を、ソリューション内の任意の場所に追加してください。
+2. アプリケーションの参照設定で JaffaCore.dllを追加します。
+
+#### プロジェクト参照
 1. src/JaffaCoreフォルダの内容を、ソリューション内のフォルダに追加してください。
 2. ソリューションに、JaffaCore.csprojを追加してください。
 3. アプリケーションの参照設定で JaffaCoreプロジェクトを追加します。
+
+### Blazor Serverアプリケーションの場合
+1.NuGetパッケージの管理で、以下のパッケージをインストールします。
+- Microsoft.Extensions.Localization 
+
+2. アプリケーションのProgram.csの以下の部分を書き換えます。
+
+変更前： var app = builder.Build();
+変更後： var app = Jaffa.Core.WebApplicationBuild(builder);
 
 ## 提供機能
 
